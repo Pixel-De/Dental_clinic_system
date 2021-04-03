@@ -1,0 +1,5 @@
+.auth { /* modify the selector according to your needs */
+    -fx-border-style: solid solid none solid;
+    -fx-border-width: 5;
+    -fx-border-color: red;
+}
