@@ -1,4 +1,4 @@
 package DentalClinic.Patient;
 
-public class PatientController {
+public class InformationController {
 }
