@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="mainMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="750.0" prefWidth="1500.0" stylesheets="@overlord.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DentalClinic.MainMenu.MainMenuController">
+    <MenuBar layoutX="77.0" layoutY="14.0" prefHeight="17.0" prefWidth="1500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+            <Menu mnemonicParsing="false" text="File">
+                <items>
+                    <MenuItem fx:id="menuLogOff" mnemonicParsing="false" text="Log Off: admin" />
+                    <MenuItem fx:id="menuChangePassword" mnemonicParsing="false" text="Change Password" />
+                    <MenuItem fx:id="menuExit" mnemonicParsing="false" text="Exit" />
+                </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Window">
+                <items>
+                    <MenuItem fx:id="menuCloseAll" mnemonicParsing="false" text="Close All" />
+                </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+                <items>
+                    <MenuItem fx:id="menuAbout" mnemonicParsing="false" text="About..." />
+                </items>
+            </Menu>
+        </menus>
+    </MenuBar>
+    <HBox fx:id="mainLogo" layoutY="26.0" prefHeight="76.0" prefWidth="1500.0" style="-fx-border-color: black; -fx-background-color: #055554;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="26.0">
+        <children>
+            <HBox prefHeight="74.0" prefWidth="99.0">
+                <children>
+                    <ImageView fitHeight="75.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../assets/tooth.png" />
+                        </image>
+                        <HBox.margin>
+                            <Insets left="5.0" />
+                        </HBox.margin>
+                    </ImageView>
+                </children>
+                <HBox.margin>
+                    <Insets />
+                </HBox.margin>
+                <padding>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                </padding>
+            </HBox>
+            <VBox prefHeight="86.0" prefWidth="1401.0">
+                <children>
+                    <Label styleClass="label-bright" text="Dental Clinic Management System">
+                        <VBox.margin>
+                            <Insets top="6.0" />
+                        </VBox.margin></Label>
+                    <Label fx:id="bright" styleClass="label-bright1" text="Hassle-free and  efficient IT workflows">
+                        <VBox.margin>
+                            <Insets left="5.0" top="-2.0" />
+                        </VBox.margin></Label>
+                </children>
+            </VBox>
+        </children>
+    </HBox>
+    <HBox fillHeight="false" layoutX="271.0" layoutY="732.0" prefHeight="18.0" prefWidth="1500.0" spacing="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <children>
+            <Label text="NUM">
+                <HBox.margin>
+                    <Insets left="100.0" />
+                </HBox.margin>
+            </Label>
+            <Label text="CAPS" />
+            <Label text="SCROLL" />
+            <Label text="Version Number" />
+            <Label text="IP:196.168.1.1" />
+        </children>
+    </HBox>
+    <VBox fx:id="MenuItems" alignment="TOP_CENTER" layoutY="112.0" prefHeight="619.0" prefWidth="255.0" spacing="5.0" styleClass="vbox-Style" stylesheets="@overlord.css" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="112.79999999999995">
+        <children>
+            <VBox alignment="CENTER" centerShape="false" maxWidth="125.0" prefHeight="74.0" prefWidth="125.0" scaleShape="false" styleClass="profile-icon">
+                <children>
+                    <ImageView fx:id="ImageAvatar" fitHeight="74.0" fitWidth="98.0" pickOnBounds="true">
+                        <image>
+                            <Image url="@../assets/image-gallery.png" />
+                        </image>
+                    </ImageView>
+                </children>
+            </VBox>
+            <Label fx:id="UserName" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="254.0" styleClass="label-bright2" text="What is your name" />
+            <Label fx:id="UserRank" alignment="CENTER" prefHeight="18.0" prefWidth="277.0" styleClass="label-bright3" text="Rank" />
+            <HBox alignment="CENTER_LEFT" maxHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: white;" styleClass="border" stylesheets="@overlord.css">
+                <children>
+                    <ImageView fitHeight="38.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
+                        <image>
+                            <Image url="@../assets/dental.png" />
+                        </image>
+                        <HBox.margin>
+                            <Insets left="10.0" />
+                        </HBox.margin>
+                    </ImageView>
+                    <MenuButton mnemonicParsing="false" popupSide="RIGHT" prefHeight="38.0" prefWidth="195.0" text="Patient">
+                        <items>
+                            <MenuItem fx:id="btnPatientInfo" mnemonicParsing="false" text="Patient Information" />
+                            <MenuItem fx:id="btnListPatient" mnemonicParsing="false" text="List of Patient" />
+                        </items>
+                    </MenuButton>
+                </children>
+                <VBox.margin>
+                    <Insets left="5.0" right="5.0" />
+                </VBox.margin>
+            </HBox>
+            <HBox maxHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: white;" styleClass="border" stylesheets="@overlord.css">
+                <children>
+                    <ImageView fitHeight="40.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../assets/doctor1.png" />
+                        </image>
+                        <HBox.margin>
+                            <Insets left="5.0" />
+                        </HBox.margin>
+                    </ImageView>
+                    <MenuButton mnemonicParsing="false" popupSide="RIGHT" prefHeight="41.0" prefWidth="200.0" text="Doctor">
+                        <items>
+                            <MenuItem fx:id="DoctorInfo" mnemonicParsing="false" text="Doctor Information" />
+                            <MenuItem fx:id="btnListDoctors" mnemonicParsing="false" text="List of Doctors" />
+                        </items>
+                    </MenuButton>
+                </children>
+                <VBox.margin>
+                    <Insets left="5.0" right="5.0" />
+                </VBox.margin>
+            </HBox>
+            <HBox maxHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: white;" styleClass="border" stylesheets="@overlord.css">
+                <children>
+                    <ImageView fitHeight="32.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../assets/pill.png" />
+                        </image>
+                        <HBox.margin>
+                            <Insets left="10.0" />
+                        </HBox.margin>
+                    </ImageView>
+                    <MenuButton mnemonicParsing="false" popupSide="RIGHT" prefHeight="49.0" prefWidth="215.0" text="Pharmacy">
+                        <items>
+                            <MenuItem fx:id="btnProductInfo" mnemonicParsing="false" text="Product information" />
+                            <MenuItem fx:id="btnProductList" mnemonicParsing="false" text="Product List" />
+                            <MenuItem fx:id="btnSales" mnemonicParsing="false" text="Sales" />
+                            <MenuItem fx:id="btnReports" mnemonicParsing="false" text="Reports" />
+                        </items>
+                    </MenuButton>
+                </children>
+                <VBox.margin>
+                    <Insets left="5.0" right="5.0" />
+                </VBox.margin>
+            </HBox>
+            <HBox maxHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: white;" styleClass="border" stylesheets="@overlord.css">
+                <children>
+                    <ImageView fitHeight="44.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../assets/tooth-extraction.png" />
+                        </image>
+                        <HBox.margin>
+                            <Insets left="10.0" />
+                        </HBox.margin>
+                    </ImageView>
+                    <MenuButton mnemonicParsing="false" popupSide="RIGHT" prefHeight="73.0" prefWidth="198.0" text="Treatment">
+                        <items>
+                            <MenuItem mnemonicParsing="false" text="Dental's Screen" />
+                            <MenuItem mnemonicParsing="false" text="Patient Visit List" />
+                            <MenuItem mnemonicParsing="false" text="Reports" />
+                        </items>
+                    </MenuButton>
+                </children>
+                <VBox.margin>
+                    <Insets left="5.0" right="5.0" />
+                </VBox.margin>
+            </HBox>
+            <HBox maxHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: white;" styleClass="border" stylesheets="@overlord.css">
+                <children>
+                    <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../assets/prescription.png" />
+                        </image>
+                        <HBox.margin>
+                            <Insets left="10.0" />
+                        </HBox.margin>
+                    </ImageView>
+                    <MenuButton mnemonicParsing="false" popupSide="RIGHT" prefHeight="73.0" prefWidth="198.0" text="Prescription">
+                        <items>
+                            <MenuItem mnemonicParsing="false" text="Prescription" />
+                            <MenuItem mnemonicParsing="false" text="Prescription List" />
+                        </items>
+                    </MenuButton>
+                </children>
+                <VBox.margin>
+                    <Insets left="5.0" right="5.0" />
+                </VBox.margin>
+            </HBox>
+            <HBox maxHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: white;" styleClass="border" stylesheets="@overlord.css">
+                <children>
+                    <ImageView fitHeight="33.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../assets/money-bag.png" />
+                        </image>
+                        <HBox.margin>
+                            <Insets left="10.0" />
+                        </HBox.margin>
+                    </ImageView>
+                    <MenuButton mnemonicParsing="false" popupSide="RIGHT" prefHeight="39.0" prefWidth="234.0" text="Income &amp; Expediture">
+                        <items>
+                            <MenuItem mnemonicParsing="false" text="Voucher" />
+                            <MenuItem mnemonicParsing="false" text="List of Voucher" />
+                            <MenuItem mnemonicParsing="false" text="Reports" />
+                        </items>
+                    </MenuButton>
+                </children>
+                <VBox.margin>
+                    <Insets left="5.0" right="5.0" />
+                </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" maxHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: white;" styleClass="border" stylesheets="@overlord.css">
+                <children>
+                    <ImageView fitHeight="37.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../assets/admin-with-cogwheels.png" />
+                        </image>
+                        <HBox.margin>
+                            <Insets left="10.0" />
+                        </HBox.margin>
+                    </ImageView>
+                    <MenuButton mnemonicParsing="false" popupSide="RIGHT" prefHeight="73.0" prefWidth="198.0" style="-fx-text-fill: white;" text="Administration">
+                        <items>
+                            <MenuItem mnemonicParsing="false" text="Clinic Information" />
+                            <MenuItem mnemonicParsing="false" text="User Information" />
+                            <MenuItem mnemonicParsing="false" text="List of Users" />
+                            <MenuItem mnemonicParsing="false" text="Permission" />
+                        </items>
+                    </MenuButton>
+                </children>
+                <VBox.margin>
+                    <Insets left="5.0" right="5.0" />
+                </VBox.margin>
+            </HBox>
+        </children>
+    </VBox>
+</AnchorPane>
