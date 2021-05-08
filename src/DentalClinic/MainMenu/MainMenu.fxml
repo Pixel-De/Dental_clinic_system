@@ -13,13 +13,13 @@
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane fx:id="mainMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="750.0" prefWidth="1500.0" stylesheets="@overlord.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DentalClinic.MainMenu.MainMenuController">
-    <MenuBar layoutX="77.0" layoutY="14.0" prefHeight="17.0" prefWidth="1500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <MenuBar fx:id="deedBar" layoutX="77.0" layoutY="14.0" prefHeight="17.0" prefWidth="1500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
             <Menu mnemonicParsing="false" text="File">
                 <items>
                     <MenuItem fx:id="menuLogOff" mnemonicParsing="false" text="Log Off: admin" />
                     <MenuItem fx:id="menuChangePassword" mnemonicParsing="false" text="Change Password" />
-                    <MenuItem fx:id="menuExit" mnemonicParsing="false" text="Exit" />
+                    <MenuItem fx:id="menuExit" mnemonicParsing="false" text="Exit" visible="false" />
                 </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Window">
@@ -104,10 +104,10 @@
                             <Insets left="10.0" />
                         </HBox.margin>
                     </ImageView>
-                    <MenuButton mnemonicParsing="false" popupSide="RIGHT" prefHeight="38.0" prefWidth="195.0" text="Patient">
+                    <MenuButton fx:id="btn" mnemonicParsing="false" popupSide="RIGHT" prefHeight="38.0" prefWidth="195.0" style="-fx-text-fill: white;" text="Patient" textFill="#000000d6">
                         <items>
-                            <MenuItem fx:id="btnPatientInfo" mnemonicParsing="false" text="Patient Information" />
-                            <MenuItem fx:id="btnListPatient" mnemonicParsing="false" text="List of Patient" />
+                            <MenuItem mnemonicParsing="false" onAction="#setPatientInformation" text="Patient Information" />
+                            <MenuItem mnemonicParsing="false" onAction="#setListOfPatient" text="List of Patient" />
                         </items>
                     </MenuButton>
                 </children>
@@ -115,7 +115,7 @@
                     <Insets left="5.0" right="5.0" />
                 </VBox.margin>
             </HBox>
-            <HBox maxHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: white;" styleClass="border" stylesheets="@overlord.css">
+            <HBox maxHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: white; -fx-text-fill: white;" styleClass="border" stylesheets="@overlord.css">
                 <children>
                     <ImageView fitHeight="40.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -125,10 +125,10 @@
                             <Insets left="5.0" />
                         </HBox.margin>
                     </ImageView>
-                    <MenuButton mnemonicParsing="false" popupSide="RIGHT" prefHeight="41.0" prefWidth="200.0" text="Doctor">
+                    <MenuButton fx:id="btn" mnemonicParsing="false" popupSide="RIGHT" prefHeight="41.0" prefWidth="226.0" style="-fx-text-fill: white;" text="Doctor">
                         <items>
-                            <MenuItem fx:id="DoctorInfo" mnemonicParsing="false" text="Doctor Information" />
-                            <MenuItem fx:id="btnListDoctors" mnemonicParsing="false" text="List of Doctors" />
+                            <MenuItem mnemonicParsing="false" onAction="#setDoctorInformation" text="Doctor Information" />
+                            <MenuItem mnemonicParsing="false" onAction="#setListOfDoctors" text="List of Doctors" />
                         </items>
                     </MenuButton>
                 </children>
@@ -136,7 +136,7 @@
                     <Insets left="5.0" right="5.0" />
                 </VBox.margin>
             </HBox>
-            <HBox maxHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: white;" styleClass="border" stylesheets="@overlord.css">
+            <HBox maxHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: white; -fx-text-fill: white;" styleClass="border" stylesheets="@overlord.css">
                 <children>
                     <ImageView fitHeight="32.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -146,12 +146,12 @@
                             <Insets left="10.0" />
                         </HBox.margin>
                     </ImageView>
-                    <MenuButton mnemonicParsing="false" popupSide="RIGHT" prefHeight="49.0" prefWidth="215.0" text="Pharmacy">
+                    <MenuButton fx:id="btn" mnemonicParsing="false" popupSide="RIGHT" prefHeight="49.0" prefWidth="215.0" text="Pharmacy">
                         <items>
-                            <MenuItem fx:id="btnProductInfo" mnemonicParsing="false" text="Product information" />
-                            <MenuItem fx:id="btnProductList" mnemonicParsing="false" text="Product List" />
-                            <MenuItem fx:id="btnSales" mnemonicParsing="false" text="Sales" />
-                            <MenuItem fx:id="btnReports" mnemonicParsing="false" text="Reports" />
+                            <MenuItem mnemonicParsing="false" onAction="#setProductInformation" text="Product information" />
+                            <MenuItem mnemonicParsing="false" onAction="#setProductList" text="Product List" />
+                            <MenuItem mnemonicParsing="false" onAction="#setPharmacySales" text="Sales" />
+                            <MenuItem mnemonicParsing="false" onAction="#setPharmacyReport" text="Reports" />
                         </items>
                     </MenuButton>
                 </children>
@@ -159,7 +159,7 @@
                     <Insets left="5.0" right="5.0" />
                 </VBox.margin>
             </HBox>
-            <HBox maxHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: white;" styleClass="border" stylesheets="@overlord.css">
+            <HBox maxHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: white; -fx-text-fill: white;" styleClass="border" stylesheets="@overlord.css">
                 <children>
                     <ImageView fitHeight="44.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -169,11 +169,11 @@
                             <Insets left="10.0" />
                         </HBox.margin>
                     </ImageView>
-                    <MenuButton mnemonicParsing="false" popupSide="RIGHT" prefHeight="73.0" prefWidth="198.0" text="Treatment">
+                    <MenuButton fx:id="btn" mnemonicParsing="false" popupSide="RIGHT" prefHeight="73.0" prefWidth="198.0" text="Treatment">
                         <items>
-                            <MenuItem mnemonicParsing="false" text="Dental's Screen" />
-                            <MenuItem mnemonicParsing="false" text="Patient Visit List" />
-                            <MenuItem mnemonicParsing="false" text="Reports" />
+                            <MenuItem mnemonicParsing="false" onAction="#setDentalScreen" text="Dental's Screen" />
+                            <MenuItem mnemonicParsing="false" onAction="#setPatientVisitList" text="Patient Visit List" />
+                            <MenuItem mnemonicParsing="false" onAction="#setTreatmentReports" text="Reports" />
                         </items>
                     </MenuButton>
                 </children>
@@ -181,7 +181,7 @@
                     <Insets left="5.0" right="5.0" />
                 </VBox.margin>
             </HBox>
-            <HBox maxHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: white;" styleClass="border" stylesheets="@overlord.css">
+            <HBox maxHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: white; -fx-text-fill: white;" styleClass="border" stylesheets="@overlord.css">
                 <children>
                     <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -191,10 +191,10 @@
                             <Insets left="10.0" />
                         </HBox.margin>
                     </ImageView>
-                    <MenuButton mnemonicParsing="false" popupSide="RIGHT" prefHeight="73.0" prefWidth="198.0" text="Prescription">
+                    <MenuButton fx:id="btn" mnemonicParsing="false" popupSide="RIGHT" prefHeight="73.0" prefWidth="198.0" text="Prescription">
                         <items>
-                            <MenuItem mnemonicParsing="false" text="Prescription" />
-                            <MenuItem mnemonicParsing="false" text="Prescription List" />
+                            <MenuItem mnemonicParsing="false" onAction="#setPrescription" text="Prescription" />
+                            <MenuItem mnemonicParsing="false" onAction="#setPrescriptionList" text="Prescription List" />
                         </items>
                     </MenuButton>
                 </children>
@@ -202,7 +202,7 @@
                     <Insets left="5.0" right="5.0" />
                 </VBox.margin>
             </HBox>
-            <HBox maxHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: white;" styleClass="border" stylesheets="@overlord.css">
+            <HBox maxHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: white; -fx-text-fill: white;" styleClass="border" stylesheets="@overlord.css">
                 <children>
                     <ImageView fitHeight="33.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -212,11 +212,11 @@
                             <Insets left="10.0" />
                         </HBox.margin>
                     </ImageView>
-                    <MenuButton mnemonicParsing="false" popupSide="RIGHT" prefHeight="39.0" prefWidth="234.0" text="Income &amp; Expediture">
+                    <MenuButton fx:id="btn" mnemonicParsing="false" popupSide="RIGHT" prefHeight="39.0" prefWidth="234.0" text="Income &amp; Expediture">
                         <items>
-                            <MenuItem mnemonicParsing="false" text="Voucher" />
-                            <MenuItem mnemonicParsing="false" text="List of Voucher" />
-                            <MenuItem mnemonicParsing="false" text="Reports" />
+                            <MenuItem mnemonicParsing="false" onAction="#setVoucher" text="Voucher" />
+                            <MenuItem mnemonicParsing="false" onAction="#setListOfVoucher" text="List of Voucher" />
+                            <MenuItem mnemonicParsing="false" onAction="#setIncomeReports" text="Reports" />
                         </items>
                     </MenuButton>
                 </children>
@@ -234,12 +234,12 @@
                             <Insets left="10.0" />
                         </HBox.margin>
                     </ImageView>
-                    <MenuButton mnemonicParsing="false" popupSide="RIGHT" prefHeight="73.0" prefWidth="198.0" style="-fx-text-fill: white;" text="Administration">
+                    <MenuButton fx:id="btn" mnemonicParsing="false" popupSide="RIGHT" prefHeight="73.0" prefWidth="198.0" style="-fx-text-fill: white;" text="Administration">
                         <items>
-                            <MenuItem mnemonicParsing="false" text="Clinic Information" />
-                            <MenuItem mnemonicParsing="false" text="User Information" />
-                            <MenuItem mnemonicParsing="false" text="List of Users" />
-                            <MenuItem mnemonicParsing="false" text="Permission" />
+                            <MenuItem mnemonicParsing="false" onAction="#setClinicInformation" text="Clinic Information" />
+                            <MenuItem mnemonicParsing="false" onAction="#setUserInformation" text="User Information" />
+                            <MenuItem mnemonicParsing="false" onAction="#setListOfUsers" text="List of Users" />
+                            <MenuItem mnemonicParsing="false" onAction="#setPermission" text="Permission" />
                         </items>
                     </MenuButton>
                 </children>

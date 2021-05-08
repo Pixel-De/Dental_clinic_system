@@ -36,20 +36,19 @@
     -fx-max-height: 100px;
     -fx-max-width: 100px;
 }
-.menu-button {
+#btn {
     -fx-background-color: none;
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: white;
 }
-
 .menu-button .arrow {
     -fx-background-color: transparent;
 }
-.menu-button:hover{
+#btn:hover{
     -fx-background-color: white;
     -fx-opacity: 0.5;
 }
-.vbox-Style>menu-button{
-
+.MenuItems{
+    -fx-text-fill: white;
 }
