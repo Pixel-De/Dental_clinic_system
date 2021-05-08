@@ -1,0 +1,54 @@
+.label-bright{
+    -fx-font-size: 21pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+.label-bright1{
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+.label-bright2{
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+.label-bright3{
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+.border-box{
+    -fx-border-color:#555;
+    -fx-border-width: 2px;
+}
+.vbox-Style{
+    -fx-background-color:#13B1BA;
+}
+.profile-icon{
+    -fx-border-radius: 50;
+    -fx-pref-height: 50px;
+    -fx-pref-width: 50px;
+    -fx-max-height: 100px;
+    -fx-max-width: 100px;
+}
+#btn {
+    -fx-background-color: none;
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+}
+.menu-button .arrow {
+    -fx-background-color: transparent;
+}
+#btn:hover{
+    -fx-background-color: white;
+    -fx-opacity: 0.5;
+}
+.MenuItems{
+    -fx-text-fill: white;
+}
