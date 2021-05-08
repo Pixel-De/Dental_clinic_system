@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -61,20 +62,23 @@
                <children>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Label text="Product ID" />
-                        <TextField />
+                        <Label text="Product ID">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Label>
+                        <TextField fx:id="pID" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                      <children>
                         <Label text="Product Name" />
-                        <TextField />
+                        <TextField fx:id="pName" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
                      <children>
                         <Label text="Generic Name" />
-                        <TextField />
+                        <TextField fx:id="gName" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3">
@@ -82,52 +86,52 @@
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
                               <Label text="Category" AnchorPane.leftAnchor="0.0" />
-                              <Label onMouseClicked="#showCategory" text="ADD CATEGORY" AnchorPane.rightAnchor="0.0" />
+                              <Label onMouseClicked="#showCategory" style="-fx-underline: true;" text="ADD CATEGORY" textFill="#df0d0d" AnchorPane.rightAnchor="0.0" />
                            </children>
                         </AnchorPane>
-                        <ComboBox prefHeight="26.0" prefWidth="442.0" />
+                        <ComboBox fx:id="category" prefHeight="26.0" prefWidth="442.0" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
                      <children>
                         <Label text="Manufacture Date" />
-                        <ComboBox prefHeight="26.0" prefWidth="442.0" />
+                        <DatePicker fx:id="manuDate" prefHeight="26.0" prefWidth="288.0" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="5">
                      <children>
                         <Label text="Expiration Date" />
-                        <ComboBox prefHeight="26.0" prefWidth="445.0" />
+                        <DatePicker fx:id="eDate" prefHeight="26.0" prefWidth="291.0" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
                         <Label text="Barcode" />
-                        <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="270.0" />
+                        <TextField fx:id="barCode" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="270.0" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
                         <Label text="UOM" />
-                        <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="270.0" />
+                        <TextField fx:id="UOM" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="270.0" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
                         <Label text="Quantity" />
-                        <TextField maxHeight="-Infinity" maxWidth="270.0" />
+                        <TextField fx:id="quantity" maxHeight="-Infinity" maxWidth="270.0" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <children>
                         <Label text="Purchase Price" />
-                        <TextField maxWidth="270.0" />
+                        <TextField fx:id="pPrice" maxWidth="270.0" />
                      </children>
                   </VBox>
                   <VBox GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <children>
                         <Label text="Sales Price" />
-                        <TextField maxWidth="270.0" />
+                        <TextField fx:id="sPrice" maxWidth="270.0" />
                      </children>
                   </VBox>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black;" GridPane.columnIndex="2" GridPane.rowSpan="6">
@@ -154,7 +158,7 @@
                      <children>
                         <TilePane alignment="CENTER" hgap="10.0" prefWidth="200.0" vgap="5.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <Button mnemonicParsing="false" text="SAVE">
+                              <Button mnemonicParsing="false" onMouseClicked="#saveProduct" text="SAVE">
                                  <graphic>
                                     <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                        <image>

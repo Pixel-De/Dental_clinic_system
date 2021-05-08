@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -16,7 +15,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane prefHeight="400.0" prefWidth="459.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DentalClinic.Pharmacy.productInformation.ProductCategoryController">
    <children>
@@ -53,19 +51,14 @@
                       <RowConstraints maxHeight="202.00001373291016" minHeight="10.0" prefHeight="191.6000198364258" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TableView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
-                          <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
-                          </columns>
-                        </TableView>
+                        <TableView fx:id="categoryTable" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
                         <VBox prefHeight="200.0" prefWidth="100.0">
                            <children>
                               <Label text="Category Name:" />
-                              <TextField prefHeight="26.0" prefWidth="462.0" />
+                              <TextField fx:id="categoryName" prefHeight="26.0" prefWidth="462.0" />
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                  <children>
-                                    <Button mnemonicParsing="false" text="SAVE">
+                                    <Button mnemonicParsing="false" onMouseClicked="#addCategory" text="SAVE">
                                        <graphic>
                                           <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                              <image>

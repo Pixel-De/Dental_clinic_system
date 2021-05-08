@@ -120,7 +120,7 @@ public class MainMenuController {
 
     @FXML
     void setPatientVisitList(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Treatment/PatientVisitList.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Treatment/PatientVisitView.fxml"));
         Parent rootTreatVis = loader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(rootTreatVis));
@@ -171,7 +171,7 @@ public class MainMenuController {
 
     @FXML
     void setProductList(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Pharmacy/productInformation/ProductCategory.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Pharmacy/productList/ProductList.fxml"));
         Parent rootPharmaProductCat = loader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(rootPharmaProductCat));
