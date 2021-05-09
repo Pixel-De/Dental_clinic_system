@@ -1,8 +1,10 @@
 package DentalClinic.DB;
+import DentalClinic.Doctor.Doctor;
 import DentalClinic.Patient.Patient;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import javax.print.Doc;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -47,6 +49,27 @@ public class DbConnect {
         }
     }
 
+    private ObservableList<Doctor> GetAllDoctor(){
+        ObservableList<Doctor> a = FXCollections.observableArrayList(new ArrayList<Doctor>());
+        try (Statement statement = this.db.createStatement()) {
+            ResultSet result = statement.executeQuery("select * from doctor");
+            while(result.next()){
+                Integer id = result.getInt("id");
+                String name = result.getString("name");
+                String speciality = result.getString("speciality");
+                String address = result.getString("address");
+                String qualification = result.getString("qualification");
+                Integer contact = result.getInt("contact");
+                Date date = result.getDate("date");
+                a.add(new Doctor(name,speciality,qualification,address,id,contact,date));
+            }
+            return a;
+        } catch (SQLException e){
+            e.printStackTrace();
+            return a;
+        }
+    }
+
     public DbConnect(){
         this.db = this.Connect();
     }
@@ -57,6 +80,9 @@ public class DbConnect {
 
     public ObservableList<Patient> PatientList(){
         return  this.GetAllPatien();
+    }
+    public ObservableList<Doctor> DoctorList(){
+        return  this.GetAllDoctor();
     }
 }
 
