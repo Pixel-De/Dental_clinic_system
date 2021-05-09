@@ -14,6 +14,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
 public class ProductInfoController {
 
@@ -32,8 +34,9 @@ public class ProductInfoController {
         category.setItems(catListTest);
     }
     public void saveProduct(){
+        ZoneId defaultZoneId = ZoneId.systemDefault();
         String id, p_name, g_name, barcode, uom, quant, p_price, s_price, cate;
-        LocalDate m_date, e_date;
+        Date m_date, e_date;
         id = pID.getText();
         p_name = pName.getText();
         g_name = gName.getText();
@@ -43,8 +46,8 @@ public class ProductInfoController {
         p_price = pPrice.getText();
         s_price = sPrice.getText();
         cate = category.getValue();
-        m_date = manuDate.getValue();
-        e_date = eDate.getValue();
+        m_date = Date.from(manuDate.getValue().atStartOfDay(defaultZoneId).toInstant());
+        e_date = Date.from(eDate.getValue().atStartOfDay(defaultZoneId).toInstant());
         Product p = new Product(id, p_name, g_name, cate, m_date, e_date, barcode, uom,quant, p_price, s_price);
         System.out.println(p.getCategory()+" "+ p.getgName());
     }

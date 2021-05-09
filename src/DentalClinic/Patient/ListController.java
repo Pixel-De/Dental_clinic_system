@@ -23,9 +23,6 @@ public class ListController {
         if(data.getStatus()!=null){
             System.out.println("db got here");
             ObservableList<Patient> patients = data.PatientList();
-            patients.forEach(patient -> {
-                System.out.println(patient.getId()+" "+patient.getName());
-            });
 
             TableColumn<Patient, Button> edit = new TableColumn<>("");
             TableColumn<Patient, Button> delete = new TableColumn<>("");

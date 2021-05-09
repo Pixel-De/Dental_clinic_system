@@ -5,14 +5,15 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.EventListener;
 
 public class Product {
     private String id, name, gName, category,  barCode, UOM, quantity , pPrice, sPrice ;
-    private LocalDate manuDate, expireDate;
+    private Date manuDate, expireDate;
     private Button edit, delete ;
 
-    public Product(String id, String name, String gName, String category, LocalDate manuDate, LocalDate expireDate, String barCode, String UOM, String quantity, String pPrice, String sPrice) {
+    public Product(String id, String name, String gName, String category, Date manuDate, Date expireDate, String barCode, String UOM, String quantity, String pPrice, String sPrice) {
         this.id = id;
         this.name = name;
         this.gName = gName;
@@ -75,19 +76,19 @@ public class Product {
         this.category = category;
     }
 
-    public LocalDate getManuDate() {
+    public Date getManuDate() {
         return manuDate;
     }
 
-    public void setManuDate(LocalDate manuDate) {
+    public void setManuDate(Date manuDate) {
         this.manuDate = manuDate;
     }
 
-    public LocalDate getExpireDate() {
+    public Date getExpireDate() {
         return expireDate;
     }
 
-    public void setExpireDate(LocalDate expireDate) {
+    public void setExpireDate(Date expireDate) {
         this.expireDate = expireDate;
     }
 
