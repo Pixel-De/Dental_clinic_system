@@ -23,7 +23,7 @@ public class ProductCategoryController {
     public void initialize(){
         for(int i=0; i<arr.length; i++){
             Category c = new Category(arr[i]);
-            catList.add(c);
+
         }
         categoryTable.setEditable(true);
         TableColumn del = new TableColumn("");
@@ -65,7 +65,7 @@ public class ProductCategoryController {
     public void addCategory(){
         String name = categoryName.getText();
         Category c = new Category(name);
-        catList.add(c);
+
     }
 
 
