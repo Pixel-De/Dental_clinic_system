@@ -1,6 +1,7 @@
 package DentalClinic.Patient;
 
 import DentalClinic.DB.DbConnect;
+import DentalClinic.Pharmacy.productList.ProductUpdateController;
 import com.mysql.cj.xdevapi.Table;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -36,8 +37,20 @@ public class ListController {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
 
-                        InformationController ic = new InformationController(patient);
-                        ic.showInformation();
+                        InformationController lc = new InformationController(patient);
+                        try {
+                            FXMLLoader loader = new FXMLLoader();
+                            loader.setLocation(getClass().getResource("./InformationView.fxml"));
+                            loader.setController(lc);
+                            Scene scene = new Scene(loader.load());
+                            Stage stage = new Stage();
+                            stage.setTitle("Patient Update");
+                            stage.setScene(scene);
+                            stage.showAndWait();
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
                 System.out.println(patient.getId()+" "+patient.getName());
