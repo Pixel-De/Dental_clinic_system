@@ -25,14 +25,14 @@ public class Patient {
         this.date = date;
 
         this.delete = new Button();
-        ImageView imgView = new ImageView(getClass().getResource("../../assets/delete.png").toExternalForm());
+        ImageView imgView = new ImageView(getClass().getResource("../assets/delete.png").toExternalForm());
         imgView.setFitHeight(10);
         imgView.setPreserveRatio(true);
         this.delete.setPrefSize(10,10);
         this.delete.setGraphic(imgView);
 
         this.edit = new Button();
-        ImageView imgView2 = new ImageView(getClass().getResource("../../assets/draw.png").toExternalForm());
+        ImageView imgView2 = new ImageView(getClass().getResource("../assets/draw.png").toExternalForm());
         imgView2.setFitHeight(10);
         imgView2.setPreserveRatio(true);
         this.edit.setPrefSize(10,10);
