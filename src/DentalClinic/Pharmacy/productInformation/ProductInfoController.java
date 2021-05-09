@@ -1,37 +1,45 @@
 package DentalClinic.Pharmacy.productInformation;
 
+import DentalClinic.DB.DbConnect;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
 public class ProductInfoController {
-
     @FXML
     TextField pID, pName, gName, barCode, UOM , quantity, pPrice, sPrice;
-   @FXML
+    @FXML
     ComboBox<String> category;
-   @FXML
-   DatePicker manuDate, eDate;
+    @FXML
+    DatePicker manuDate, eDate;
 
 
-    ObservableList<String> catListTest = FXCollections.observableArrayList("category1", "category2", "category3");
+    ObservableList<String> allCategory = FXCollections.observableArrayList();
+
 
     @FXML
     public void initialize(){
-        category.setItems(catListTest);
+        DbConnect db = new DbConnect();
+        ObservableList<Category> tmp = db.CategoryList();
+        tmp.forEach(category ->{
+            allCategory.add(category.getCategory());
+        });
+
+        category.setItems(allCategory);
+        category.getSelectionModel().selectFirst();
+
     }
     public void saveProduct(){
         ZoneId defaultZoneId = ZoneId.systemDefault();
@@ -49,7 +57,7 @@ public class ProductInfoController {
         m_date = Date.from(manuDate.getValue().atStartOfDay(defaultZoneId).toInstant());
         e_date = Date.from(eDate.getValue().atStartOfDay(defaultZoneId).toInstant());
         Product p = new Product(id, p_name, g_name, cate, m_date, e_date, barcode, uom,quant, p_price, s_price);
-        System.out.println(p.getCategory()+" "+ p.getgName());
+        System.out.println(p.getCategory()+" "+ p.getGName());
     }
 
     public void showCategory() {

@@ -17,8 +17,8 @@ import java.time.ZoneId;
 
 public class InformationController {
 
-    @FXML
-    TextField id, name, parent, address, contact, age, occupation;
+//    @FXML
+//    TextField id, name, parent, address, contact, age, occupation;
 //    @FXML
 //    ChoiceBox<String> gender;
 //    @FXML

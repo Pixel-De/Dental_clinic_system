@@ -1,5 +1,7 @@
 package DentalClinic.Pharmacy.productInformation;
 
+import DentalClinic.DB.DbConnect;
+import DentalClinic.Patient.InformationController;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -8,7 +10,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.MouseEvent;
 import org.w3c.dom.Text;
+import DentalClinic.Pharmacy.productInformation.Category;
 
 public class ProductCategoryController {
 
@@ -19,12 +23,21 @@ public class ProductCategoryController {
 
     String arr[] = {"cat1", "cate2", "cat3"};
     ObservableList<Category> catList = FXCollections.observableArrayList();
+    DbConnect db ;
     @FXML
     public void initialize(){
-        for(int i=0; i<arr.length; i++){
-            Category c = new Category(arr[i]);
+        db = new DbConnect();
+        catList = db.CategoryList();
 
-        }
+        catList.forEach(category -> {
+            Button d = category.getDel();
+            d.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    System.out.println(category.getCategory());
+                }
+            });
+        });
         categoryTable.setEditable(true);
         TableColumn del = new TableColumn("");
         TableColumn category = new TableColumn("Category");
@@ -42,21 +55,6 @@ public class ProductCategoryController {
             }
         });
 
-//        del.setCellFactory(tableColumn -> {
-//            TableCell<Category, Button> cell = new TableCell<Category, Button>(){
-//                @Override
-//                protected void updateItem(Button button, boolean b) {
-//                    super.updateItem(button, b);
-//                }
-//            };
-////            cell.setOnMouseClicked(e -> {
-////                if (! cell.isEmpty()) {
-////
-////                }
-////            };
-//            return cell ;
-//        });
-
         categoryTable.setItems(catList);
         categoryTable.getColumns().addAll(del, category);
 
@@ -65,7 +63,7 @@ public class ProductCategoryController {
     public void addCategory(){
         String name = categoryName.getText();
         Category c = new Category(name);
-
+        //db ruu nemeh ym hiine.
     }
 
 

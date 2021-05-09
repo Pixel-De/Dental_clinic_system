@@ -28,9 +28,9 @@
                <children>
                   <HBox prefHeight="82.4" prefWidth="911.2" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <ImageView fitHeight="80.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="63.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../assets/medicine.png" />
+                              <Image url="@../../assets/pill.png" />
                            </image>
                         </ImageView>
                         <Label prefHeight="82.0" prefWidth="396.0" text="Product Information" textFill="WHITE">
@@ -39,6 +39,9 @@
                            </font>
                         </Label>
                      </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
                   </HBox>
                </children>
             </AnchorPane>

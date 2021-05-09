@@ -13,6 +13,22 @@ public class Product {
     private Date manuDate, expireDate;
     private Button edit, delete ;
 
+    public Button getEdit() {
+        return edit;
+    }
+
+    public void setEdit(Button edit) {
+        this.edit = edit;
+    }
+
+    public Button getDelete() {
+        return delete;
+    }
+
+    public void setDelete(Button delete) {
+        this.delete = delete;
+    }
+
     public Product(String id, String name, String gName, String category, Date manuDate, Date expireDate, String barCode, String UOM, String quantity, String pPrice, String sPrice) {
         this.id = id;
         this.name = name;
@@ -41,9 +57,7 @@ public class Product {
         this.edit.setGraphic(imgView2);
 
     }
-    public void editHandler(){
 
-    }
     public String getId() {
         return id;
     }
@@ -60,11 +74,11 @@ public class Product {
         this.name = name;
     }
 
-    public String getgName() {
+    public String getGName() {
         return gName;
     }
 
-    public void setgName(String gName) {
+    public void setGName(String gName) {
         this.gName = gName;
     }
 
@@ -74,22 +88,6 @@ public class Product {
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public Date getManuDate() {
-        return manuDate;
-    }
-
-    public void setManuDate(Date manuDate) {
-        this.manuDate = manuDate;
-    }
-
-    public Date getExpireDate() {
-        return expireDate;
-    }
-
-    public void setExpireDate(Date expireDate) {
-        this.expireDate = expireDate;
     }
 
     public String getBarCode() {
@@ -116,20 +114,35 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public String getpPrice() {
+    public String getPPrice() {
         return pPrice;
     }
 
-    public void setpPrice(String pPrice) {
+    public void setPPrice(String pPrice) {
         this.pPrice = pPrice;
     }
 
-    public String getsPrice() {
+    public String getSPrice() {
         return sPrice;
     }
 
-    public void setsPrice(String sPrice) {
+    public void setSPrice(String sPrice) {
         this.sPrice = sPrice;
     }
 
+    public Date getManuDate() {
+        return manuDate;
+    }
+
+    public void setManuDate(Date manuDate) {
+        this.manuDate = manuDate;
+    }
+
+    public Date getExpireDate() {
+        return expireDate;
+    }
+
+    public void setExpireDate(Date expireDate) {
+        this.expireDate = expireDate;
+    }
 }
