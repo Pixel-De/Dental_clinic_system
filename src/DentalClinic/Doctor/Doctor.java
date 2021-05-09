@@ -1,11 +1,15 @@
 package DentalClinic.Doctor;
 
+import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
+
 import java.util.Date;
 
 public class Doctor {
     String name,speciality,qualification,address;
     Integer id,contact;
     Date date;
+    Button delete, edit;
 
     public Doctor(String name, String speciality, String qualification, String address, Integer id, Integer contact, Date date) {
         this.name = name;
@@ -15,6 +19,36 @@ public class Doctor {
         this.id = id;
         this.contact = contact;
         this.date = date;
+
+        this.delete = new Button();
+        ImageView imgView = new ImageView(getClass().getResource("../assets/delete.png").toExternalForm());
+        imgView.setFitHeight(10);
+        imgView.setPreserveRatio(true);
+        this.delete.setPrefSize(10,10);
+        this.delete.setGraphic(imgView);
+
+        this.edit = new Button();
+        ImageView imgView2 = new ImageView(getClass().getResource("../assets/draw.png").toExternalForm());
+        imgView2.setFitHeight(10);
+        imgView2.setPreserveRatio(true);
+        this.edit.setPrefSize(10,10);
+        this.edit.setGraphic(imgView2);
+    }
+
+    public Button getDelete() {
+        return delete;
+    }
+
+    public void setDelete(Button delete) {
+        this.delete = delete;
+    }
+
+    public Button getEdit() {
+        return edit;
+    }
+
+    public void setEdit(Button edit) {
+        this.edit = edit;
     }
 
     public String getName() {
