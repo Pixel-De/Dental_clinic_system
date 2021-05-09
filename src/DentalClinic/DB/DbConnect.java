@@ -1,6 +1,8 @@
 package DentalClinic.DB;
 import DentalClinic.Doctor.Doctor;
 import DentalClinic.Patient.Patient;
+import DentalClinic.Pharmacy.productInformation.Category;
+import DentalClinic.Pharmacy.productInformation.Product;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -70,6 +72,46 @@ public class DbConnect {
         }
     }
 
+    private ObservableList<Product> GetAllProduct(){
+        ObservableList<Product> a = FXCollections.observableArrayList(new ArrayList<Product>());
+        try (Statement statement = this.db.createStatement()) {
+            ResultSet result = statement.executeQuery("select * from product");
+            while(result.next()){
+                String id = result.getString("id");
+                String name = result.getString("p_name");
+                String gName = result.getString("g_name");
+                String category = result.getString("category");
+                Date manuDate = result.getDate("m_date");
+                Date expireDate = result.getDate("e_date");
+                String barcode = result.getString("barcode");
+                String UOM = result.getString("UOM");
+                String quantity = result.getString("quantity");
+                String pPrice = result.getString("p_price");
+                String sPrcie = result.getString("s_price");
+                a.add(new Product(id,name,gName,category,manuDate,expireDate,barcode,UOM,quantity,pPrice,sPrcie));
+            }
+            return a;
+        } catch (SQLException e){
+            e.printStackTrace();
+            return a;
+        }
+    }
+
+    private ObservableList<Category> GetAllCategory(){
+        ObservableList<Category> a = FXCollections.observableArrayList(new ArrayList<Category>());
+        try (Statement statement = this.db.createStatement()) {
+            ResultSet result = statement.executeQuery("select name from category");
+            while(result.next()){
+                String name = result.getString("name");
+                a.add(new Category(name));
+            }
+            return a;
+        } catch (SQLException e){
+            e.printStackTrace();
+            return a;
+        }
+    }
+
     public DbConnect(){
         this.db = this.Connect();
     }
@@ -83,6 +125,12 @@ public class DbConnect {
     }
     public ObservableList<Doctor> DoctorList(){
         return  this.GetAllDoctor();
+    }
+    public ObservableList<Product> ProductList(){
+        return  this.GetAllProduct();
+    }
+    public ObservableList<Category> CategoryList(){
+        return  this.GetAllCategory();
     }
 }
 
