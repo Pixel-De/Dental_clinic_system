@@ -1,5 +1,6 @@
 package DentalClinic.Patient;
 
+import DentalClinic.DB.DbConnect;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -39,6 +40,7 @@ public class InformationController implements Initializable {
 
     ObservableList<String> genders = FXCollections.observableArrayList("Female", "Male");
 
+    DbConnect db = new DbConnect();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         gender.setItems(genders);
@@ -65,20 +67,26 @@ public class InformationController implements Initializable {
         dateDate = p.getDate();
     }
 
-    public void showInformation(){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("./InformationView.fxml"));
-        Parent rootDocInfo = null;
-        try {
-            rootDocInfo = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(rootDocInfo));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+    public void updatePatient(){
+        String n  = name.getText();
+        String par = parent.getText();
+        String gen = gender.getValue();
+        String occup = occupation.getText();
+        String addr = address.getText();
+        int i = Integer.valueOf(id.getText());
+        int ag = Integer.valueOf(age.getText());
+        int cont = Integer.valueOf(contact.getText());
+        LocalDate refLoc = reference.getValue();
+        Date ref = Date.from(refLoc.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        LocalDate dLoc = date.getValue() ;
+        Date d = Date.from(dLoc.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
     }
     public InformationController(){
 
+
     }
+
 
 }

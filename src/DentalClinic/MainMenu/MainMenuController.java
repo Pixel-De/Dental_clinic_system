@@ -69,7 +69,7 @@ public class MainMenuController {
 
     @FXML
     void setDoctorInformation(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Doctor/InformationView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Doctor/InfoView.fxml"));
         Parent rootDocInfo = loader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(rootDocInfo));
@@ -111,7 +111,7 @@ public class MainMenuController {
 
     @FXML
     void setPatientInformation(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Patient/InformationView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Patient/InfoView.fxml"));
         Parent patientsInfo = loader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(patientsInfo));

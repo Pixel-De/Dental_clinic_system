@@ -86,10 +86,6 @@ public class ListController {
             patientTable.setItems(patients);
             patientTable.getColumns().addAll(edit, delete, id, name, parent_name, gender, age
             , occupation, address, contact_no, date, reference);
-
-
-
-
         }
     }
 }
