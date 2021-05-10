@@ -133,7 +133,7 @@ public class DbConnect {
         return  this.GetAllCategory();
     }
 
-    public Boolean AddPatient(Integer id,String name,String parent,String gender, Integer age, String occupation, String address, Integer contact,Date reference,Date date){
+    public Boolean AddPatient(Integer id, String name, String parent, String gender, Integer age, String occupation, String address, Integer contact, java.util.Date reference, java.util.Date date){
         try (Statement statement = this.db.createStatement()){
             Integer cnt = statement.executeUpdate("INSERT INTO `patient` (`id`, `name`, `parent`, `gender`, `age`, `occupation`, `address`, `contact`, `reference`, `date`) " +
                     "VALUES ('"+id+"', '"+name+"', '"+parent+"', '"+gender+"', '"+age+"', '"+occupation+"', '"+address+"', '"+contact+"', '"+reference+"', '"+date+"')");
