@@ -147,5 +147,48 @@ public class DbConnect {
             return false;
         }
     }
+
+    public Boolean AddDoctor(Integer id, String name,String  speciality, String qualification, String address, Integer contact,  java.util.Date date){
+        try (Statement statement = this.db.createStatement()){
+            Integer cnt = statement.executeUpdate("INSERT INTO `doctor` (`id`, `name`, `speciality`, `qualification`, `address`, `contact`, `date`) " +
+                                                                            "VALUES ('"+id+"', '"+name+"', '"+speciality+"', '"+qualification+"', '"+address+"', '"+contact+"', '"+date+"')");
+            if(cnt == 1){
+                return  true;
+            } else {
+                return  false;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public Boolean AddProduct(Integer id, String p_name,String g_name,String  category,java.util.Date m_date,java.util.Date e_date, Integer barcode, String UOM, Integer quantity,Integer p_price,Integer s_price){
+        try (Statement statement = this.db.createStatement()){
+            Integer cnt = statement.executeUpdate("INSERT INTO `product` (`id`, `p_name`, `g_name`, `category`, `m_date`, `e_date`, `barcode`, `UOM`, `quantity`, `p_price`, `s_price`) " +
+                    "VALUES ('"+id+"', '"+p_name+"', '"+g_name+"', '"+category+"', '"+m_date+"', '"+e_date+"', '"+barcode+"', '"+UOM+"', '"+quantity+"', '"+p_price+"', '"+s_price+"')");
+            if(cnt == 1){
+                return  true;
+            } else {
+                return  false;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public Boolean AddCategory(Integer id, String name){
+        try (Statement statement = this.db.createStatement()){
+            Integer cnt = statement.executeUpdate("INSERT INTO `category` (`id`, `name`) VALUES ('"+id+"', '"+name+"')");
+            if(cnt == 1){
+                return  true;
+            } else {
+                return  false;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
 
