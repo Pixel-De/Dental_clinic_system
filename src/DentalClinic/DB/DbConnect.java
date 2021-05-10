@@ -132,5 +132,20 @@ public class DbConnect {
     public ObservableList<Category> CategoryList(){
         return  this.GetAllCategory();
     }
+
+    public Boolean AddPatient(Integer id,String name,String parent,String gender, Integer age, String occupation, String address, Integer contact,Date reference,Date date){
+        try (Statement statement = this.db.createStatement()){
+            Integer cnt = statement.executeUpdate("INSERT INTO `patient` (`id`, `name`, `parent`, `gender`, `age`, `occupation`, `address`, `contact`, `reference`, `date`) " +
+                    "VALUES ('"+id+"', '"+name+"', '"+parent+"', '"+gender+"', '"+age+"', '"+occupation+"', '"+address+"', '"+contact+"', '"+reference+"', '"+date+"')");
+            if(cnt == 1){
+                return  true;
+            } else {
+                return  false;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
 
