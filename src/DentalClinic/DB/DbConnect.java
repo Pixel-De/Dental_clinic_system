@@ -190,5 +190,145 @@ public class DbConnect {
             return false;
         }
     }
+
+    public Boolean UpdatePatient(Integer id, String name, String parent, String gender, Integer age, String occupation, String address, Integer contact, java.util.Date reference, java.util.Date date){
+        try (Statement statement = this.db.createStatement()){
+            Integer cnt = statement.executeUpdate("UPDATE `patient` SET " +
+                    "`name` = '"+name+"', " +
+                    "`parent` = '"+parent+"', " +
+                    "`gender` = '"+gender+"', " +
+                    "`age` = '"+age+"', " +
+                    "`occupation` = '"+occupation+"', " +
+                    "`address` = '"+address+"', " +
+                    "`contact` = '"+contact+"', " +
+                    "`reference` = '"+reference+"', " +
+                    "`date` = '"+date+"' " +
+                    "WHERE `patient`.`id` = "+id);
+            if(cnt == 1){
+                return  true;
+            } else {
+                return  false;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public Boolean UpdateDoctor(Integer id, String name,String  speciality, String qualification, String address, Integer contact,  java.util.Date date){
+        try (Statement statement = this.db.createStatement()){
+            Integer cnt = statement.executeUpdate("UPDATE `doctor` SET " +
+                    "`name` = '"+name+"', " +
+                    "`speciality` = '"+speciality+"', " +
+                    "`qualification` = '"+qualification+"', " +
+                    "`address` = '"+address+"', " +
+                    "`contact` = '"+contact+"', " +
+                    "`date` = '"+date+"'" +
+                    "WHERE `doctor`.`id` = "+id);
+            if(cnt == 1){
+                return  true;
+            } else {
+                return  false;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public Boolean UpdateProduct(Integer id, String p_name,String g_name,String  category,java.util.Date m_date,java.util.Date e_date, Integer barcode, String UOM, Integer quantity,Integer p_price,Integer s_price){
+        try (Statement statement = this.db.createStatement()){
+            Integer cnt = statement.executeUpdate("UPDATE `product` SET " +
+                    "`p_name` = '"+p_name+"', " +
+                    "`g_name` = '"+g_name+"', " +
+                    "`category` = '"+category+"', " +
+                    "`m_date` = '"+m_date+"', " +
+                    "`e_date` = '"+e_date+"', " +
+                    "`barcode` = '"+barcode+"', " +
+                    "`UOM` = '"+UOM+"', " +
+                    "`quantity` = '"+quantity+"', " +
+                    "`p_price` = '"+p_price+"', " +
+                    "`s_price` = '"+s_price+"' " +
+                    "WHERE `product`.`id` = "+id);
+            if(cnt == 1){
+                return  true;
+            } else {
+                return  false;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public Boolean UpdateCategory(Integer id, String name){
+        try (Statement statement = this.db.createStatement()){
+            Integer cnt = statement.executeUpdate("UPDATE `category` SET `name` = '"+name+"' WHERE `category`.`id` = "+id);
+            if(cnt == 1){
+                return  true;
+            } else {
+                return  false;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public Boolean DeletePatient(Integer id){
+        try (Statement statement = this.db.createStatement()){
+            Integer cnt = statement.executeUpdate("DELETE FROM `patient` WHERE `patient`.`id` = "+id);
+            if(cnt == 1){
+                return  true;
+            } else {
+                return  false;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public Boolean DeleteDoctor(Integer id){
+        try (Statement statement = this.db.createStatement()){
+            Integer cnt = statement.executeUpdate("DELETE FROM `doctor` WHERE `doctor`.`id` = "+id);
+            if(cnt == 1){
+                return  true;
+            } else {
+                return  false;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public Boolean DeleteProduct(Integer id){
+        try (Statement statement = this.db.createStatement()){
+            Integer cnt = statement.executeUpdate("DELETE FROM `product` WHERE `product`.`id` = "+id);
+            if(cnt == 1){
+                return  true;
+            } else {
+                return  false;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public Boolean DeleteCategory(Integer id){
+        try (Statement statement = this.db.createStatement()){
+            Integer cnt = statement.executeUpdate("DELETE FROM `category` WHERE `category`.`id` = "+id);
+            if(cnt == 1){
+                return  true;
+            } else {
+                return  false;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
 
