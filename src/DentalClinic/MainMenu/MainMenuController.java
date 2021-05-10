@@ -111,7 +111,7 @@ public class MainMenuController {
 
     @FXML
     void setPatientInformation(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Patient/InformationView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Patient/InfoView.fxml"));
         Parent patientsInfo = loader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(patientsInfo));
