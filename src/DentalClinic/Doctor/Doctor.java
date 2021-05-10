@@ -3,7 +3,7 @@ package DentalClinic.Doctor;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Doctor {
     String name,speciality,qualification,address;

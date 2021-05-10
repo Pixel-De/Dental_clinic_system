@@ -2,9 +2,11 @@ package DentalClinic.Doctor;
 
 import DentalClinic.DB.DbConnect;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.time.ZoneId;
 import java.sql.Date;
@@ -17,6 +19,8 @@ public class InfoController {
     TextArea addressArea;
     @FXML
     DatePicker datePicker;
+    @FXML
+    Button closeButton;
     DbConnect db = new DbConnect();
     public void saveDoctor(){
         String name = nameField.getText();
@@ -29,6 +33,24 @@ public class InfoController {
 
         Date date = Date.valueOf(datePicker.getValue());
 
+        boolean f = db.AddDoctor(id, name, speciality, qualification, address, contact, date);
+        System.out.println(f);
         // db ruu save hiih uildel.
+    }
+
+    @FXML
+    private void closeButtonAction(){
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        stage.close();
+    }
+
+    public void reset(){
+        nameField.setText("");
+        specialityField.setText("");
+        qualificationField.setText("");
+        addressArea.setText("");
+        idField.setText("");
+        contactField.setText("");
+        datePicker.setValue(null);
     }
 }

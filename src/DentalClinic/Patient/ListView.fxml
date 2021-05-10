@@ -72,7 +72,7 @@
                         <Label text="0 Record Found." />
                                 <TilePane alignment="CENTER_RIGHT" hgap="10.0" prefWidth="200.0" vgap="5.0" HBox.hgrow="ALWAYS">
                                     <children>
-                                        <Button mnemonicParsing="false" text="REFRESH">
+                                        <Button mnemonicParsing="false" onMouseClicked="#refresh" text="REFRESH">
                                             <graphic>
                                                 <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                                     <image>
@@ -81,7 +81,7 @@
                                                 </ImageView>
                                             </graphic>
                                         </Button>
-                                        <Button mnemonicParsing="false" text="CLOSE">
+                                        <Button fx:id="closeButton" mnemonicParsing="false" onAction="#closeButtonAction" text="CLOSE">
                                             <graphic>
                                                 <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                                     <image>

@@ -4,10 +4,8 @@ import DentalClinic.DB.DbConnect;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -23,6 +21,8 @@ public class InfoController {
     DatePicker reference, date;
     @FXML
     TextArea address;
+    @FXML
+    Button closeButton;
 
     private ObservableList<String> genders = FXCollections.observableArrayList("Female", "Male");
     DbConnect db = new DbConnect();
@@ -46,5 +46,24 @@ public class InfoController {
         Date d = Date.valueOf(dLoc);
         boolean flag = db.AddPatient(i, n, par, gen,ag, occup, addr, cont, ref, d );
         System.out.println(flag);
+    }
+
+    public void reset(){
+        name.setText("");
+        parent.setText("");
+        gender.getSelectionModel().selectFirst();
+        occupation.setText("");
+        address.setText("");
+        id.setText("");
+        age.setText("");
+        contact.setText("");
+        reference.setValue(null);
+        date.setValue(null);
+    }
+
+    @FXML
+    private void closeButtonAction(){
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        stage.close();
     }
 }

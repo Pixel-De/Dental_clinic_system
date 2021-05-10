@@ -4,7 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.sql.Date;
 
 public class Patient {
     private String name,parent,gender,occupation,address;
