@@ -1,5 +1,6 @@
 package DentalClinic.Patient;
 
+import DentalClinic.DB.DbConnect;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,7 +11,7 @@ import javafx.scene.control.TextField;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Date;
+import java.sql.Date;
 
 public class InfoController {
 
@@ -24,6 +25,7 @@ public class InfoController {
     TextArea address;
 
     private ObservableList<String> genders = FXCollections.observableArrayList("Female", "Male");
+    DbConnect db = new DbConnect();
     @FXML
     public void initialize(){
         gender.setItems(genders);
@@ -39,9 +41,10 @@ public class InfoController {
         int ag = Integer.valueOf(age.getText());
         int cont = Integer.valueOf(contact.getText());
         LocalDate refLoc = reference.getValue();
-        Date ref = Date.from(refLoc.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Date ref = Date.valueOf(refLoc);
         LocalDate dLoc = date.getValue() ;
-        Date d = Date.from(dLoc.atStartOfDay(ZoneId.systemDefault()).toInstant());
-//        boolean flag = db.AddPatient(i, n, par, gen,ag, occup, addr, cont, ref, d );
+        Date d = Date.valueOf(dLoc);
+        boolean flag = db.AddPatient(i, n, par, gen,ag, occup, addr, cont, ref, d );
+        System.out.println(flag);
     }
 }

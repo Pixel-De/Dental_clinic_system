@@ -7,7 +7,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.time.ZoneId;
-import java.util.Date;
+import java.sql.Date;
 
 public class InfoController {
 
@@ -27,7 +27,8 @@ public class InfoController {
         int id = Integer.valueOf(idField.getText());
         int contact = Integer.valueOf(contactField.getText());
 
-        Date date = Date.from(datePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Date date = Date.valueOf(datePicker.getValue());
+
         // db ruu save hiih uildel.
     }
 }
