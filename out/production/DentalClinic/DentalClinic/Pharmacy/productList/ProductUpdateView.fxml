@@ -20,7 +20,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="567.0" prefWidth="911.0" style="-fx-background-color: #f2f2f2;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DentalClinic.Pharmacy.productList.ProductUpdateController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="567.0" prefWidth="911.0" style="-fx-background-color: #f2f2f2;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <BorderPane prefHeight="83.0" prefWidth="663.0" AnchorPane.bottomAnchor="360.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <top>
@@ -69,19 +69,19 @@
                                     <font>
                                         <Font name="System Bold" size="12.0" />
                                     </font></Label>
-                                <TextField fx:id="pID" />
+                                <TextField fx:id="idField" />
                             </children>
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                             <children>
                                 <Label text="Product Name" />
-                                <TextField fx:id="pName" />
+                                <TextField fx:id="nameField" />
                             </children>
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
                             <children>
                                 <Label text="Generic Name" />
-                                <TextField fx:id="gName" />
+                                <TextField fx:id="genericField" />
                             </children>
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3">
@@ -92,49 +92,49 @@
                                         <Label onMouseClicked="#showCategory" style="-fx-underline: true;" text="ADD CATEGORY" textFill="#df0d0d" AnchorPane.rightAnchor="0.0" />
                                     </children>
                                 </AnchorPane>
-                                <ComboBox fx:id="category" prefHeight="26.0" prefWidth="442.0" />
+                                <ComboBox fx:id="categoryBox" prefHeight="26.0" prefWidth="442.0" />
                             </children>
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
                             <children>
                                 <Label text="Manufacture Date" />
-                                <DatePicker fx:id="manuDate" prefHeight="26.0" prefWidth="288.0" />
+                                <DatePicker fx:id="manuPicker" prefHeight="26.0" prefWidth="288.0" />
                             </children>
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="5">
                             <children>
                                 <Label text="Expiration Date" />
-                                <DatePicker fx:id="eDate" prefHeight="26.0" prefWidth="291.0" />
+                                <DatePicker fx:id="expirePicker" prefHeight="26.0" prefWidth="291.0" />
                             </children>
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                             <children>
                                 <Label text="Barcode" />
-                                <TextField fx:id="barCode" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="270.0" />
+                                <TextField fx:id="barcodeField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="270.0" />
                             </children>
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                             <children>
                                 <Label text="UOM" />
-                                <TextField fx:id="UOM" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="270.0" />
+                                <TextField fx:id="uomField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="270.0" />
                             </children>
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                             <children>
                                 <Label text="Quantity" />
-                                <TextField fx:id="quantity" maxHeight="-Infinity" maxWidth="270.0" />
+                                <TextField fx:id="quantityField" maxHeight="-Infinity" maxWidth="270.0" />
                             </children>
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                             <children>
                                 <Label text="Purchase Price" />
-                                <TextField fx:id="pPrice" maxWidth="270.0" />
+                                <TextField fx:id="purchaseField" maxWidth="270.0" />
                             </children>
                         </VBox>
                         <VBox GridPane.columnIndex="1" GridPane.rowIndex="5">
                             <children>
                                 <Label text="Sales Price" />
-                                <TextField fx:id="sPrice" maxWidth="270.0" />
+                                <TextField fx:id="salesField" maxWidth="270.0" />
                             </children>
                         </VBox>
                         <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black;" GridPane.columnIndex="2" GridPane.rowSpan="6">

@@ -23,7 +23,7 @@ public class ProductListController {
     @FXML
     TableView<Product> productTable;
     public void initialize(){
-        System.out.println("sucks java");
+        System.out.println("java sucks");
         DbConnect data = new DbConnect();
         if(data.getStatus()!=null){
             System.out.println("db got here");
