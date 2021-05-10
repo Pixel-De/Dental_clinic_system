@@ -3,11 +3,16 @@ package DentalClinic.Doctor;
 import DentalClinic.DB.DbConnect;
 import DentalClinic.Patient.Patient;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 import javax.print.Doc;
 import java.util.Date;
@@ -23,7 +28,28 @@ public class ListController {
             System.out.println("db got here");
             ObservableList<Doctor> doctors = data.DoctorList();
             doctors.forEach(doctor -> {
-                System.out.println(doctor.getId()+" "+doctor.getName());
+                Button btn = doctor.getEdit();
+                btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        DentalClinic.Doctor.InformationController lc = new InformationController(doctor);
+                        try {
+                            FXMLLoader loader = new FXMLLoader();
+                            loader.setLocation(getClass().getResource("./InformationView.fxml"));
+                            loader.setController(lc);
+                            Scene scene = new Scene(loader.load());
+                            Stage stage = new Stage();
+                            stage.setTitle("Doctor Update");
+                            stage.setScene(scene);
+                            stage.showAndWait();
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+
             });
 
             TableColumn<Doctor, Button> edit = new TableColumn<>("");
