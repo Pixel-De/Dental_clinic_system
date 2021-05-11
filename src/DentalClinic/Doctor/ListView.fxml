@@ -44,13 +44,13 @@
                                         <VBox>
                                             <children>
                                                 <Label text="PARAMETER" />
-                                                <ChoiceBox prefWidth="150.0" />
+                                                <ChoiceBox fx:id="param" prefWidth="150.0" />
                                             </children>
                                         </VBox>
                                         <VBox>
                                             <children>
                                                 <Label text="CRITERIA" />
-                                                <TextField />
+                                                <TextField fx:id="criteria" editable="false" />
                                             </children>
                                         </VBox>
                                     </children>

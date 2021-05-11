@@ -3,10 +3,7 @@ package DentalClinic.Doctor;
 import DentalClinic.DB.DbConnect;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -60,7 +57,12 @@ public class InformationController implements Initializable {
         Date d = Date.valueOf(datePicker.getValue());
 
         boolean f = db.UpdateDoctor(i, n, spe, qu, addr, con, d);
-        System.out.println(f);
+        if(f){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Update");
+            alert.setContentText("Successfully updated.");
+            alert.show();
+        }
 
     }
     @FXML

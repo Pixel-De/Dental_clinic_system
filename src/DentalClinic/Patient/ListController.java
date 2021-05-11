@@ -3,6 +3,7 @@ package DentalClinic.Patient;
 import DentalClinic.DB.DbConnect;
 import DentalClinic.Pharmacy.productList.ProductUpdateController;
 import com.mysql.cj.xdevapi.Table;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -26,20 +27,44 @@ public class ListController {
     TableView<Patient> patientTable;
     @FXML
     Button closeButton;
+    @FXML
+    ChoiceBox<String> param;
+    @FXML
+    TextField criteria;
 
     DbConnect db = new DbConnect();
 
     ObservableList<Patient> patients = FXCollections.observableArrayList();
+    ObservableList<String> params = FXCollections.observableArrayList("PatientID", "PatientName");
+    ObservableList<Patient> tempPat = FXCollections.observableArrayList();
+
     public void initialize(){
+
+        param.setItems(params);
+
         Alert alert  = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Delete Patient");
         alert.setContentText("Are you sure you want to delete this record?");
 
-        System.out.println("sucks java");
-        DbConnect data = new DbConnect();
-        if(data.getStatus()!=null){
+        param.getSelectionModel().selectedIndexProperty().addListener((ObservableValue<? extends Number> ov, Number old, Number new_val)->{
+            criteria.setEditable(true);
+        });
+
+        criteria.textProperty().addListener(((observableValue, old, new_val) -> {
+            if(param.getValue() == params.get(0)){
+                if(new_val != ""){
+                    patientTable.setItems(filterId(Integer.valueOf(new_val)));
+                }
+            } else if(param.getValue() == params.get(1)){
+                if(new_val != "") {
+                    patientTable.setItems(filterName(new_val));
+                }
+            }
+        }));
+
+        if(db.getStatus()!=null){
             System.out.println("db got here");
-            patients = data.PatientList();
+            patients = db.PatientList();
             patients.forEach(patient -> {
                 Button b = patient.getEdit();
                 Button dell = patient.getDelete();
@@ -68,7 +93,6 @@ public class ListController {
                 dell.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
-
                         Optional<ButtonType> result = alert.showAndWait();
                         if(result.get()==ButtonType.OK){
                             int delID = patient.getId();
@@ -78,7 +102,6 @@ public class ListController {
                         }
                     }
                 });
-                System.out.println(patient.getId()+" "+patient.getName());
             });
 
             TableColumn<Patient, Button> edit = new TableColumn<>("");
@@ -122,5 +145,28 @@ public class ListController {
     public void refresh(){
         patients = db.PatientList();
         patientTable.setItems(patients);
+    }
+    public ObservableList<Patient> filterId(int id){
+        tempPat.clear();
+        patients.forEach(patient -> {
+            if(patient.getId() == id){
+                if(!tempPat.contains(patient)){
+                    tempPat.add(patient);
+                }
+            }
+        });
+
+        return tempPat;
+    }
+    public  ObservableList<Patient> filterName(String name){
+        tempPat.clear();
+        patients.forEach(patient -> {
+            if(patient.getName().toLowerCase().contains(name)){
+                if(!tempPat.contains(patient)){
+                    tempPat.add(patient);
+                }
+            }
+        });
+        return tempPat;
     }
 }

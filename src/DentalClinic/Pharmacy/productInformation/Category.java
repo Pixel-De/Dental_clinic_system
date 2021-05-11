@@ -7,6 +7,8 @@ import javafx.scene.image.ImageView;
 
 public class Category {
     private String category;
+    private int id;
+    private Button del ;
 
     public String getCategory() {
         return category;
@@ -24,7 +26,13 @@ public class Category {
         this.del = del;
     }
 
-    private Button del ;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Category(String category) {
         this.del = new Button();
@@ -34,5 +42,6 @@ public class Category {
         this.del.setPrefSize(10,10);
         this.del.setGraphic(imgView);
         this.category = category;
+        this.id = 1;
     }
 }

@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.sql.Date;
 import java.util.EventListener;
 
 public class Product {
