@@ -112,7 +112,7 @@
                             <children>
                                 <TilePane alignment="CENTER" hgap="10.0" prefWidth="200.0" vgap="5.0" HBox.hgrow="ALWAYS">
                                     <children>
-                                        <Button mnemonicParsing="false" text="SAVE">
+                                        <Button mnemonicParsing="false" onMouseClicked="#updateDoctor" text="UPDATE">
                                             <graphic>
                                                 <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                                     <image>
@@ -130,7 +130,7 @@
                                                 </ImageView>
                                             </graphic>
                                         </Button>
-                                        <Button mnemonicParsing="false" text="CLOSE">
+                                        <Button fx:id="closeButton" mnemonicParsing="false" onAction="#closeButtonAction" text="CLOSE">
                                             <graphic>
                                                 <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                                     <image>

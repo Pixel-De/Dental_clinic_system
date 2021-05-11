@@ -6,13 +6,12 @@ import DentalClinic.Pharmacy.productInformation.Product;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import javax.print.Doc;
 import java.sql.*;
 import java.util.ArrayList;
 
 public class DbConnect {
 
-    private Connection db;
+    private final Connection db;
 
     private Connection Connect(){
 
@@ -25,7 +24,7 @@ public class DbConnect {
             e.printStackTrace();
             return null;
         }
-    };
+    }
 
     private ObservableList<Patient> GetAllPatien(){
         ObservableList<Patient> a = FXCollections.observableArrayList(new ArrayList<Patient>());
@@ -330,5 +329,37 @@ public class DbConnect {
             return false;
         }
     }
+
+    public boolean CreateInvoice(Integer id, Integer user_id, Double total, Double paid, String method, Double change_due,String[] products){
+        String query = "";
+        for (int i = 0; i < products.length; i++) {
+            if(i== products.length-1){
+                query += "('"+id+"','"+products[i]+"')";
+            }else{
+                query += "('"+id+"','"+products[i]+"'),";
+            }
+        }
+        try (Statement statement = this.db.createStatement()){
+            Integer cnt = statement.executeUpdate("INSERT INTO `invoice_item` (`invoice_id`, `product_id`) " +
+                    "VALUES "+query);
+            if(cnt==products.length){
+                Integer cnt1 = statement.executeUpdate("INSERT INTO `invoice` (`id`, `user_id`, `total`, `paid`, `method`, `change_due`) " +
+                        "VALUES ('"+id+"', '"+user_id+"', '"+total+"', '"+paid+"', '"+method+"', '"+change_due+"')");
+                if(cnt1==1) {
+                    return true;
+                } else {
+                    statement.executeUpdate("DELETE FROM `invoice_item` WHERE `invoice_item`.`invoice_id` = "+id);
+                }
+            }else{
+                statement.executeUpdate("DELETE FROM `invoice_item` WHERE `invoice_item`.`invoice_id` = "+id);
+                return false;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
 }
 
