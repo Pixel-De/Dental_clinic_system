@@ -99,10 +99,11 @@ public class DbConnect {
     private ObservableList<Category> GetAllCategory(){
         ObservableList<Category> a = FXCollections.observableArrayList(new ArrayList<Category>());
         try (Statement statement = this.db.createStatement()) {
-            ResultSet result = statement.executeQuery("select name from category");
+            ResultSet result = statement.executeQuery("select id, name from category");
             while(result.next()){
                 String name = result.getString("name");
-                a.add(new Category(name));
+                Integer id = result.getInt("id");
+                a.add(new Category(name,id));
             }
             return a;
         } catch (SQLException e){
@@ -176,9 +177,9 @@ public class DbConnect {
             return false;
         }
     }
-    public Boolean AddCategory(Integer id, String name){
+    public Boolean AddCategory(String name){
         try (Statement statement = this.db.createStatement()){
-            Integer cnt = statement.executeUpdate("INSERT INTO `category` (`id`, `name`) VALUES ('"+id+"', '"+name+"')");
+            Integer cnt = statement.executeUpdate("INSERT INTO `category` (`id`, `name`) VALUES (NULL , '"+name+"')");
             if(cnt == 1){
                 return  true;
             } else {
