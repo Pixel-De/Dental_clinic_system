@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="516.0" prefWidth="600.0" stylesheets="@ClinicStyle.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DentalClinic.Administration.ClinicInformation.ClinicInfoController">
+   <children>
+      <HBox fx:id="upBox" layoutX="25.0" layoutY="25.0" prefHeight="100.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane prefHeight="100.0" prefWidth="598.0">
+               <children>
+                  <HBox fx:id="upBox" fillHeight="false" layoutX="-2.0" prefHeight="100.0" prefWidth="598.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <ImageView fitHeight="85.0" fitWidth="79.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../assets/checklists.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="labelBright" text="Clinic Information">
+                           <HBox.margin>
+                              <Insets top="20.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="20.0" top="10.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </children></HBox>
+      <VBox fillWidth="false" layoutX="26.0" layoutY="109.0" prefHeight="304.0" prefWidth="328.0" style="-fx-border-color: black;" AnchorPane.leftAnchor="10.0">
+         <children>
+            <Label text="Clinic Name" />
+            <TextField fx:id="txtFieldClinicName" prefHeight="26.0" prefWidth="275.0" />
+            <Label text="Phone" />
+            <TextField fx:id="txtFieldClinicPhone" prefHeight="26.0" prefWidth="275.0" />
+            <Label text="Address" />
+            <TextField fx:id="txtFieldClinicAddress" prefHeight="45.0" prefWidth="275.0" />
+            <Label text="Report Header" />
+            <TextField fx:id="txtFieldClinicReportHeader" prefHeight="45.0" prefWidth="275.0" />
+            <Label text="Report footer" />
+            <TextField fx:id="txtFieldClinicReportFooter" prefHeight="45.0" prefWidth="275.0" />
+         </children>
+         <padding>
+            <Insets left="10.0" top="5.0" />
+         </padding>
+      </VBox>
+      <VBox layoutX="476.0" layoutY="109.0" prefHeight="304.0" prefWidth="238.0" style="-fx-border-color: black;" AnchorPane.rightAnchor="10.0">
+         <children>
+            <ImageView fx:id="ClinicInfoPicture" fitHeight="150.0" fitWidth="225.0" pickOnBounds="true" smooth="false" />
+            <Label prefHeight="35.0" prefWidth="202.0" text="Note: This image may appear distorted in this screen." wrapText="true" />
+            <Hyperlink fx:id="ClinicInfoHyper" text="Browse Image" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+      <HBox layoutX="40.0" layoutY="402.0" prefHeight="87.0" prefWidth="580.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+         <children>
+            <AnchorPane prefHeight="86.0" prefWidth="602.0">
+               <children>
+                  <Button fx:id="closeButton" layoutX="434.0" layoutY="19.0" mnemonicParsing="false" onAction="#btnCloseAction" prefHeight="36.0" prefWidth="130.0" text="CLOSE">
+                     <graphic>
+                        <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../assets/logout.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnSave" layoutX="280.0" layoutY="19.0" mnemonicParsing="false" onAction="#btnSaveAction" onMouseClicked="#saveDoctor" prefHeight="36.0" prefWidth="129.0" text="SAVE">
+                     <graphic>
+                        <ImageView fitHeight="34.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../assets/floppy-disk.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
