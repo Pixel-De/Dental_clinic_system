@@ -2,10 +2,7 @@ package DentalClinic.Doctor;
 
 import DentalClinic.DB.DbConnect;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.time.ZoneId;
@@ -34,8 +31,12 @@ public class InfoController {
         Date date = Date.valueOf(datePicker.getValue());
 
         boolean f = db.AddDoctor(id, name, speciality, qualification, address, contact, date);
-        System.out.println(f);
-        // db ruu save hiih uildel.
+        if(f){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Saved");
+            alert.setContentText("Successfully saved.");
+            alert.show();
+        }
     }
 
     @FXML

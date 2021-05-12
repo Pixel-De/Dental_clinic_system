@@ -84,7 +84,13 @@ public class InformationController implements Initializable {
 
         boolean f = db.UpdatePatient(i, n, par, gen, ag, occup, addr, cont, ref, d);
 
-        System.out.println(f);
+        if(f){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Update");
+            alert.setContentText("Successfully updated.");
+            alert.show();
+        }
+
 
     }
 

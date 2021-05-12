@@ -45,7 +45,13 @@ public class InfoController {
         LocalDate dLoc = date.getValue() ;
         Date d = Date.valueOf(dLoc);
         boolean flag = db.AddPatient(i, n, par, gen,ag, occup, addr, cont, ref, d );
-        System.out.println(flag);
+
+        if(flag){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Saved");
+            alert.setContentText("Successfully saved.");
+            alert.show();
+        }
     }
 
     public void reset(){

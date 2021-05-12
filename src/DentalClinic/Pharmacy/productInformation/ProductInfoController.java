@@ -15,7 +15,7 @@ import javafx.util.Callback;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Date;
+import java.sql.Date;
 
 public class ProductInfoController {
     @FXML
@@ -24,10 +24,12 @@ public class ProductInfoController {
     ComboBox<String> category;
     @FXML
     DatePicker manuDate, eDate;
-
+    @FXML
+    Button closeButton;
 
     ObservableList<String> allCategory = FXCollections.observableArrayList();
 
+    private DbConnect db = new DbConnect();
 
     @FXML
     public void initialize(){
@@ -54,12 +56,37 @@ public class ProductInfoController {
         p_price = pPrice.getText();
         s_price = sPrice.getText();
         cate = category.getValue();
-        m_date = Date.from(manuDate.getValue().atStartOfDay(defaultZoneId).toInstant());
-        e_date = Date.from(eDate.getValue().atStartOfDay(defaultZoneId).toInstant());
-        Product p = new Product(id, p_name, g_name, cate, m_date, e_date, barcode, uom,quant, p_price, s_price);
-        System.out.println(p.getCategory()+" "+ p.getGName());
+        m_date = Date.valueOf(manuDate.getValue());
+        e_date = Date.valueOf(eDate.getValue());
+
+        boolean f = db.AddProduct(Integer.valueOf(id), p_name, g_name, cate, m_date, e_date, Integer.valueOf(barcode),uom, Integer.valueOf(quant), Integer.valueOf(p_price), Integer.valueOf(s_price));
+
+        if(f){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Saved");
+            alert.setContentText("Successfully saved.");
+            alert.showAndWait();
+        }
     }
 
+    public void reset(){
+        pID.setText("");
+        pName.setText("");
+        gName.setText("");
+        barCode.setText("");
+        UOM.setText("");
+        quantity.setText("");
+        pPrice.setText("");
+        sPrice.setText("");
+        category.getSelectionModel().selectFirst();
+        manuDate.setValue(null);
+        eDate.setValue(null);
+    }
+    @FXML
+    private void closeButtonAction(){
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        stage.close();
+    }
     public void showCategory() {
         try {
 

@@ -1,0 +1,10 @@
+#upBox{
+    -fx-background-color:  #055554;
+}
+#labelBright{
+    -fx-text-fill: white;
+    -fx-font-size: 25px;
+}
+#boxBorders{
+    -fx-border-color: grey;
+}

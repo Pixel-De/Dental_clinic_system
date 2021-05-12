@@ -55,11 +55,11 @@ public class MainMenuController {
 
     @FXML
     void setClinicInformation(ActionEvent event) throws IOException {
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu/MainMenu.fxml"));
-//        Parent clinic = loader.load();
-//        Stage stage = new Stage();
-//        stage.setScene(new Scene(clinic));
-//        stage.show();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Administration/ClinicInformation/ClinicInformationView.fxml"));
+        Parent clinic = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(clinic));
+        stage.show();
     }
 
     @FXML
@@ -100,8 +100,12 @@ public class MainMenuController {
     }
 
     @FXML
-    void setListOfUsers(ActionEvent event) {
-
+    void setListOfUsers(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Administration/ListOfUser/ListOfUserView.fxml"));
+        Parent clinic = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(clinic));
+        stage.show();
     }
 
     @FXML
@@ -128,8 +132,12 @@ public class MainMenuController {
     }
 
     @FXML
-    void setPermission(ActionEvent event) {
-
+    void setPermission(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Administration/Permission/PermissionView.fxml"));
+        Parent clinic = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(clinic));
+        stage.show();
     }
 
     @FXML
@@ -151,12 +159,16 @@ public class MainMenuController {
     }
 
     @FXML
-    void setPrescription(ActionEvent event) {
-
+    void setPrescription(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Prescription/Presicription.fxml"));
+        Parent rootPharmaSale = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(rootPharmaSale));
+        stage.show();
     }
 
     @FXML
-    void setPrescriptionList(ActionEvent event) {
+    void setPrescriptionList(ActionEvent event) throws IOException {
 
     }
 
@@ -188,12 +200,21 @@ public class MainMenuController {
     }
 
     @FXML
-    void setUserInformation(ActionEvent event) {
-
+    void setUserInformation(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Administration/UserInformation/UserInformationView.fxml"));
+        Parent clinic = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(clinic));
+        stage.show();
     }
 
     @FXML
-    void setVoucher(ActionEvent event) {
+    void setVoucher(ActionEvent event)  throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Income/VoucherView.fxml"));
+        Parent clinic = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(clinic));
+        stage.show();
 
     }
 

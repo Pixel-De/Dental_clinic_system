@@ -14,6 +14,8 @@ import javafx.scene.input.MouseEvent;
 import org.w3c.dom.Text;
 import DentalClinic.Pharmacy.productInformation.Category;
 
+import java.util.Optional;
+
 public class ProductCategoryController {
 
     @FXML
@@ -24,17 +26,30 @@ public class ProductCategoryController {
     String arr[] = {"cat1", "cate2", "cat3"};
     ObservableList<Category> catList = FXCollections.observableArrayList();
     DbConnect db ;
+    Alert alert;
     @FXML
     public void initialize(){
         db = new DbConnect();
         catList = db.CategoryList();
+
+        alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete Category");
+        alert.setContentText("Are you sure you want to delete this category?");
 
         catList.forEach(category -> {
             Button d = category.getDel();
             d.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    System.out.println(category.getCategory());
+
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if(result.get()==ButtonType.OK){
+//                        int delID = category.getId();
+//                        boolean f = db.DeleteCategory(delID);
+//                        System.out.println(delID);
+//                        catList.remove(category);
+                    }
+
                 }
             });
         });
@@ -62,8 +77,11 @@ public class ProductCategoryController {
     }
     public void addCategory(){
         String name = categoryName.getText();
-        Category c = new Category(name);
-        //db ruu nemeh ym hiine.
+        Category c  = new Category(name);
+        boolean f = db.AddCategory(1, name);
+        if(f){
+            catList.add(c);
+        }
     }
 
 

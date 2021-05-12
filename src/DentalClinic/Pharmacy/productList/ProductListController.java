@@ -10,26 +10,40 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.util.Date;
+import java.util.Optional;
 
 public class ProductListController {
     @FXML
     TableView<Product> productTable;
+    @FXML
+    Button closeButton;
+
+    ObservableList<Product> products ;
+    DbConnect data;
+
+    Alert alert;
+
     public void initialize(){
-        System.out.println("java sucks");
-        DbConnect data = new DbConnect();
+        data = new DbConnect();
+
+        alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete Product");
+        alert.setContentText("Are you sure you want to delete this product?");
+
         if(data.getStatus()!=null){
             System.out.println("db got here");
-            ObservableList<Product> products = data.ProductList();
+            products = data.ProductList();
             products.forEach(product -> {
+
                 Button e = product.getEdit();
+                Button del = product.getDelete();
+
                 e.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
@@ -47,6 +61,20 @@ public class ProductListController {
 
                         } catch (Exception e) {
                             e.printStackTrace();
+                        }
+
+                    }
+                });
+
+                del.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        Optional<ButtonType> result = alert.showAndWait();
+                        if(result.get()==ButtonType.OK){
+                            int delID = Integer.valueOf( product.getId());
+                            boolean f = data.DeleteProduct(delID);
+                            System.out.println(delID);
+                            products.remove(product);
                         }
 
                     }
@@ -87,7 +115,16 @@ public class ProductListController {
             productTable.setItems(products);
             productTable.getColumns().addAll(edit, delete, id, name, g_name, category, barcode
                     , uom, quantity, p_price, s_price, m_date, e_date);
-
         }
+    }
+
+    public void refresh(){
+        products = data.ProductList();
+        productTable.setItems(products);
+    }
+    @FXML
+    private void closeButtonAction(){
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        stage.close();
     }
 }

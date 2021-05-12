@@ -90,7 +90,7 @@
                <children>
                   <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="600.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Button mnemonicParsing="false" text="REFRESH">
+                        <Button mnemonicParsing="false" onMouseClicked="#refresh" text="REFRESH">
                            <graphic>
                               <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -99,7 +99,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button mnemonicParsing="false" text="CLOSE">
+                        <Button fx:id="closeButton" mnemonicParsing="false" onAction="#closeButtonAction" text="CLOSE">
                            <graphic>
                               <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
