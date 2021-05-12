@@ -37,7 +37,7 @@
                </children>
             </AnchorPane>
          </children></HBox>
-      <VBox fillWidth="false" layoutX="26.0" layoutY="109.0" prefHeight="304.0" prefWidth="328.0" style="-fx-border-color: black;" AnchorPane.leftAnchor="10.0">
+      <VBox fx:id="boxBorders" fillWidth="false" layoutX="26.0" layoutY="109.0" prefHeight="304.0" prefWidth="328.0" AnchorPane.leftAnchor="10.0">
          <children>
             <Label text="Clinic Name" />
             <TextField fx:id="txtFieldClinicName" prefHeight="26.0" prefWidth="275.0" />
@@ -54,7 +54,7 @@
             <Insets left="10.0" top="5.0" />
          </padding>
       </VBox>
-      <VBox layoutX="476.0" layoutY="109.0" prefHeight="304.0" prefWidth="238.0" style="-fx-border-color: black;" AnchorPane.rightAnchor="10.0">
+      <VBox fx:id="boxBorders" layoutX="476.0" layoutY="109.0" prefHeight="304.0" prefWidth="238.0" AnchorPane.rightAnchor="10.0">
          <children>
             <ImageView fx:id="ClinicInfoPicture" fitHeight="150.0" fitWidth="225.0" pickOnBounds="true" smooth="false" />
             <Label prefHeight="35.0" prefWidth="202.0" text="Note: This image may appear distorted in this screen." wrapText="true" />
@@ -64,7 +64,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </VBox>
-      <HBox layoutX="40.0" layoutY="402.0" prefHeight="87.0" prefWidth="580.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+      <HBox fx:id="boxBorders" layoutX="40.0" layoutY="402.0" prefHeight="87.0" prefWidth="580.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
          <children>
             <AnchorPane prefHeight="86.0" prefWidth="602.0">
                <children>
