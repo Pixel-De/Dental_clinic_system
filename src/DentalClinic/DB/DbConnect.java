@@ -366,7 +366,7 @@ public class DbConnect {
     public  Integer getIdInvoice(){
         try (Statement statement = this.db.createStatement()){
             ResultSet result = statement.executeQuery("SELECT id FROM `invoice` ORDER BY id DESC LIMIT 1");
-            if(result.getRow() == 0){
+            if(result.next()){
                 return  1;
             } else {
                 return  result.getInt("id") + 1;
