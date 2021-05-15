@@ -5,6 +5,8 @@ import DentalClinic.Patient.InformationController;
 import DentalClinic.Patient.Patient;
 import DentalClinic.Pharmacy.productInformation.Category;
 import DentalClinic.Pharmacy.productInformation.Product;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -23,14 +25,37 @@ public class ProductListController {
     TableView<Product> productTable;
     @FXML
     Button closeButton;
+    @FXML
+    ComboBox<String> param;
+    @FXML
+    TextField criteria;
 
+    ObservableList<String> params = FXCollections.observableArrayList("Product ID", "Product Name");
     ObservableList<Product> products ;
+    ObservableList<Product> tempPat = FXCollections.observableArrayList();
     DbConnect data;
 
     Alert alert;
 
     public void initialize(){
         data = new DbConnect();
+
+        param.setItems(params);
+        param.getSelectionModel().selectedIndexProperty().addListener((ObservableValue<? extends Number> ov, Number old, Number new_val)->{
+            criteria.setEditable(true);
+        });
+
+        criteria.textProperty().addListener(((observableValue, old, new_val) -> {
+            if(param.getValue() == params.get(0)){
+                if(new_val != ""){
+                    productTable.setItems(filterId(Integer.valueOf(new_val)));
+                }
+            } else if(param.getValue() == params.get(1)){
+                if(new_val != "") {
+                    productTable.setItems(filterName(new_val));
+                }
+            }
+        }));
 
         alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Delete Product");
@@ -118,6 +143,30 @@ public class ProductListController {
         }
     }
 
+    public ObservableList<Product> filterName(String name){
+
+        tempPat.clear();
+        products.forEach(product -> {
+            if(product.getName().toLowerCase().contains(name)){
+                if(!tempPat.contains(product)){
+                    tempPat.add(product);
+                }
+            }
+        });
+        return tempPat;
+    }
+    public ObservableList<Product> filterId(int id){
+       tempPat.clear();
+        products.forEach(product -> {
+            if(Integer.valueOf(product.getId()) == id){
+                if(!tempPat.contains(product)){
+                    tempPat.add(product);
+                }
+            }
+        });
+
+        return tempPat;
+    }
     public void refresh(){
         products = data.ProductList();
         productTable.setItems(products);
