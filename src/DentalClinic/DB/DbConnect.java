@@ -1,6 +1,7 @@
 package DentalClinic.DB;
 import DentalClinic.Doctor.Doctor;
 import DentalClinic.Patient.Patient;
+import DentalClinic.Pharmacy.Sale.Invoice_item;
 import DentalClinic.Pharmacy.productInformation.Category;
 import DentalClinic.Pharmacy.productInformation.Product;
 import javafx.collections.FXCollections;
@@ -331,17 +332,17 @@ public class DbConnect {
         }
     }
 
-    public boolean CreateInvoice(Integer id, Integer user_id, Double total, Double paid, String method, Double change_due,String[] products){
+    public boolean CreateInvoice(Integer id, Integer user_id, Double total, Double paid, String method, Double change_due, Invoice_item[] products){
         String query = "";
         for (int i = 0; i < products.length; i++) {
-            if(i== products.length-1){
-                query += "('"+id+"','"+products[i]+"')";
+            if( i == products.length-1){
+                query += "('"+id+"','"+products[i].getProduct_id()+"','"+products[i].getQty()+"','"+products[i].getTotal()+"')";
             }else{
-                query += "('"+id+"','"+products[i]+"'),";
+                query += "('"+id+"','"+products[i].getProduct_id()+"','"+products[i].getQty()+"','"+products[i].getTotal()+"'),";
             }
         }
         try (Statement statement = this.db.createStatement()){
-            Integer cnt = statement.executeUpdate("INSERT INTO `invoice_item` (`invoice_id`, `product_id`) " +
+            Integer cnt = statement.executeUpdate("INSERT INTO `invoice_item` (`invoice_id`, `product_id`, `qty`, `total) " +
                     "VALUES "+query);
             if(cnt==products.length){
                 Integer cnt1 = statement.executeUpdate("INSERT INTO `invoice` (`id`, `user_id`, `total`, `paid`, `method`, `change_due`) " +
