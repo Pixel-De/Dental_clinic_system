@@ -27,7 +27,7 @@ import java.io.IOException;
 public class SaleController {
 
     @FXML
-    Label idLabel, nameLabel, avQuantityLabel, priceLabel, totalLabel, changeDueLabel;
+    Label idLabel, nameLabel, avQuantityLabel, priceLabel, totalLabel, changeDueLabel, inVoiceIdLabel;
     @FXML
     TextField quantityField , paidField;
     @FXML
@@ -56,14 +56,18 @@ public class SaleController {
     private Patient selectedPatient;
     private Double paid;
     private String method="";
-    private Double cd;
+    private Double cd = 0.0;
 
     @FXML
     public void initialize(){
+        invoiceId = db.getIdInvoice();
+
 
         totalLabel.textProperty().bindBidirectional(totalProperty);
         changeDueLabel.textProperty().bindBidirectional(changeD);
-
+        inVoiceIdLabel.setText(String.valueOf(invoiceId));
+        totalLabel.setText(String.valueOf(total));
+        changeDueLabel.setText(String.valueOf(cd));
 
         saleModels.addListener(new ListChangeListener<SaleModel>() {
             @Override
@@ -113,6 +117,11 @@ public class SaleController {
         productNameBox.setItems(pBox);
         methodBox.setItems(paidMethod);
         patientBox.setItems(getPatientNameAndId());
+
+
+        methodBox.getSelectionModel().selectFirst();
+        productNameBox.getSelectionModel().selectFirst();
+        patientBox.getSelectionModel().selectFirst();
 
         productNameBox.getSelectionModel().selectedIndexProperty().addListener(((observableValue, old, new_val) -> {
             String s = pBox.get((Integer) new_val);
@@ -217,9 +226,9 @@ public class SaleController {
             invoice_items.add(new Invoice_item(String.valueOf(invoiceId),String.valueOf(saleModel.getId())  , saleModel.getQuantity(), Double.valueOf(saleModel.getTotal())));
         });
 
-        System.out.println(i + " " + user_id + " " + ttl+ " " + p+" "+ m+ " " + c);
-//        boolean f = db.CreateInvoice(i,user_id, ttl, p, m, c, invoice_items);
-
+//        System.out.println(i + " " + user_id + " " + ttl+ " " + p+" "+ m+ " " + c);
+        boolean f = db.CreateInvoice(i,user_id, ttl, p, m, c, invoice_items);
+        System.out.println(f);
 
 
     }

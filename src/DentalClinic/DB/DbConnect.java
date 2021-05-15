@@ -345,7 +345,7 @@ public class DbConnect {
             }
         }
         try (Statement statement = this.db.createStatement()){
-            Integer cnt = statement.executeUpdate("INSERT INTO `invoice_item` (`invoice_id`, `product_id`, `qty`, `total) " +
+            Integer cnt = statement.executeUpdate("INSERT INTO `invoice_item` (`invoice_id`, `product_id`, `qty`, `total`) " +
                     "VALUES "+query);
             if(cnt==products.size()){
                 Integer cnt1 = statement.executeUpdate("INSERT INTO `invoice` (`id`, `user_id`, `total`, `paid`, `method`, `change_due`) " +
