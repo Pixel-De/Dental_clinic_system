@@ -3,6 +3,12 @@ package DentalClinic.Pharmacy.Sale;
 import DentalClinic.DB.DbConnect;
 import DentalClinic.Patient.Patient;
 import DentalClinic.Pharmacy.productInformation.Product;
+import javafx.beans.property.FloatProperty;
+import javafx.beans.property.SimpleFloatProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -23,19 +29,62 @@ public class SaleController {
     @FXML
     TextField quantityField , paidField;
     @FXML
-    ComboBox<String> productNameBox, methodBox;
+    ComboBox<String> productNameBox, methodBox, patientBox;
     @FXML
-    TableView<SaleModel> salesTable; ;
+    TableView<SaleModel> salesTable;
+
 
     private ObservableList<Product> products = FXCollections.observableArrayList();
     private ObservableList<Patient> patients = FXCollections.observableArrayList();
     private ObservableList<String> pBox = FXCollections.observableArrayList();
     private ObservableList<SaleModel> saleModels = FXCollections.observableArrayList();
+    private ObservableList<String> paidMethod = FXCollections.observableArrayList("Card", "Cash");
+
     private DbConnect db = new DbConnect();
 
 
+    private StringProperty totalProperty = new SimpleStringProperty();
+    private StringProperty changeD = new SimpleStringProperty();
+
+    private float ttl=0 ;
+
     @FXML
     public void initialize(){
+
+        totalLabel.textProperty().bindBidirectional(totalProperty);
+        changeDueLabel.textProperty().bindBidirectional(changeD);
+
+
+
+        saleModels.addListener(new ListChangeListener<SaleModel>() {
+            @Override
+            public void onChanged(Change<? extends SaleModel> change) {
+                SaleModel s = saleModels.get(saleModels.size()-1);
+                ttl = ttl + s.getTotal();
+                System.out.println(ttl);
+                totalProperty.set(String.valueOf(ttl));
+            }
+        });
+
+        paidField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                try{
+
+                    float changeDue = Float.valueOf(t1) - ttl;
+                    changeD.set(String.valueOf(changeDue));
+//                    System.out.println(changeDue);
+
+
+
+                }catch (Exception e){
+                    System.out.println("err");
+                }
+            }
+        });
+
+
+
         products = db.ProductList();
         patients = db.PatientList();
 
@@ -44,10 +93,20 @@ public class SaleController {
         });
 
         productNameBox.setItems(pBox);
+        methodBox.setItems(paidMethod);
+        patientBox.setItems(getPatientNameAndId());
 
         productNameBox.getSelectionModel().selectedIndexProperty().addListener(((observableValue, old, new_val) -> {
             String s = pBox.get((Integer) new_val);
             setInformation(s);
+        }));
+
+        methodBox.getSelectionModel().selectedIndexProperty().addListener((observableValue, number, t1) -> {
+            String s = paidMethod.get((Integer) t1);
+        });
+
+        patientBox.getSelectionModel().selectedIndexProperty().addListener(((observableValue, number, t1) -> {
+//            String s = patients.get((Integer) t1);
         }));
 
         saleModels.addListener(new ListChangeListener<SaleModel>() {
@@ -70,6 +129,8 @@ public class SaleController {
 
         salesTable.setItems(saleModels);
         salesTable.getColumns().addAll(id, name, quant, unit, total);
+
+
     }
 
     public void addToCart(){
@@ -98,13 +159,13 @@ public class SaleController {
         });
 
     }
-    public void seePatientList() throws IOException {
+    public ObservableList<String> getPatientNameAndId(){
+        ObservableList<String> p= FXCollections.observableArrayList();
+        patients.forEach(patient -> {
+            String s = patient.getId() +" "+ patient.getName();
+            p.add(s);
+        });
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("./PatientList.fxml"));
-        Parent rootDocInfo = loader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(rootDocInfo));
-        stage.show();
+        return p;
     }
-
 }
