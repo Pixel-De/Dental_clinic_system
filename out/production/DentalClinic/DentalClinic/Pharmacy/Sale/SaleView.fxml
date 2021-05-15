@@ -39,11 +39,6 @@
                               <Font name="System Bold" size="36.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="262.0" style="-fx-underline: true;" text="INVOICE LISTS" textAlignment="RIGHT" textFill="#a70d0d">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
                      </children>
                   </HBox>
                </children>

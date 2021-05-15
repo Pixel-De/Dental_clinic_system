@@ -41,7 +41,6 @@ public class SaleController {
     private ObservableList<String> pBox = FXCollections.observableArrayList();
     private ObservableList<SaleModel> saleModels = FXCollections.observableArrayList();
     private ObservableList<String> paidMethod = FXCollections.observableArrayList("Card", "Cash");
-
     private ObservableList<Invoice_item> invoice_items = FXCollections.observableArrayList();
 
     private DbConnect db = new DbConnect();
@@ -68,6 +67,7 @@ public class SaleController {
         inVoiceIdLabel.setText(String.valueOf(invoiceId));
         totalLabel.setText(String.valueOf(total));
         changeDueLabel.setText(String.valueOf(cd));
+        paidField.setText("0");
 
         saleModels.addListener(new ListChangeListener<SaleModel>() {
             @Override
@@ -123,6 +123,10 @@ public class SaleController {
         productNameBox.getSelectionModel().selectFirst();
         patientBox.getSelectionModel().selectFirst();
 
+        selectedPatient = patients.get(0);
+        method = paidMethod.get(0);
+        setInformation(products.get(0).getName());
+        paid = 0.0;
         productNameBox.getSelectionModel().selectedIndexProperty().addListener(((observableValue, old, new_val) -> {
             String s = pBox.get((Integer) new_val);
             setInformation(s);
@@ -215,21 +219,40 @@ public class SaleController {
 
     public void saveInvoice(){
 
-        int i = this.invoiceId;
-        int user_id = selectedPatient.getId();
-        double ttl = total;
-        double p = paid;
-        String m = method;
-        Double c = cd;
+        try{
 
-        saleModels.forEach(saleModel -> {
-            invoice_items.add(new Invoice_item(String.valueOf(invoiceId),String.valueOf(saleModel.getId())  , saleModel.getQuantity(), Double.valueOf(saleModel.getTotal())));
-        });
+            int i = this.invoiceId;
+            int user_id = selectedPatient.getId();
+            double ttl = total;
+            double p = paid;
+            String m = method;
+            Double c = cd;
 
-//        System.out.println(i + " " + user_id + " " + ttl+ " " + p+" "+ m+ " " + c);
-        boolean f = db.CreateInvoice(i,user_id, ttl, p, m, c, invoice_items);
-        System.out.println(f);
+            if(saleModels.size() != 0){
+                saleModels.forEach(saleModel -> {
+                    invoice_items.add(new Invoice_item(String.valueOf(invoiceId),String.valueOf(saleModel.getId())  , saleModel.getQuantity(), Double.valueOf(saleModel.getTotal())));
+                });
+                boolean f = db.CreateInvoice(i,user_id, ttl, p, m, c, invoice_items);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Invoice Saved.");
+                if(f){
+                    alert.setContentText("Invoice Successfully saved.");
+                    alert.showAndWait();
+                }else {
+                    alert.setContentText("Invoice did not saved.");
+                    alert.showAndWait();
+                }
+            }else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.showAndWait();
+            }
 
+
+
+        } catch (Exception e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.showAndWait();
+        }
 
     }
 }
