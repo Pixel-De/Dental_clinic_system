@@ -1,10 +1,14 @@
 package DentalClinic.Pharmacy.Sale;
 
+import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
+
 public class SaleModel {
 
     private Integer id, quantity;
     private String name;
     private Float total, unit;
+    private Button delete;
 
     public SaleModel(Integer id, Integer quantity, String name, Float unit, Float total) {
         this.id = id;
@@ -12,6 +16,22 @@ public class SaleModel {
         this.name = name;
         this.unit = unit;
         this.total = total;
+
+        this.delete = new Button();
+        ImageView imgView = new ImageView(getClass().getResource("../../assets/delete.png").toExternalForm());
+        imgView.setFitHeight(10);
+        imgView.setPreserveRatio(true);
+        this.delete.setPrefSize(10,10);
+        this.delete.setGraphic(imgView);
+
+    }
+
+    public Button getDelete() {
+        return delete;
+    }
+
+    public void setDelete(Button delete) {
+        this.delete = delete;
     }
 
     public Integer getId() {

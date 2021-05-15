@@ -56,25 +56,10 @@
                      <children>
                         <HBox prefHeight="76.8" prefWidth="900.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                            <children>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
+                              <VBox prefHeight="44.0" prefWidth="551.0">
                                  <children>
                                     <Label text="Product ID#" />
-                                    <TextField />
-                                 </children>
-                              </VBox>
-                              <VBox alignment="BOTTOM_CENTER" prefHeight="44.0" prefWidth="47.0">
-                                 <children>
-                                    <ImageView fitHeight="27.0" fitWidth="28.0" onMouseClicked="#seePatientList" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../assets/pres_table.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                              </VBox>
-                              <VBox prefHeight="44.0" prefWidth="330.0">
-                                 <children>
-                                    <Label text="Walk In Customer Name" />
-                                    <TextField prefHeight="26.0" prefWidth="504.0" />
+                                    <ComboBox fx:id="patientBox" prefHeight="26.0" prefWidth="479.0" />
                                  </children>
                               </VBox>
                            </children>
@@ -213,7 +198,7 @@
                      <children>
                         <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: black;">
                            <children>
-                              <Label prefHeight="18.0" prefWidth="103.0" text="INVOICE" />
+                              <Label alignment="CENTER" prefHeight="18.0" prefWidth="103.0" text="INVOICE" />
                               <Label alignment="CENTER" prefHeight="50.0" prefWidth="98.0" text="0">
                                  <font>
                                     <Font size="18.0" />
@@ -223,7 +208,7 @@
                         </VBox>
                         <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: black;">
                            <children>
-                              <Label prefHeight="18.0" prefWidth="106.0" text="TOTAL" />
+                              <Label alignment="CENTER" prefHeight="18.0" prefWidth="106.0" text="TOTAL" />
                               <Label fx:id="totalLabel" alignment="CENTER" prefHeight="50.0" prefWidth="98.0">
                                  <font>
                                     <Font size="18.0" />
@@ -253,7 +238,7 @@
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: black;">
                            <children>
-                              <Label prefHeight="27.0" prefWidth="92.0" text="CHANGE DUE">
+                              <Label alignment="CENTER" prefHeight="27.0" prefWidth="92.0" text="CHANGE DUE">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -281,7 +266,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="121.0" text="SAVE">
+                              <Button mnemonicParsing="false" onMouseClicked="#saveInvoice" prefHeight="26.0" prefWidth="121.0" text="SAVE">
                                  <graphic>
                                     <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
