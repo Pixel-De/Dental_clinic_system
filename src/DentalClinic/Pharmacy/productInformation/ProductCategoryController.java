@@ -77,11 +77,6 @@ public class ProductCategoryController {
     }
     public void addCategory(){
         String name = categoryName.getText();
-        Category c  = new Category(name);
-        boolean f = db.AddCategory(1, name);
-        if(f){
-            catList.add(c);
-        }
     }
 
 

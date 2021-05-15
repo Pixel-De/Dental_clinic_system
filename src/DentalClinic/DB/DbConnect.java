@@ -1,6 +1,7 @@
 package DentalClinic.DB;
 import DentalClinic.Doctor.Doctor;
 import DentalClinic.Patient.Patient;
+import DentalClinic.Pharmacy.Sale.Invoice_item;
 import DentalClinic.Pharmacy.productInformation.Category;
 import DentalClinic.Pharmacy.productInformation.Product;
 import javafx.collections.FXCollections;
@@ -99,10 +100,11 @@ public class DbConnect {
     private ObservableList<Category> GetAllCategory(){
         ObservableList<Category> a = FXCollections.observableArrayList(new ArrayList<Category>());
         try (Statement statement = this.db.createStatement()) {
-            ResultSet result = statement.executeQuery("select name from category");
+            ResultSet result = statement.executeQuery("select id, name from category");
             while(result.next()){
                 String name = result.getString("name");
-                a.add(new Category(name));
+                Integer id = result.getInt("id");
+                a.add(new Category(name,id));
             }
             return a;
         } catch (SQLException e){
@@ -176,9 +178,9 @@ public class DbConnect {
             return false;
         }
     }
-    public Boolean AddCategory(Integer id, String name){
+    public Boolean AddCategory(String name){
         try (Statement statement = this.db.createStatement()){
-            Integer cnt = statement.executeUpdate("INSERT INTO `category` (`id`, `name`) VALUES ('"+id+"', '"+name+"')");
+            Integer cnt = statement.executeUpdate("INSERT INTO `category` (`id`, `name`) VALUES (NULL , '"+name+"')");
             if(cnt == 1){
                 return  true;
             } else {
@@ -330,19 +332,22 @@ public class DbConnect {
         }
     }
 
-    public boolean CreateInvoice(Integer id, Integer user_id, Double total, Double paid, String method, Double change_due,String[] products){
+    public boolean CreateInvoice(Integer id, Integer user_id, Double total, Double paid, String method, Double change_due, ObservableList<Invoice_item> products){
         String query = "";
-        for (int i = 0; i < products.length; i++) {
-            if(i== products.length-1){
-                query += "('"+id+"','"+products[i]+"')";
+        products.forEach(product->{
+
+        });
+        for (int i = 0; i < products.size(); i++) {
+            if( i == products.size()-1){
+                query += "('"+id+"','"+products.get(i).getProduct_id()+"','"+products.get(i).getQty()+"','"+products.get(i).getTotal()+"')";
             }else{
-                query += "('"+id+"','"+products[i]+"'),";
+                query += "('"+id+"','"+products.get(i).getProduct_id()+"','"+products.get(i).getQty()+"','"+products.get(i).getTotal()+"'),";
             }
         }
         try (Statement statement = this.db.createStatement()){
-            Integer cnt = statement.executeUpdate("INSERT INTO `invoice_item` (`invoice_id`, `product_id`) " +
+            Integer cnt = statement.executeUpdate("INSERT INTO `invoice_item` (`invoice_id`, `product_id`, `qty`, `total) " +
                     "VALUES "+query);
-            if(cnt==products.length){
+            if(cnt==products.size()){
                 Integer cnt1 = statement.executeUpdate("INSERT INTO `invoice` (`id`, `user_id`, `total`, `paid`, `method`, `change_due`) " +
                         "VALUES ('"+id+"', '"+user_id+"', '"+total+"', '"+paid+"', '"+method+"', '"+change_due+"')");
                 if(cnt1==1) {
@@ -359,6 +364,20 @@ public class DbConnect {
             return false;
         }
         return true;
+    }
+
+    public  Integer getIdInvoice(){
+        try (Statement statement = this.db.createStatement()){
+            ResultSet result = statement.executeQuery("SELECT id FROM `invoice` ORDER BY id DESC LIMIT 1");
+            if(result.next()){
+                return  1;
+            } else {
+                return  result.getInt("id") + 1;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return  -1;
+        }
     }
 
 }

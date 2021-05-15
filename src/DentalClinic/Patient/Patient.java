@@ -10,7 +10,7 @@ public class Patient {
     private String name,parent,gender,occupation,address;
     private Integer id,age,contact;
     private Date reference,date;
-    private Button edit, delete;
+    private Button edit, delete , check;
 
     public Patient(String name, String parent, String gender, String occupation, String address, Integer id, Integer age, Integer contact, Date reference, Date date) {
         this.name = name;
@@ -37,6 +37,21 @@ public class Patient {
         imgView2.setPreserveRatio(true);
         this.edit.setPrefSize(10,10);
         this.edit.setGraphic(imgView2);
+
+        this.check = new Button();
+        ImageView imgView3 = new ImageView(getClass().getResource("../assets/check.png").toExternalForm());
+        imgView3.setFitHeight(10);
+        imgView3.setPreserveRatio(true);
+        this.check.setPrefSize(10,10);
+        this.check.setGraphic(imgView3);
+    }
+
+    public Button getCheck() {
+        return check;
+    }
+
+    public void setCheck(Button check) {
+        this.check = check;
     }
 
     public Button getEdit() {

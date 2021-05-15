@@ -7,8 +7,15 @@ import javafx.scene.image.ImageView;
 
 public class Category {
     private String category;
-    private int id;
-    private Button del ;
+    private Integer id;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getCategory() {
         return category;
@@ -26,15 +33,9 @@ public class Category {
         this.del = del;
     }
 
-    public int getId() {
-        return id;
-    }
+    private Button del ;
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Category(String category) {
+    public Category(String category,Integer id) {
         this.del = new Button();
         ImageView imgView = new ImageView(getClass().getResource("../../assets/delete.png").toExternalForm());
         imgView.setFitHeight(10);
@@ -42,6 +43,6 @@ public class Category {
         this.del.setPrefSize(10,10);
         this.del.setGraphic(imgView);
         this.category = category;
-        this.id = 1;
+        this.id = id;
     }
 }
