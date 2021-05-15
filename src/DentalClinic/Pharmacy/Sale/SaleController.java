@@ -12,12 +12,14 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -40,13 +42,21 @@ public class SaleController {
     private ObservableList<SaleModel> saleModels = FXCollections.observableArrayList();
     private ObservableList<String> paidMethod = FXCollections.observableArrayList("Card", "Cash");
 
+    private ObservableList<Invoice_item> invoice_items = FXCollections.observableArrayList();
+
     private DbConnect db = new DbConnect();
+
+    private int  invoiceId = 0 ;
 
 
     private StringProperty totalProperty = new SimpleStringProperty();
     private StringProperty changeD = new SimpleStringProperty();
 
-    private float ttl=0 ;
+    private float total = 0 ;
+    private Patient selectedPatient;
+    private Double paid;
+    private String method="";
+    private Double cd;
 
     @FXML
     public void initialize(){
@@ -55,14 +65,17 @@ public class SaleController {
         changeDueLabel.textProperty().bindBidirectional(changeD);
 
 
-
         saleModels.addListener(new ListChangeListener<SaleModel>() {
             @Override
             public void onChanged(Change<? extends SaleModel> change) {
-                SaleModel s = saleModels.get(saleModels.size()-1);
-                ttl = ttl + s.getTotal();
-                System.out.println(ttl);
-                totalProperty.set(String.valueOf(ttl));
+
+                total = 0;
+                saleModels.forEach(saleModel -> {
+                    total = total + saleModel.getTotal();
+
+                    totalProperty.set(String.valueOf(total));
+
+                });
             }
         });
 
@@ -71,18 +84,23 @@ public class SaleController {
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
                 try{
 
-                    float changeDue = Float.valueOf(t1) - ttl;
+                    float changeDue = Float.valueOf(t1) - total;
+                    cd = Double.valueOf(changeDue) ;
                     changeD.set(String.valueOf(changeDue));
-//                    System.out.println(changeDue);
 
+                    try{
 
+                        paid = Double.valueOf(t1);
+
+                    }catch (Exception e){
+                        paid = 0.0;
+                    }
 
                 }catch (Exception e){
                     System.out.println("err");
                 }
             }
         });
-
 
 
         products = db.ProductList();
@@ -102,11 +120,11 @@ public class SaleController {
         }));
 
         methodBox.getSelectionModel().selectedIndexProperty().addListener((observableValue, number, t1) -> {
-            String s = paidMethod.get((Integer) t1);
+            method = paidMethod.get((Integer) t1);
         });
 
         patientBox.getSelectionModel().selectedIndexProperty().addListener(((observableValue, number, t1) -> {
-//            String s = patients.get((Integer) t1);
+            selectedPatient = patients.get((Integer) t1);
         }));
 
         saleModels.addListener(new ListChangeListener<SaleModel>() {
@@ -115,12 +133,14 @@ public class SaleController {
 
             }
         });
+        TableColumn<SaleModel, Button> delete = new TableColumn<>("");
         TableColumn<SaleModel, Integer> id = new TableColumn<>("PRODUCT ID");
         TableColumn<SaleModel, String> name = new TableColumn<>("PRODUCT NAME");
         TableColumn<SaleModel, Integer> quant = new TableColumn<>("QUANTITY");
         TableColumn<SaleModel, Float > unit = new TableColumn<>("UNIT");
         TableColumn<SaleModel, Float> total = new TableColumn<>("TOTAL");
 
+        delete.setCellValueFactory(new PropertyValueFactory<SaleModel, Button>("delete"));
         id.setCellValueFactory(new PropertyValueFactory<SaleModel, Integer>("id"));
         name.setCellValueFactory(new PropertyValueFactory<SaleModel, String>("name"));
         quant.setCellValueFactory(new PropertyValueFactory<SaleModel, Integer>("quantity"));
@@ -128,10 +148,14 @@ public class SaleController {
         total.setCellValueFactory(new PropertyValueFactory<>("total"));
 
         salesTable.setItems(saleModels);
-        salesTable.getColumns().addAll(id, name, quant, unit, total);
+        salesTable.getColumns().addAll(delete, id, name, quant, unit, total);
 
 
     }
+
+
+
+
 
     public void addToCart(){
         if(!quantityField.getText().equals("")){
@@ -139,13 +163,22 @@ public class SaleController {
                 Float ttl = Integer.valueOf(quantityField.getText()) * Float.valueOf(priceLabel.getText());
 
                 SaleModel saleModel = new SaleModel(Integer.valueOf(idLabel.getText()), Integer.valueOf(quantityField.getText()),nameLabel.getText(),Float.valueOf(priceLabel.getText()),ttl);
-
+                Button del = saleModel.getDelete();
+                del.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        saleModels.remove(saleModel);
+                    }
+                });
                 saleModels.add(saleModel);
             } catch (Exception e){
                 e.printStackTrace();
             }
         }
     }
+
+
+
     public void setInformation(String s){
 
         products.forEach(product -> {
@@ -159,6 +192,8 @@ public class SaleController {
         });
 
     }
+
+
     public ObservableList<String> getPatientNameAndId(){
         ObservableList<String> p= FXCollections.observableArrayList();
         patients.forEach(patient -> {
@@ -167,5 +202,25 @@ public class SaleController {
         });
 
         return p;
+    }
+
+    public void saveInvoice(){
+
+        int i = this.invoiceId;
+        int user_id = selectedPatient.getId();
+        double ttl = total;
+        double p = paid;
+        String m = method;
+        Double c = cd;
+
+        saleModels.forEach(saleModel -> {
+            invoice_items.add(new Invoice_item(String.valueOf(invoiceId),String.valueOf(saleModel.getId())  , saleModel.getQuantity(), Double.valueOf(saleModel.getTotal())));
+        });
+
+        System.out.println(i + " " + user_id + " " + ttl+ " " + p+" "+ m+ " " + c);
+//        boolean f = db.CreateInvoice(i,user_id, ttl, p, m, c, invoice_items);
+
+
+
     }
 }

@@ -332,19 +332,22 @@ public class DbConnect {
         }
     }
 
-    public boolean CreateInvoice(Integer id, Integer user_id, Double total, Double paid, String method, Double change_due, Invoice_item[] products){
+    public boolean CreateInvoice(Integer id, Integer user_id, Double total, Double paid, String method, Double change_due, ObservableList<Invoice_item> products){
         String query = "";
-        for (int i = 0; i < products.length; i++) {
-            if( i == products.length-1){
-                query += "('"+id+"','"+products[i].getProduct_id()+"','"+products[i].getQty()+"','"+products[i].getTotal()+"')";
+        products.forEach(product->{
+
+        });
+        for (int i = 0; i < products.size(); i++) {
+            if( i == products.size()-1){
+                query += "('"+id+"','"+products.get(i).getProduct_id()+"','"+products.get(i).getQty()+"','"+products.get(i).getTotal()+"')";
             }else{
-                query += "('"+id+"','"+products[i].getProduct_id()+"','"+products[i].getQty()+"','"+products[i].getTotal()+"'),";
+                query += "('"+id+"','"+products.get(i).getProduct_id()+"','"+products.get(i).getQty()+"','"+products.get(i).getTotal()+"'),";
             }
         }
         try (Statement statement = this.db.createStatement()){
             Integer cnt = statement.executeUpdate("INSERT INTO `invoice_item` (`invoice_id`, `product_id`, `qty`, `total) " +
                     "VALUES "+query);
-            if(cnt==products.length){
+            if(cnt==products.size()){
                 Integer cnt1 = statement.executeUpdate("INSERT INTO `invoice` (`id`, `user_id`, `total`, `paid`, `method`, `change_due`) " +
                         "VALUES ('"+id+"', '"+user_id+"', '"+total+"', '"+paid+"', '"+method+"', '"+change_due+"')");
                 if(cnt1==1) {
