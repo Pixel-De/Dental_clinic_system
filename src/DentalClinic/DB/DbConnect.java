@@ -345,7 +345,7 @@ public class DbConnect {
             }
         }
         try (Statement statement = this.db.createStatement()){
-            Integer cnt = statement.executeUpdate("INSERT INTO `invoice_item` (`invoice_id`, `product_id`, `qty`, `total) " +
+            Integer cnt = statement.executeUpdate("INSERT INTO `invoice_item` (`invoice_id`, `product_id`, `qty`, `total`) " +
                     "VALUES "+query);
             if(cnt==products.size()){
                 Integer cnt1 = statement.executeUpdate("INSERT INTO `invoice` (`id`, `user_id`, `total`, `paid`, `method`, `change_due`) " +
@@ -370,9 +370,11 @@ public class DbConnect {
         try (Statement statement = this.db.createStatement()){
             ResultSet result = statement.executeQuery("SELECT id FROM `invoice` ORDER BY id DESC LIMIT 1");
             if(result.next()){
-                return  1;
-            } else {
                 return  result.getInt("id") + 1;
+
+            } else {
+                return  1;
+
             }
         } catch (SQLException e){
             e.printStackTrace();
