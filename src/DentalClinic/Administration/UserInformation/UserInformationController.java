@@ -1,62 +1,64 @@
 package DentalClinic.Administration.UserInformation;
 
+import DentalClinic.Administration.ListOfUser.User;
+import DentalClinic.DB.DbConnect;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
+import java.net.URL;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.ResourceBundle;
+
 public class UserInformationController {
 
     @FXML
-    private HBox upBox;
-
+    HBox upBox;
     @FXML
-    private Label lblBright;
-
+    Label lblBright;
     @FXML
-    private AnchorPane AnchorBord;
-
+    AnchorPane AnchorBord;
     @FXML
-    private TextField txtUserID;
-
+    TextField txtUserID ,txtFullname, txtUsername, txtDesignation, txtPassword, txtRePassword, txtContact;
     @FXML
-    private TextField txtFullname;
-
+    ComboBox<String> comboUserType;
     @FXML
-    private TextField txtUsername;
-
+    DatePicker UserInformationDatepicker;
     @FXML
-    private TextField txtPassword;
+    Button btnReset, btnSave, btnClose ;
+//    private String full_name,user_job,fieldOfArea,user_name;
+//    private Integer id, contact_no;
+//    private Date joining_date;
+//    private DbConnect db = new DbConnect();
 
-    @FXML
-    private TextField txtRePassword;
+//    public void initialize(URL url, ResourceBundle resourceBundle) {
+//
+//        txtUserID.setText(String.valueOf(id));
+//        txtFullname.setText(full_name);
+//        txtUsername.setText(user_name);
+//        txtDesignation.setText(fieldOfArea);
+////        txtRePassword.setText(passwordu);
+//        txtContact.setText(String.valueOf(contact_no));
+//        UserInformationDatepicker.setValue(joining_date.toLocalDate());
+//
+//    }
+    public UserInformationController(User user) {
 
-    @FXML
-    private TextField txtDesignation;
+    }
 
-    @FXML
-    private TextField txtContact;
+//    private  ObservableList<String> comboUserType = FXCollections.observableArrayList("Administrator", "Doctor, Receptionist, Cashier, Assistant");
+//
+//    public void initializable(){
+//        comboUserType.setItems(comboUserType);
+//        comboUserType.getSelectionModel().selectFirst();
+//    }
 
-    @FXML
-    private ComboBox<?> comboUserType;
-
-    @FXML
-    private DatePicker UserInformationDatepicker;
-
-    @FXML
-    private Button btnReset;
-
-    @FXML
-    private Button btnSave;
-
-    @FXML
-    private Button btnClose;
 
     @FXML
     void btnCloseAction(ActionEvent event) {
