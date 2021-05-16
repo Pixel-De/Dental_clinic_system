@@ -345,9 +345,9 @@ public class DbConnect {
         }
     }
 
-    public Boolean DeleteCategory(Integer id){
+    public Boolean DeleteCategory(String id){
         try (Statement statement = this.db.createStatement()){
-            Integer cnt = statement.executeUpdate("DELETE FROM category WHERE id = "+id);
+            Integer cnt = statement.executeUpdate("DELETE FROM category WHERE done = "+id);
             if(cnt == 1){
                 return  true;
             } else {
