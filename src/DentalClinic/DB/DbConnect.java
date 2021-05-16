@@ -5,6 +5,7 @@ import DentalClinic.Pharmacy.Sale.Invoice_item;
 import DentalClinic.Pharmacy.productInformation.Category;
 import DentalClinic.Pharmacy.productInformation.Product;
 import DentalClinic.Prescription.PresCriptionMain;
+import DentalClinic.Prescription.PrescriptionFull;
 import DentalClinic.Prescription.PrescriptionModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -117,15 +118,17 @@ public class DbConnect {
         }
     }
 
-    private ObservableList<PresCriptionMain> GetAllPrescription(){
-        ObservableList<PresCriptionMain> a = FXCollections.observableArrayList(new ArrayList<PresCriptionMain>());
+    private ObservableList<PrescriptionFull> GetAllPrescription(){
+        ObservableList<PrescriptionFull> a = FXCollections.observableArrayList(new ArrayList<PrescriptionFull>());
         try (Statement statement = this.db.createStatement()) {
-            ResultSet result = statement.executeQuery("select * from prescription");
+            ResultSet result = statement.executeQuery("select prescription.id as id, prescription.date as date, patient_id, patient.name as name, patient.age as age from prescription ,patient WHERE prescription.patient_id=patient.id");
             while(result.next()){
                 String id = result.getString("id");
                 String patient_id = result.getString("patient_id");
                 Date date = result.getDate("date");
-                a.add(new PresCriptionMain(id, patient_id, date));
+                String name = result.getString("name");
+                String age = result.getString("age");
+                a.add(new PrescriptionFull(id, patient_id, date, age,name));
             }
             return a;
         } catch (SQLException e){
@@ -154,7 +157,7 @@ public class DbConnect {
     public ObservableList<Category> CategoryList(){
         return  this.GetAllCategory();
     }
-    public ObservableList<PresCriptionMain> PrescriptionList(){
+    public ObservableList<PrescriptionFull> PrescriptionList(){
         return  this.GetAllPrescription();
     }
 
@@ -204,7 +207,7 @@ public class DbConnect {
     }
     public Boolean AddCategory(String name){
         try (Statement statement = this.db.createStatement()){
-            Integer cnt = statement.executeUpdate("INSERT INTO category (id, name) VALUES (NULL , '"+name+"')");
+            Integer cnt = statement.executeUpdate("INSERT INTO category ( name) VALUES ( '"+name+"')");
             if(cnt == 1){
                 return  true;
             } else {
