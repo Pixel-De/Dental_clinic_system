@@ -102,9 +102,9 @@ public class MainMenuController {
     @FXML
     void setListOfUsers(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../Administration/ListOfUser/ListOfUserView.fxml"));
-        Parent clinic = loader.load();
+        Parent listofuser = loader.load();
         Stage stage = new Stage();
-        stage.setScene(new Scene(clinic));
+        stage.setScene(new Scene(listofuser));
         stage.show();
     }
 
@@ -169,6 +169,11 @@ public class MainMenuController {
 
     @FXML
     void setPrescriptionList(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Prescription/PreList.fxml"));
+        Parent rootPharmaSale = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(rootPharmaSale));
+        stage.show();
 
     }
 
