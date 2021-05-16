@@ -25,7 +25,7 @@ public class PrescriptionController {
     @FXML
     ComboBox<String> productBox, patientBox;
     @FXML
-    Button closeButton;
+    Button closeButton, createButton;
 
     private DbConnect db = new DbConnect();
 
@@ -107,10 +107,20 @@ public class PrescriptionController {
     public void createPresc(){
         PresCriptionMain presCriptionMain = db.CreatePrescription();
         System.out.println(presCriptionMain.id  +  " " + presCriptionMain.date);
-//        ObservableList<PresCriptionMain> list = db.PrescriptionList();
-//        System.out.println(list.size());
+        createButton.setDisable(true);
     }
     public void saveChanges(){
+
+        try{
+
+
+
+
+        } catch(Exception e){
+
+        }
+
+        createButton.setDisable(false);
 
     }
     public void reset(){
