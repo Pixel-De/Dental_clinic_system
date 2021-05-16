@@ -67,7 +67,7 @@ public class PreListController {
     @FXML
     private void closeButtonAction(){
         Stage stage = (Stage) closeButton.getScene().getWindow();
-        stage.close();
+            stage.close();
     }
 
 //    public ObservableList<Doctor> filterId(int id){
