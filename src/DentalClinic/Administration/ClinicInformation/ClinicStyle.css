@@ -8,3 +8,6 @@
 #boxBorders{
     -fx-border-color: grey;
 }
+#txtFieldClinicName{
+    -fx-font-weight: bold;
+}

@@ -14,37 +14,29 @@ public class ClinicInfoController {
 
     @FXML
     private HBox upBox;
-
     @FXML
     private Label labelBright;
-
     @FXML
-    private TextField txtFieldClinicName;
-
-    @FXML
-    private TextField txtFieldClinicPhone;
-
-    @FXML
-    private TextField txtFieldClinicAddress;
-
-    @FXML
-    private TextField txtFieldClinicReportHeader;
-
-    @FXML
-    private TextField txtFieldClinicReportFooter;
-
+    private TextField txtFieldClinicName, txtFieldClinicPhone, txtFieldClinicAddress, txtFieldClinicReportHeader, txtFieldClinicReportFooter;
     @FXML
     private ImageView ClinicInfoPicture;
-
     @FXML
     private Hyperlink ClinicInfoHyper;
-
     @FXML
     private Button closeButton;
-
     @FXML
     private Button btnSave;
 
+    public void initialize(){
+
+
+        txtFieldClinicPhone.setText("Phone :443-323-4245");
+        txtFieldClinicReportHeader.setText("A smile is a curve that sets everything straight");
+        txtFieldClinicName.setText("OraMed Dental Care");
+        txtFieldClinicReportFooter.setText("Because you should want to go to your dentist");
+        txtFieldClinicAddress.setText("Address:3506  Calvin Street, Salisbury, MD 21875");
+
+    }
     @FXML
     void btnCloseAction(ActionEvent event) {
 

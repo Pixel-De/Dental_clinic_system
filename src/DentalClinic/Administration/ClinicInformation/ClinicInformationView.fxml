@@ -44,11 +44,11 @@
             <Label text="Phone" />
             <TextField fx:id="txtFieldClinicPhone" prefHeight="26.0" prefWidth="275.0" />
             <Label text="Address" />
-            <TextField fx:id="txtFieldClinicAddress" prefHeight="45.0" prefWidth="275.0" />
+            <TextField fx:id="txtFieldClinicAddress" alignment="TOP_LEFT" prefHeight="45.0" prefWidth="275.0" />
             <Label text="Report Header" />
-            <TextField fx:id="txtFieldClinicReportHeader" prefHeight="45.0" prefWidth="275.0" />
+            <TextField fx:id="txtFieldClinicReportHeader" alignment="TOP_LEFT" prefHeight="45.0" prefWidth="275.0" />
             <Label text="Report footer" />
-            <TextField fx:id="txtFieldClinicReportFooter" prefHeight="45.0" prefWidth="275.0" />
+            <TextField fx:id="txtFieldClinicReportFooter" alignment="TOP_LEFT" prefHeight="45.0" prefWidth="275.0" />
          </children>
          <padding>
             <Insets left="10.0" top="5.0" />
@@ -56,7 +56,10 @@
       </VBox>
       <VBox fx:id="boxBorders" layoutX="476.0" layoutY="109.0" prefHeight="304.0" prefWidth="238.0" AnchorPane.rightAnchor="10.0">
          <children>
-            <ImageView fx:id="ClinicInfoPicture" fitHeight="150.0" fitWidth="225.0" pickOnBounds="true" smooth="false" />
+            <ImageView fx:id="ClinicInfoPicture" fitHeight="150.0" fitWidth="225.0" pickOnBounds="true" smooth="false">
+               <image>
+                  <Image url="@../../assets/image-gallery.png" />
+               </image></ImageView>
             <Label prefHeight="35.0" prefWidth="202.0" text="Note: This image may appear distorted in this screen." wrapText="true" />
             <Hyperlink fx:id="ClinicInfoHyper" text="Browse Image" />
          </children>
