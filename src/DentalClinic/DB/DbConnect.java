@@ -483,5 +483,19 @@ public class DbConnect {
         }
     }
 
+    public Boolean AddAccount(String name,String type, String status){
+        try (Statement statement = this.db.createStatement()){
+            Integer cnt = statement.executeUpdate("INSERT INTO account ( name, type, status) VALUES ( '"+name+"','"+type+"','"+status+"')");
+            if(cnt == 1){
+                return  true;
+            } else {
+                return  false;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }
 
