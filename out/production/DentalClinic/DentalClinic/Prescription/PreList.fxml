@@ -75,7 +75,7 @@
                            </children>
                         </HBox>
                                 <TilePane hgap="10.0" vgap="10.0" />
-                                <TableView fx:id="patientTable" VBox.vgrow="ALWAYS" />
+                                <TableView fx:id="preTable" VBox.vgrow="ALWAYS" />
                             </children>
                             <padding>
                                 <Insets left="10.0" right="10.0" />
