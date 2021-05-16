@@ -24,36 +24,34 @@ public class PreListController {
     @FXML
     Button closeButton;
     @FXML
-    TableView patientTable; // turluu bicig ugnu
+    TableView<PrescriptionFull> preTable; // turluu bicig ugnu
 
     private ObservableList<String> params = FXCollections.observableArrayList("Prescription ID", "Patient Name");
-//    private ObservableList<>
+    private ObservableList<PrescriptionFull> prescriptionFulls = FXCollections.observableArrayList();
 
     DbConnect db = new DbConnect();
     public void initialize(){
 
         ObservableList<PresCriptionMain> presCriptionMains = FXCollections.observableArrayList();
+        prescriptionFulls = db.PrescriptionList();
 
-//        TableColumn<Doctor, Button> edit = new TableColumn<>("");
-//        TableColumn<Doctor, Button> delete = new TableColumn<>("");
-//        TableColumn<Doctor,Integer> id = new TableColumn<>("PRESCRIPTION ID");
-//        TableColumn<Doctor, String> p_id = new TableColumn<>("PATIENT NAME");
-//        TableColumn<Doctor, String> p_name = new TableColumn<>("PATIENT NAME");
-//        TableColumn<Doctor, String > age = new TableColumn<>("AGE");
-//
-//
-//        delete.setCellValueFactory(new PropertyValueFactory<Doctor, Button>("delete"));
-//        edit.setCellValueFactory(new PropertyValueFactory<Doctor, Button>("edit"));
-//        id.setCellValueFactory(new PropertyValueFactory<Doctor, Integer>("id"));
-//        p_id.setCellValueFactory(new PropertyValueFactory<Doctor, String>("name"));
-//        p_name.setCellValueFactory(new PropertyValueFactory<Doctor, String >("speciality"));
-//        age.setCellValueFactory(new PropertyValueFactory<Doctor, String>("qualification"));
-//
-//        doctorTable.setItems(doctors);
-//        doctorTable.getColumns().addAll(edit, delete, id, name, speciality, qualification, address, contact_no, date);
+        TableColumn<PrescriptionFull, Button> edit = new TableColumn<>("");
+        TableColumn<PrescriptionFull, Button> delete = new TableColumn<>("");
+        TableColumn<PrescriptionFull,String> id = new TableColumn<>("PRESCRIPTION ID");
+        TableColumn<PrescriptionFull, String> p_id = new TableColumn<>("PATIENT NAME");
+        TableColumn<PrescriptionFull, String> p_name = new TableColumn<>("PATIENT NAME");
+        TableColumn<PrescriptionFull, String > age = new TableColumn<>("AGE");
 
 
+        delete.setCellValueFactory(new PropertyValueFactory<PrescriptionFull, Button>("delete"));
+        edit.setCellValueFactory(new PropertyValueFactory<PrescriptionFull, Button>("edit"));
+        id.setCellValueFactory(new PropertyValueFactory<PrescriptionFull, String>("id"));
+        p_id.setCellValueFactory(new PropertyValueFactory<PrescriptionFull, String>("patient_id"));
+        p_name.setCellValueFactory(new PropertyValueFactory<PrescriptionFull, String >("name"));
+        age.setCellValueFactory(new PropertyValueFactory<PrescriptionFull, String>("age"));
 
+        preTable.setItems(prescriptionFulls);
+        preTable.getColumns().addAll(edit, delete, id, p_id, p_name, age);
 
 
         param.setItems(params);
