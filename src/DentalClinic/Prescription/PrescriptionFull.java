@@ -6,16 +6,17 @@ import javafx.scene.image.ImageView;
 import java.sql.Date;
 
 public class PrescriptionFull {
-    String id, patient_id, name, age;
+    String id, patient_id, name, age, gender;
     Date date;
     Button edit , delete;
 
-    public PrescriptionFull(String id, String patient_id, Date date, String age, String name) {
+    public PrescriptionFull(String id, String patient_id, Date date, String age, String name, String gender) {
         this.id = id;
         this.patient_id = patient_id;
         this.date = date;
         this.name = name;
         this.age = age;
+        this.gender = gender;
 
         this.delete = new Button();
         ImageView imgView = new ImageView(getClass().getResource("../assets/delete.png").toExternalForm());

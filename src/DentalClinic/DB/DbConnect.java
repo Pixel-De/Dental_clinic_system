@@ -121,14 +121,15 @@ public class DbConnect {
     private ObservableList<PrescriptionFull> GetAllPrescription(){
         ObservableList<PrescriptionFull> a = FXCollections.observableArrayList(new ArrayList<PrescriptionFull>());
         try (Statement statement = this.db.createStatement()) {
-            ResultSet result = statement.executeQuery("select prescription.id as id, prescription.date as date, patient_id, patient.name as name, patient.age as age from prescription ,patient WHERE prescription.patient_id=patient.id");
+            ResultSet result = statement.executeQuery("select prescription.id as id, prescription.date as date, patient_id, patient.name as name, patient.age as age, gender from prescription ,patient WHERE prescription.patient_id=patient.id");
             while(result.next()){
                 String id = result.getString("id");
                 String patient_id = result.getString("patient_id");
                 Date date = result.getDate("date");
                 String name = result.getString("name");
                 String age = result.getString("age");
-                a.add(new PrescriptionFull(id, patient_id, date, age,name));
+                String gender = result.getString("gender");
+                a.add(new PrescriptionFull(id, patient_id, date, age,name, gender));
             }
             return a;
         } catch (SQLException e){
