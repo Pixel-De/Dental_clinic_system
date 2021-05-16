@@ -1,0 +1,16 @@
+#upBox{
+    -fx-background-color: #055554;
+}
+#lblBright{
+    -fx-text-fill: white;
+    -fx-font-size: 25px;
+}
+#bottomStack{
+    -fx-border-color: grey;
+}
+#leftVBox{
+    -fx-border-color: grey;
+}
+#rightStack{
+    -fx-border-color: grey;
+}
