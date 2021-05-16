@@ -89,7 +89,7 @@ public class DbConnect {
                 Date manuDate = result.getDate("m_date");
                 Date expireDate = result.getDate("e_date");
                 String barcode = result.getString("barcode");
-                String UOM = result.getString("UOM");
+                String UOM = result.getString("uom");
                 String quantity = result.getString("quantity");
                 String pPrice = result.getString("p_price");
                 String sPrcie = result.getString("s_price");
@@ -193,7 +193,7 @@ public class DbConnect {
 
     public Boolean AddProduct(Integer id, String p_name,String g_name,String  category,java.util.Date m_date,java.util.Date e_date, Integer barcode, String UOM, Integer quantity,Integer p_price,Integer s_price){
         try (Statement statement = this.db.createStatement()){
-            Integer cnt = statement.executeUpdate("INSERT INTO product (id, p_name, g_name, category, m_date, e_date, barcode, UOM, quantity, p_price, s_price) " +
+            Integer cnt = statement.executeUpdate("INSERT INTO product (id, p_name, g_name, category, m_date, e_date, barcode, uom, quantity, p_price, s_price) " +
                     "VALUES ('"+id+"', '"+p_name+"', '"+g_name+"', '"+category+"', '"+m_date+"', '"+e_date+"', '"+barcode+"', '"+UOM+"', '"+quantity+"', '"+p_price+"', '"+s_price+"')");
             if(cnt == 1){
                 return  true;
@@ -273,7 +273,7 @@ public class DbConnect {
                     "m_date = '"+m_date+"', " +
                     "e_date = '"+e_date+"', " +
                     "barcode = '"+barcode+"', " +
-                    "UOM = '"+UOM+"', " +
+                    "uom = '"+UOM+"', " +
                     "quantity` = '"+quantity+"', " +
                     "p_price = '"+p_price+"', " +
                     "s_price = '"+s_price+"' " +
