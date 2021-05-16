@@ -37,8 +37,6 @@ public class PrescriptionController {
 
     public void initialize(){
 
-
-
         //productCombo
         products = db.ProductList();
         products.forEach(product -> {
@@ -107,9 +105,8 @@ public class PrescriptionController {
     }
 
     public void createPresc(){
-        PresCriptionMain presCriptionMain = db.CreatePrescription();
-        System.out.println(presCriptionMain.id  +  " " + presCriptionMain.date);
-
+//        PresCriptionMain presCriptionMain = db.CreatePrescription();
+//        System.out.println(presCriptionMain.id  +  " " + presCriptionMain.date);
     }
     public void saveChanges(){
 
