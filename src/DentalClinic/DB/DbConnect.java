@@ -428,6 +428,25 @@ public class DbConnect {
         }
     }
 
+    public ObservableList<PrescriptionModel> getPrescriptionItem(String id){
+        ObservableList<PrescriptionModel> a = FXCollections.observableArrayList(new ArrayList<PrescriptionModel>());
+        try (Statement statement = this.db.createStatement()) {
+            ResultSet result = statement.executeQuery("select * from prescription_item WHERE prescription_id = "+id);
+            while(result.next()){
+                String _id = result.getString("id");
+                String name = result.getString("m_name");
+                String dodge = result.getString("dodge");
+                String duration = result.getString("duration");
+                Integer qty = result.getInt("qty");
+                String remark = result.getString("remark");
+                a.add(new PrescriptionModel(qty,name,dodge,duration,remark));
+            }
+            return a;
+        } catch (SQLException e){
+            e.printStackTrace();
+            return a;
+        }
+    }
 
 
     public Boolean UpdatePrescription(PresCriptionMain prescription, ObservableList<PrescriptionModel> prescription_items){
@@ -440,10 +459,13 @@ public class DbConnect {
             }
         }
         try (Statement statement = this.db.createStatement()){
+            statement.executeUpdate("DELETE FROM invoice_item WHERE invoice_id = "+prescription.getId());
                 Integer cnt = statement.executeUpdate("INSERT INTO prescription_item (prescription_id, m_name, dodge, qty, duration, remark) VALUES "+query);
             if(cnt==prescription_items.size()){
-                Integer cnt1 = statement.executeUpdate("INSERT INTO prescription (id, patient_id, date) " +
-                        "VALUES ('"+prescription.getId()+"', '"+prescription.getPatient_id()+"', '"+prescription.getDate()+"')");
+                Integer cnt1 = statement.executeUpdate("UPDATE prescription SET " +
+                        "patient_id = '"+prescription.getPatient_id()+"',"+
+                        "date = '"+prescription.getDate()+"' "+
+                        "WHERE id = "+prescription.getId());
                 if(cnt1==1) {
                     return true;
                 } else {
