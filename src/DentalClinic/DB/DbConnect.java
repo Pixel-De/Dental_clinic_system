@@ -108,7 +108,7 @@ public class DbConnect {
             while(result.next()){
                 String name = result.getString("name");
                 Integer id = result.getInt("id");
-                a.add(new Category(name,id));
+                a.add(new Category(name));
             }
             return a;
         } catch (SQLException e){

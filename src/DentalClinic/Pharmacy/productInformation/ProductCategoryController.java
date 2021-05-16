@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import org.w3c.dom.Text;
 import DentalClinic.Pharmacy.productInformation.Category;
 
@@ -22,6 +23,8 @@ public class ProductCategoryController {
     TableView<Category> categoryTable;
     @FXML
     TextField categoryName;
+    @FXML
+    Button closeButton;
 
     String arr[] = {"cat1", "cate2", "cat3"};
     ObservableList<Category> catList = FXCollections.observableArrayList();
@@ -54,6 +57,7 @@ public class ProductCategoryController {
             });
         });
         categoryTable.setEditable(true);
+
         TableColumn del = new TableColumn("");
         TableColumn category = new TableColumn("Category");
 
@@ -74,9 +78,23 @@ public class ProductCategoryController {
         categoryTable.getColumns().addAll(del, category);
     }
     public void addCategory(){
+
         String name = categoryName.getText();
+        Category c = new Category(name);
+        boolean f = db.AddCategory(name);
+        if(f){
+            catList.add(c);
+        }
 
     }
+    @FXML
+    private void closeButtonAction(){
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        stage.close();
+    }
 
+    public void reset(){
+        categoryName.setText("");
+    }
 
 }

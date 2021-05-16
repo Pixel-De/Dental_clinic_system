@@ -33,7 +33,7 @@ public class ProductInfoController {
 
     @FXML
     public void initialize(){
-        DbConnect db = new DbConnect();
+
         ObservableList<Category> tmp = db.CategoryList();
         tmp.forEach(category ->{
             allCategory.add(category.getCategory());
@@ -96,6 +96,7 @@ public class ProductInfoController {
             Stage stage = new Stage();
             stage.setTitle("Product Category");
             stage.setScene(scene);
+            this.closeButtonAction();
             stage.showAndWait();
 
         } catch (Exception e) {
