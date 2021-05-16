@@ -380,5 +380,20 @@ public class DbConnect {
         }
     }
 
+    public Integer CreatePrescription(){
+        try (Statement statement = this.db.createStatement()){
+
+            Integer cnt = statement.executeUpdate("INSERT INTO `prescription` (`id`, `date`, `patient_id`, `created_at`) VALUES (NULL, '2021-05-01', '', CURRENT_TIMESTAMP)");
+            if(cnt == 1){
+                return  1;
+            } else {
+                return  -1;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
 }
 
