@@ -44,7 +44,7 @@ public class ProductInfoController {
 
     }
     public void saveProduct(){
-        ZoneId defaultZoneId = ZoneId.systemDefault();
+//        ZoneId defaultZoneId = ZoneId.systemDefault();
         String id, p_name, g_name, barcode, uom, quant, p_price, s_price, cate;
         Date m_date, e_date;
         id = pID.getText();
@@ -55,7 +55,7 @@ public class ProductInfoController {
         quant = quantity.getText();
         p_price = pPrice.getText();
         s_price = sPrice.getText();
-        cate = category.getValue();
+        cate = category.getValue() == null ? "": category.getValue();
         m_date = Date.valueOf(manuDate.getValue());
         e_date = Date.valueOf(eDate.getValue());
 

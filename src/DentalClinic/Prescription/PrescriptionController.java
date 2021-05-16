@@ -27,6 +27,7 @@ public class PrescriptionController {
     @FXML
     Button closeButton, createButton;
 
+
     private DbConnect db = new DbConnect();
 
     private ObservableList<PrescriptionModel> prescriptionModels = FXCollections.observableArrayList();
@@ -35,7 +36,11 @@ public class PrescriptionController {
     private ObservableList<Product> products = FXCollections.observableArrayList();
     private ObservableList<String> productsName = FXCollections.observableArrayList();
 
+    private PresCriptionMain presCriptionMain;
+    private int patientId;
     public void initialize(){
+
+        createPresc();
 
         //productCombo
         products = db.ProductList();
@@ -86,41 +91,62 @@ public class PrescriptionController {
             patientNameField.setText(p.getName());
             ageField.setText(String.valueOf(p.getAge()));
             genderField.setText(p.getGender());
+            patientId = p.getId();
     }
     public void savePresc(){
-        String med = productBox.getValue();
-        String dod = dodgeField.getText();
-        String dura = durationField.getText();
-        String qty = quantityField.getText();
-        String rm = remarkField.getText();
-        PrescriptionModel prescriptionModel = new PrescriptionModel(Integer.valueOf(qty), med,dod, dura,rm);
-        Button delete = prescriptionModel.getDelete();
-        delete.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                prescriptionModels.remove(prescriptionModel);
-            }
-        });
-        prescriptionModels.add(prescriptionModel);
+        try{
+            String med = productBox.getValue();
+            String dod = dodgeField.getText();
+            String dura = durationField.getText();
+            String qty = quantityField.getText();
+            String rm = remarkField.getText();
+            PrescriptionModel prescriptionModel = new PrescriptionModel(Integer.valueOf(qty), med,dod, dura,rm);
+            Button delete = prescriptionModel.getDelete();
+            delete.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    prescriptionModels.remove(prescriptionModel);
+                }
+            });
+            prescriptionModels.add(prescriptionModel);
+
+        } catch (Exception e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.showAndWait();
+        }
+
     }
 
     public void createPresc(){
-        PresCriptionMain presCriptionMain = db.CreatePrescription();
-        System.out.println(presCriptionMain.id  +  " " + presCriptionMain.date);
+        presCriptionMain = db.CreatePrescription();
+//        System.out.println(presCriptionMain.id  +  " " + presCriptionMain.date);
+        preIdField.setText(presCriptionMain.getId());
+        datePicker.setValue(presCriptionMain.getDate().toLocalDate());
         createButton.setDisable(true);
     }
     public void saveChanges(){
+        Alert alert ;
 
         try{
 
+            presCriptionMain.setPatient_id(String.valueOf(patientId));
+            boolean f = db.UpdatePrescription(presCriptionMain, prescriptionModels );
 
-
+            if(f){
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("Successfully Updated");
+                createButton.setDisable(false);
+                alert.showAndWait();
+            } else{
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.showAndWait();
+            }
 
         } catch(Exception e){
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.showAndWait();
 
         }
-
-        createButton.setDisable(false);
 
     }
     public void reset(){
