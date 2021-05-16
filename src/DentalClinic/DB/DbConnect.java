@@ -387,7 +387,7 @@ public class DbConnect {
         try (Statement statement = this.db.createStatement()){
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDateTime now = LocalDateTime.now();
-            Integer cnt = statement.executeUpdate("INSERT INTO prescription (id, date, patient_id, created_at) VALUES (NULL, '"+dtf.format(now)+"', '', CURRENT_TIMESTAMP)");
+            Integer cnt = statement.executeUpdate("INSERT INTO prescription (id, date, patient_id, created_at) VALUES (1, '"+dtf.format(now)+"', 0, CURRENT_TIMESTAMP)");
             if(cnt == 1){
                 ResultSet result = statement.executeQuery("SELECT * FROM prescription ORDER BY created_at DESC LIMIT 1");
                 if(result.next()){
@@ -405,36 +405,36 @@ public class DbConnect {
         }
     }
 
-//    public Boolean UpdatePrescription(PresCriptionMain prescription, ObservableList<PrescriptionModel> prescription_items){
-//        String query = "";
-//        for (int i = 0; i < prescription_items.size(); i++) {
-//            if( i == prescription_items.size()-1){
-//                query += "('"+prescription.getId()+"','"+prescription_items.get(i).getName()+"','"+prescription_items.get(i).getDodge()+"','"+prescription_items.get(i).getQuantity()+"','"+prescription_items.get(i).getDuration()+"','"+prescription_items.get(i).getRemark()+"')";
-//            }else{
-//                query += "('"+prescription.getId()+"','"+prescription_items.get(i).getName()+"','"+prescription_items.get(i).getDodge()+"','"+prescription_items.get(i).getQuantity()+"','"+prescription_items.get(i).getDuration()+"','"+prescription_items.get(i).getRemark()+"'),";
-//            }
-//        }
-//        try (Statement statement = this.db.createStatement()){
-    //            Integer cnt = statement.executeUpdate("INSERT INTO `prescription_item` (`prescription_id`, `m_name`, `dodge`, `qty`, `duration`, `remark`) VALUES "+query);
-//            if(cnt==prescription_items.size()){
-//                Integer cnt1 = statement.executeUpdate("INSERT INTO `invoice` (`id`, `user_id`, `total`, `paid`, `method`, `change_due`) " +
-//                        "VALUES ('"+id+"', '"+user_id+"', '"+total+"', '"+paid+"', '"+method+"', '"+change_due+"')");
-//                if(cnt1==1) {
-//                    return true;
-//                } else {
-//                    statement.executeUpdate("DELETE FROM `invoice_item` WHERE `invoice_item`.`invoice_id` = "+prescription.getId());
-//                }
-//            }else{
-//                statement.executeUpdate("DELETE FROM `invoice_item` WHERE `invoice_item`.`invoice_id` = "+prescription.getId());
-//                return false;
-//            }
-//            return true;
-//        } catch (SQLException e){
-//            e.printStackTrace();
-//            return false;
-//        }
-//        return true;
-//    }
+    public Boolean UpdatePrescription(PresCriptionMain prescription, ObservableList<PrescriptionModel> prescription_items){
+        String query = "";
+        for (int i = 0; i < prescription_items.size(); i++) {
+            if( i == prescription_items.size()-1){
+                query += "('"+prescription.getId()+"','"+prescription_items.get(i).getName()+"','"+prescription_items.get(i).getDodge()+"','"+prescription_items.get(i).getQuantity()+"','"+prescription_items.get(i).getDuration()+"','"+prescription_items.get(i).getRemark()+"')";
+            }else{
+                query += "('"+prescription.getId()+"','"+prescription_items.get(i).getName()+"','"+prescription_items.get(i).getDodge()+"','"+prescription_items.get(i).getQuantity()+"','"+prescription_items.get(i).getDuration()+"','"+prescription_items.get(i).getRemark()+"'),";
+            }
+        }
+        try (Statement statement = this.db.createStatement()){
+                Integer cnt = statement.executeUpdate("INSERT INTO `prescription_item` (`prescription_id`, `m_name`, `dodge`, `qty`, `duration`, `remark`) VALUES "+query);
+            if(cnt==prescription_items.size()){
+                Integer cnt1 = statement.executeUpdate("INSERT INTO `invoice` (`id`, `user_id`, `total`, `paid`, `method`, `change_due`) " +
+                        "VALUES ('"+id+"', '"+user_id+"', '"+total+"', '"+paid+"', '"+method+"', '"+change_due+"')");
+                if(cnt1==1) {
+                    return true;
+                } else {
+                    statement.executeUpdate("DELETE FROM `invoice_item` WHERE `invoice_item`.`invoice_id` = "+prescription.getId());
+                }
+            }else{
+                statement.executeUpdate("DELETE FROM `invoice_item` WHERE `invoice_item`.`invoice_id` = "+prescription.getId());
+                return false;
+            }
+            return true;
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 
 }
 
