@@ -44,13 +44,11 @@ public class ProductCategoryController {
             d.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-
                     Optional<ButtonType> result = alert.showAndWait();
                     if(result.get()==ButtonType.OK){
-//                        int delID = category.getId();
-//                        boolean f = db.DeleteCategory(delID);
-//                        System.out.println(delID);
-//                        catList.remove(category);
+                        boolean f = db.DeleteCategory(category.getCategory());
+                        System.out.println(f);
+                        catList.remove(category);
                     }
 
                 }
@@ -90,15 +88,13 @@ public class ProductCategoryController {
                 public void handle(MouseEvent mouseEvent) {
                     Optional<ButtonType> result = alert.showAndWait();
                     if(result.get()==ButtonType.OK){
-//                        int delID = category.getId();
-//                        boolean f = db.DeleteCategory(delID);
-//                        System.out.println(delID);
-//                        catList.remove(category);
+                        boolean f = db.DeleteCategory(c.getCategory());
+                        System.out.println(f);
+                        catList.remove(c);
                     }
                 }
             });
         }
-
     }
     @FXML
     private void closeButtonAction(){
