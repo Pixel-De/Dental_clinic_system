@@ -72,11 +72,10 @@ public class ProductCategoryController {
 
         categoryTable.setItems(catList);
         categoryTable.getColumns().addAll(del, category);
-
-
     }
     public void addCategory(){
         String name = categoryName.getText();
+
     }
 
 
