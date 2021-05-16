@@ -4,10 +4,14 @@ import DentalClinic.Patient.Patient;
 import DentalClinic.Pharmacy.Sale.Invoice_item;
 import DentalClinic.Pharmacy.productInformation.Category;
 import DentalClinic.Pharmacy.productInformation.Product;
+import DentalClinic.Prescription.PresCriptionMain;
+import DentalClinic.Prescription.PrescriptionModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class DbConnect {
@@ -17,7 +21,7 @@ public class DbConnect {
     private Connection Connect(){
 
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://sql6.freesqldatabase.com:3306/sql6411222","sql6411222","m6Z57Fl9LD");
+            Connection connection = DriverManager.getConnection("jdbc:postgresql://103.50.205.77:5432/clinic_kheb","kheb","@@ludo@@");
             System.out.println("connection success");
             return connection;
         }
@@ -136,7 +140,7 @@ public class DbConnect {
 
     public Boolean AddPatient(Integer id, String name, String parent, String gender, Integer age, String occupation, String address, Integer contact, java.util.Date reference, java.util.Date date){
         try (Statement statement = this.db.createStatement()){
-            Integer cnt = statement.executeUpdate("INSERT INTO `patient` (`id`, `name`, `parent`, `gender`, `age`, `occupation`, `address`, `contact`, `reference`, `date`) " +
+            Integer cnt = statement.executeUpdate("INSERT INTO patient (id, name, parent, gender, age, occupation, address, contact, reference, date) " +
                     "VALUES ('"+id+"', '"+name+"', '"+parent+"', '"+gender+"', '"+age+"', '"+occupation+"', '"+address+"', '"+contact+"', '"+reference+"', '"+date+"')");
             if(cnt == 1){
                 return  true;
@@ -151,7 +155,7 @@ public class DbConnect {
 
     public Boolean AddDoctor(Integer id, String name,String  speciality, String qualification, String address, Integer contact,  java.util.Date date){
         try (Statement statement = this.db.createStatement()){
-            Integer cnt = statement.executeUpdate("INSERT INTO `doctor` (`id`, `name`, `speciality`, `qualification`, `address`, `contact`, `date`) " +
+            Integer cnt = statement.executeUpdate("INSERT INTO doctor (id, name, speciality, qualification, address, contact, date) " +
                                                                             "VALUES ('"+id+"', '"+name+"', '"+speciality+"', '"+qualification+"', '"+address+"', '"+contact+"', '"+date+"')");
             if(cnt == 1){
                 return  true;
@@ -166,7 +170,7 @@ public class DbConnect {
 
     public Boolean AddProduct(Integer id, String p_name,String g_name,String  category,java.util.Date m_date,java.util.Date e_date, Integer barcode, String UOM, Integer quantity,Integer p_price,Integer s_price){
         try (Statement statement = this.db.createStatement()){
-            Integer cnt = statement.executeUpdate("INSERT INTO `product` (`id`, `p_name`, `g_name`, `category`, `m_date`, `e_date`, `barcode`, `UOM`, `quantity`, `p_price`, `s_price`) " +
+            Integer cnt = statement.executeUpdate("INSERT INTO product (id, p_name, g_name, category, m_date, e_date, barcode, UOM, quantity, p_price, s_price) " +
                     "VALUES ('"+id+"', '"+p_name+"', '"+g_name+"', '"+category+"', '"+m_date+"', '"+e_date+"', '"+barcode+"', '"+UOM+"', '"+quantity+"', '"+p_price+"', '"+s_price+"')");
             if(cnt == 1){
                 return  true;
@@ -180,7 +184,7 @@ public class DbConnect {
     }
     public Boolean AddCategory(String name){
         try (Statement statement = this.db.createStatement()){
-            Integer cnt = statement.executeUpdate("INSERT INTO `category` (`id`, `name`) VALUES (NULL , '"+name+"')");
+            Integer cnt = statement.executeUpdate("INSERT INTO category (id, name) VALUES (NULL , '"+name+"')");
             if(cnt == 1){
                 return  true;
             } else {
@@ -194,17 +198,17 @@ public class DbConnect {
 
     public Boolean UpdatePatient(Integer id, String name, String parent, String gender, Integer age, String occupation, String address, Integer contact, java.util.Date reference, java.util.Date date){
         try (Statement statement = this.db.createStatement()){
-            Integer cnt = statement.executeUpdate("UPDATE `patient` SET " +
-                    "`name` = '"+name+"', " +
-                    "`parent` = '"+parent+"', " +
-                    "`gender` = '"+gender+"', " +
-                    "`age` = '"+age+"', " +
-                    "`occupation` = '"+occupation+"', " +
-                    "`address` = '"+address+"', " +
-                    "`contact` = '"+contact+"', " +
-                    "`reference` = '"+reference+"', " +
-                    "`date` = '"+date+"' " +
-                    "WHERE `patient`.`id` = "+id);
+            Integer cnt = statement.executeUpdate("UPDATE patient SET " +
+                    "name = '"+name+"', " +
+                    "parent = '"+parent+"', " +
+                    "gender = '"+gender+"', " +
+                    "age = '"+age+"', " +
+                    "occupation = '"+occupation+"', " +
+                    "address = '"+address+"', " +
+                    "contact = '"+contact+"', " +
+                    "reference = '"+reference+"', " +
+                    "date = '"+date+"' " +
+                    "WHERE id = "+id);
             if(cnt == 1){
                 return  true;
             } else {
@@ -218,14 +222,14 @@ public class DbConnect {
 
     public Boolean UpdateDoctor(Integer id, String name,String  speciality, String qualification, String address, Integer contact,  java.util.Date date){
         try (Statement statement = this.db.createStatement()){
-            Integer cnt = statement.executeUpdate("UPDATE `doctor` SET " +
-                    "`name` = '"+name+"', " +
-                    "`speciality` = '"+speciality+"', " +
-                    "`qualification` = '"+qualification+"', " +
-                    "`address` = '"+address+"', " +
-                    "`contact` = '"+contact+"', " +
-                    "`date` = '"+date+"'" +
-                    "WHERE `doctor`.`id` = "+id);
+            Integer cnt = statement.executeUpdate("UPDATE doctor SET " +
+                    "name = '"+name+"', " +
+                    "speciality = '"+speciality+"', " +
+                    "qualification = '"+qualification+"', " +
+                    "address = '"+address+"', " +
+                    "contact = '"+contact+"', " +
+                    "date = '"+date+"'" +
+                    "WHERE id = "+id);
             if(cnt == 1){
                 return  true;
             } else {
@@ -239,18 +243,18 @@ public class DbConnect {
 
     public Boolean UpdateProduct(Integer id, String p_name,String g_name,String  category,java.util.Date m_date,java.util.Date e_date, Integer barcode, String UOM, Integer quantity,Integer p_price,Integer s_price){
         try (Statement statement = this.db.createStatement()){
-            Integer cnt = statement.executeUpdate("UPDATE `product` SET " +
-                    "`p_name` = '"+p_name+"', " +
-                    "`g_name` = '"+g_name+"', " +
-                    "`category` = '"+category+"', " +
-                    "`m_date` = '"+m_date+"', " +
-                    "`e_date` = '"+e_date+"', " +
-                    "`barcode` = '"+barcode+"', " +
-                    "`UOM` = '"+UOM+"', " +
-                    "`quantity` = '"+quantity+"', " +
-                    "`p_price` = '"+p_price+"', " +
-                    "`s_price` = '"+s_price+"' " +
-                    "WHERE `product`.`id` = "+id);
+            Integer cnt = statement.executeUpdate("UPDATE product SET " +
+                    "p_name = '"+p_name+"', " +
+                    "g_name = '"+g_name+"', " +
+                    "category = '"+category+"', " +
+                    "m_date = '"+m_date+"', " +
+                    "e_date = '"+e_date+"', " +
+                    "barcode = '"+barcode+"', " +
+                    "UOM = '"+UOM+"', " +
+                    "quantity` = '"+quantity+"', " +
+                    "p_price = '"+p_price+"', " +
+                    "s_price = '"+s_price+"' " +
+                    "WHERE id = "+id);
             if(cnt == 1){
                 return  true;
             } else {
@@ -264,7 +268,7 @@ public class DbConnect {
 
     public Boolean UpdateCategory(Integer id, String name){
         try (Statement statement = this.db.createStatement()){
-            Integer cnt = statement.executeUpdate("UPDATE `category` SET `name` = '"+name+"' WHERE `category`.`id` = "+id);
+            Integer cnt = statement.executeUpdate("UPDATE category SET name = '"+name+"' WHERE id = "+id);
             if(cnt == 1){
                 return  true;
             } else {
@@ -278,7 +282,7 @@ public class DbConnect {
 
     public Boolean DeletePatient(Integer id){
         try (Statement statement = this.db.createStatement()){
-            Integer cnt = statement.executeUpdate("DELETE FROM `patient` WHERE `patient`.`id` = "+id);
+            Integer cnt = statement.executeUpdate("DELETE FROM patient WHERE id = "+id);
             if(cnt == 1){
                 return  true;
             } else {
@@ -292,7 +296,7 @@ public class DbConnect {
 
     public Boolean DeleteDoctor(Integer id){
         try (Statement statement = this.db.createStatement()){
-            Integer cnt = statement.executeUpdate("DELETE FROM `doctor` WHERE `doctor`.`id` = "+id);
+            Integer cnt = statement.executeUpdate("DELETE FROM doctor WHERE id = "+id);
             if(cnt == 1){
                 return  true;
             } else {
@@ -306,7 +310,7 @@ public class DbConnect {
 
     public Boolean DeleteProduct(Integer id){
         try (Statement statement = this.db.createStatement()){
-            Integer cnt = statement.executeUpdate("DELETE FROM `product` WHERE `product`.`id` = "+id);
+            Integer cnt = statement.executeUpdate("DELETE FROM product WHERE id = "+id);
             if(cnt == 1){
                 return  true;
             } else {
@@ -320,7 +324,7 @@ public class DbConnect {
 
     public Boolean DeleteCategory(Integer id){
         try (Statement statement = this.db.createStatement()){
-            Integer cnt = statement.executeUpdate("DELETE FROM `category` WHERE `category`.`id` = "+id);
+            Integer cnt = statement.executeUpdate("DELETE FROM category WHERE id = "+id);
             if(cnt == 1){
                 return  true;
             } else {
@@ -334,9 +338,6 @@ public class DbConnect {
 
     public boolean CreateInvoice(Integer id, Integer user_id, Double total, Double paid, String method, Double change_due, ObservableList<Invoice_item> products){
         String query = "";
-        products.forEach(product->{
-
-        });
         for (int i = 0; i < products.size(); i++) {
             if( i == products.size()-1){
                 query += "('"+id+"','"+products.get(i).getProduct_id()+"','"+products.get(i).getQty()+"','"+products.get(i).getTotal()+"')";
@@ -345,30 +346,30 @@ public class DbConnect {
             }
         }
         try (Statement statement = this.db.createStatement()){
-            Integer cnt = statement.executeUpdate("INSERT INTO `invoice_item` (`invoice_id`, `product_id`, `qty`, `total`) " +
+            Integer cnt = statement.executeUpdate("INSERT INTO invoice_item (invoice_id, product_id, qty, total) " +
                     "VALUES "+query);
             if(cnt==products.size()){
-                Integer cnt1 = statement.executeUpdate("INSERT INTO `invoice` (`id`, `user_id`, `total`, `paid`, `method`, `change_due`) " +
+                Integer cnt1 = statement.executeUpdate("INSERT INTO invoice (id, user_id, total, paid, method, change_due) " +
                         "VALUES ('"+id+"', '"+user_id+"', '"+total+"', '"+paid+"', '"+method+"', '"+change_due+"')");
                 if(cnt1==1) {
                     return true;
                 } else {
-                    statement.executeUpdate("DELETE FROM `invoice_item` WHERE `invoice_item`.`invoice_id` = "+id);
+                    statement.executeUpdate("DELETE FROM invoice_item WHERE invoice_id = "+id);
+                    return  false;
                 }
             }else{
-                statement.executeUpdate("DELETE FROM `invoice_item` WHERE `invoice_item`.`invoice_id` = "+id);
+                statement.executeUpdate("DELETE FROM invoice_item WHERE invoice_id = "+id);
                 return false;
             }
         } catch (SQLException e){
             e.printStackTrace();
             return false;
         }
-        return true;
     }
 
     public  Integer getIdInvoice(){
         try (Statement statement = this.db.createStatement()){
-            ResultSet result = statement.executeQuery("SELECT id FROM `invoice` ORDER BY id DESC LIMIT 1");
+            ResultSet result = statement.executeQuery("SELECT id FROM invoice ORDER BY id DESC LIMIT 1");
             if(result.next()){
                 return  result.getInt("id") + 1;
 
@@ -382,20 +383,58 @@ public class DbConnect {
         }
     }
 
-    public Integer CreatePrescription(){
+    public PresCriptionMain CreatePrescription(){
         try (Statement statement = this.db.createStatement()){
-
-            Integer cnt = statement.executeUpdate("INSERT INTO `prescription` (`id`, `date`, `patient_id`, `created_at`) VALUES (NULL, '2021-05-01', '', CURRENT_TIMESTAMP)");
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDateTime now = LocalDateTime.now();
+            Integer cnt = statement.executeUpdate("INSERT INTO prescription (id, date, patient_id, created_at) VALUES (NULL, '"+dtf.format(now)+"', '', CURRENT_TIMESTAMP)");
             if(cnt == 1){
-                return  1;
+                ResultSet result = statement.executeQuery("SELECT * FROM prescription ORDER BY created_at DESC LIMIT 1");
+                if(result.next()){
+                    PresCriptionMain presCriptionMain = new PresCriptionMain(result.getString("id"),result.getString("patient_id"),result.getDate("date"));
+                    return presCriptionMain;
+                } else {
+                    return null;
+                }
             } else {
-                return  -1;
+                return  null;
             }
         } catch (SQLException e){
             e.printStackTrace();
-            return -1;
+            return null;
         }
     }
+
+//    public Boolean UpdatePrescription(PresCriptionMain prescription, ObservableList<PrescriptionModel> prescription_items){
+//        String query = "";
+//        for (int i = 0; i < prescription_items.size(); i++) {
+//            if( i == prescription_items.size()-1){
+//                query += "('"+prescription.getId()+"','"+prescription_items.get(i).getName()+"','"+prescription_items.get(i).getDodge()+"','"+prescription_items.get(i).getQuantity()+"','"+prescription_items.get(i).getDuration()+"','"+prescription_items.get(i).getRemark()+"')";
+//            }else{
+//                query += "('"+prescription.getId()+"','"+prescription_items.get(i).getName()+"','"+prescription_items.get(i).getDodge()+"','"+prescription_items.get(i).getQuantity()+"','"+prescription_items.get(i).getDuration()+"','"+prescription_items.get(i).getRemark()+"'),";
+//            }
+//        }
+//        try (Statement statement = this.db.createStatement()){
+    //            Integer cnt = statement.executeUpdate("INSERT INTO `prescription_item` (`prescription_id`, `m_name`, `dodge`, `qty`, `duration`, `remark`) VALUES "+query);
+//            if(cnt==prescription_items.size()){
+//                Integer cnt1 = statement.executeUpdate("INSERT INTO `invoice` (`id`, `user_id`, `total`, `paid`, `method`, `change_due`) " +
+//                        "VALUES ('"+id+"', '"+user_id+"', '"+total+"', '"+paid+"', '"+method+"', '"+change_due+"')");
+//                if(cnt1==1) {
+//                    return true;
+//                } else {
+//                    statement.executeUpdate("DELETE FROM `invoice_item` WHERE `invoice_item`.`invoice_id` = "+prescription.getId());
+//                }
+//            }else{
+//                statement.executeUpdate("DELETE FROM `invoice_item` WHERE `invoice_item`.`invoice_id` = "+prescription.getId());
+//                return false;
+//            }
+//            return true;
+//        } catch (SQLException e){
+//            e.printStackTrace();
+//            return false;
+//        }
+//        return true;
+//    }
 
 }
 
