@@ -442,8 +442,10 @@ public class DbConnect {
         try (Statement statement = this.db.createStatement()){
                 Integer cnt = statement.executeUpdate("INSERT INTO prescription_item (prescription_id, m_name, dodge, qty, duration, remark) VALUES "+query);
             if(cnt==prescription_items.size()){
-                Integer cnt1 = statement.executeUpdate("INSERT INTO prescription (id, patient_id, date) " +
-                        "VALUES ('"+prescription.getId()+"', '"+prescription.getPatient_id()+"', '"+prescription.getDate()+"')");
+                Integer cnt1 = statement.executeUpdate("UPDATE prescription SET " +
+                        "patient_id = '"+prescription.getPatient_id()+"',"+
+                        "date = '"+prescription.getDate()+"' "+
+                        "WHERE id = "+prescription.getId());
                 if(cnt1==1) {
                     return true;
                 } else {
