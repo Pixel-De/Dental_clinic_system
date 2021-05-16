@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -15,7 +16,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="716.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DentalClinic.Prescription.PrescriptionController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="716.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.20001220703125" minWidth="10.0" prefWidth="41.80000610351563" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="291.9999938964844" minWidth="10.0" prefWidth="146.19999999999996" />
@@ -26,13 +27,12 @@
     <RowConstraints maxHeight="120.79999237060548" minHeight="10.0" prefHeight="57.40000915527344" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="292.799983215332" minHeight="10.0" prefHeight="131.40001220703124" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="383.3999877929688" minHeight="4.399999999999977" prefHeight="371.3999877929688" vgrow="SOMETIMES" />
-      <RowConstraints />
   </rowConstraints>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
    <children>
-      <GridPane hgap="7.0" vgap="6.0" GridPane.columnSpan="4" GridPane.rowIndex="2" GridPane.rowSpan="2">
+      <GridPane hgap="7.0" style="-fx-background-color: #;" vgap="6.0" GridPane.columnSpan="4" GridPane.rowIndex="2" GridPane.rowSpan="2">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="157.5999755859375" minWidth="10.0" prefWidth="109.99999542236328" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="276.00003814697266" minWidth="0.0" prefWidth="127.79998779296874" />
@@ -77,11 +77,11 @@
                   <Font size="10.0" />
                </font>
             </Label>
-            <TextField fx:id="durationField" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <TextField fx:id="dodgeField" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <TextField fx:id="remarkField" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-            <TextField fx:id="quantityField" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#savePresc" GridPane.columnIndex="6" GridPane.rowIndex="1">
+            <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+            <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" GridPane.columnIndex="6" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="18.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -90,8 +90,16 @@
                   </ImageView>
                </graphic>
             </Button>
-            <ComboBox fx:id="productBox" maxWidth="1.7976931348623157E308" prefWidth="150.0" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-            <TableView fx:id="preTableView" prefHeight="258.0" prefWidth="650.0" GridPane.columnSpan="7" GridPane.rowIndex="2" />
+            <ComboBox maxWidth="1.7976931348623157E308" prefWidth="150.0" promptText="A-Rox Tablet 150mg" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+            <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="7" GridPane.rowIndex="2">
+              <columns>
+                <TableColumn prefWidth="260.7999690771103" style="-fx-background-color: #235b7a;" text="MEDICINE NAME" />
+                <TableColumn minWidth="0.0" prefWidth="77.60003662109375" style="-fx-background-color: #235b7a;" text="DODGE" />
+                  <TableColumn prefWidth="120.0" style="-fx-background-color: #235b7a;" text="DURATION" />
+                  <TableColumn minWidth="0.0" prefWidth="63.99993896484375" style="-fx-background-color: #235b7a;" text="QTY" />
+                  <TableColumn minWidth="0.0" prefWidth="135.20001220703125" style="-fx-background-color: #235b7a;" text="REMARK" />
+              </columns>
+            </TableView>
             <Button mnemonicParsing="false" text="PRINT VIEW" GridPane.rowIndex="3">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
@@ -101,7 +109,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" onMouseClicked="#saveChanges" text="SAVE CHANGES" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Button mnemonicParsing="false" text="SAVE CHANGES" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -153,10 +161,9 @@
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.59998779296876" minWidth="10.0" prefWidth="145.59998779296876" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="98.99998779296877" minWidth="10.0" prefWidth="98.99998779296877" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="98.99998779296877" minWidth="10.0" prefWidth="98.99998779296877" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="86.39996337890625" minWidth="10.0" prefWidth="69.60001220703126" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="86.39996337890625" minWidth="10.0" prefWidth="69.60001220703126" />
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="90.4000244140625" minWidth="10.0" prefWidth="70.80000000000001" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="90.60003662109375" minWidth="10.0" prefWidth="73.79998779296875" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="90.60003662109375" minWidth="10.0" prefWidth="73.79998779296875" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -170,10 +177,13 @@
                               <Font name="System Bold" size="10.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="preIdField" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1" />
-                        <TextField fx:id="genderField" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-                        <TextField fx:id="ageField" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                        <Label prefHeight="15.0" prefWidth="112.0" text="PATIENT ID, NAME" GridPane.rowIndex="2">
+                        <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1" />
+                        <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                        <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                        <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+                        <Label text="PATIENT ID" GridPane.rowIndex="2">
                            <font>
                               <Font name="System Bold" size="10.0" />
                            </font>
@@ -183,12 +193,22 @@
                               <Font size="10.0" />
                            </font>
                         </Label>
-                        <Label text="GENDER" GridPane.columnIndex="5" GridPane.rowIndex="2">
+                        <Label prefHeight="6.0" prefWidth="77.0" text="APPNT#" GridPane.columnIndex="2">
                            <font>
                               <Font name="System Bold" size="10.0" />
                            </font>
                         </Label>
-                        <Label text="AGE" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                        <Label text="VISIT#" GridPane.columnIndex="3">
+                           <font>
+                              <Font name="System Bold" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label text="GENDER" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label text="AGE" GridPane.columnIndex="3" GridPane.rowIndex="2">
                            <font>
                               <Font name="System Bold" size="10.0" />
                            </font>
@@ -198,7 +218,7 @@
                               <Font name="System Bold" size="10.0" />
                            </font>
                         </Label>
-                        <DatePicker fx:id="datePicker" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <GridPane hgap="2.0" GridPane.rowIndex="3">
                           <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="78.0" minWidth="10.0" prefWidth="66.0000244140625" />
@@ -209,10 +229,25 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <ComboBox fx:id="patientBox" prefWidth="150.0" GridPane.columnSpan="3" />
+                              <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" GridPane.columnIndex="1">
+                                 <graphic>
+                                    <ImageView fitHeight="17.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/pres_table.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></Button>
+                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="26.0" prefWidth="41.0" GridPane.columnIndex="2">
+                                 <graphic>
+                                    <ImageView fitHeight="17.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/pres_new.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></Button>
                            </children>
                         </GridPane>
-                        <TextField fx:id="patientNameField" editable="false" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
                </children>
@@ -232,7 +267,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#createPresc" text="CREATE NEW">
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="CREATE NEW">
                            <graphic>
                               <ImageView fitHeight="22.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -240,7 +275,7 @@
                                  </image>
                               </ImageView>
                            </graphic></Button>
-                        <Button fx:id="closeButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#closeButtonAction" text="CLOSE" GridPane.rowIndex="2">
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="CLOSE" GridPane.rowIndex="2">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -248,7 +283,7 @@
                                  </image>
                               </ImageView>
                            </graphic></Button>
-                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#reset" text="RESET" GridPane.rowIndex="1">
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="RESET" GridPane.rowIndex="1">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
