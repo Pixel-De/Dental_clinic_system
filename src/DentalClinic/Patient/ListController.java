@@ -2,7 +2,7 @@ package DentalClinic.Patient;
 
 import DentalClinic.DB.DbConnect;
 import DentalClinic.Pharmacy.productList.ProductUpdateController;
-import com.mysql.cj.xdevapi.Table;
+//import com.mysql.cj.xdevapi.Table;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;

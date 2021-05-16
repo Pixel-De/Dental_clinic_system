@@ -107,6 +107,8 @@ public class PrescriptionController {
     }
 
     public void createPresc(){
+        PresCriptionMain presCriptionMain = db.CreatePrescription();
+        System.out.println(presCriptionMain.id  +  " " + presCriptionMain.date);
 
     }
     public void saveChanges(){

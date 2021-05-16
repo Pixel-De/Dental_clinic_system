@@ -35,7 +35,7 @@ public class Category {
 
     private Button del ;
 
-    public Category(String category,Integer id) {
+    public Category(String category) {
         this.del = new Button();
         ImageView imgView = new ImageView(getClass().getResource("../../assets/delete.png").toExternalForm());
         imgView.setFitHeight(10);
@@ -43,6 +43,5 @@ public class Category {
         this.del.setPrefSize(10,10);
         this.del.setGraphic(imgView);
         this.category = category;
-        this.id = id;
     }
 }
