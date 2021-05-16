@@ -84,6 +84,19 @@ public class ProductCategoryController {
         boolean f = db.AddCategory(name);
         if(f){
             catList.add(c);
+            Button btn = c.getDel();
+            btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if(result.get()==ButtonType.OK){
+//                        int delID = category.getId();
+//                        boolean f = db.DeleteCategory(delID);
+//                        System.out.println(delID);
+//                        catList.remove(category);
+                    }
+                }
+            });
         }
 
     }

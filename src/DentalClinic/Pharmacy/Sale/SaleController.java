@@ -123,10 +123,16 @@ public class SaleController {
         productNameBox.getSelectionModel().selectFirst();
         patientBox.getSelectionModel().selectFirst();
 
-        selectedPatient = patients.get(0);
         method = paidMethod.get(0);
-        setInformation(products.get(0).getName());
-        paid = 0.0;
+        if(products.size() != 0){
+            setInformation(products.get(0).getName());
+            paid = 0.0;
+        }
+        if(patients.size() != 0){
+            selectedPatient = patients.get(0);
+        }
+
+
         productNameBox.getSelectionModel().selectedIndexProperty().addListener(((observableValue, old, new_val) -> {
             String s = pBox.get((Integer) new_val);
             setInformation(s);
