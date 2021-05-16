@@ -427,7 +427,7 @@ public class DbConnect {
 
 
 
-    public Boolean UpdatePrescription(PresCriptionMain prescription, ObservableList<PrescriptionModel> prescription_items,String total, String paid, String method, String change_due){
+    public Boolean UpdatePrescription(PresCriptionMain prescription, ObservableList<PrescriptionModel> prescription_items){
         String query = "";
         for (int i = 0; i < prescription_items.size(); i++) {
             if( i == prescription_items.size()-1){
@@ -439,8 +439,8 @@ public class DbConnect {
         try (Statement statement = this.db.createStatement()){
                 Integer cnt = statement.executeUpdate("INSERT INTO prescription_item (prescription_id, m_name, dodge, qty, duration, remark) VALUES "+query);
             if(cnt==prescription_items.size()){
-                Integer cnt1 = statement.executeUpdate("INSERT INTO invoice (id, user_id, total, paid, method, change_due) " +
-                        "VALUES ('"+prescription.getId()+"', '"+prescription.getPatient_id()+"', '"+total+"', '"+paid+"', '"+method+"', '"+change_due+"')");
+                Integer cnt1 = statement.executeUpdate("INSERT INTO prescription (id, patient_id, date) " +
+                        "VALUES ('"+prescription.getId()+"', '"+prescription.getPatient_id()+"', '"+prescription.getDate()+"')");
                 if(cnt1==1) {
                     return true;
                 } else {
