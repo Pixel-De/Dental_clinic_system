@@ -439,7 +439,7 @@ public class DbConnect {
                 String duration = result.getString("duration");
                 Integer qty = result.getInt("qty");
                 String remark = result.getString("remark");
-                a.add(new PrescriptionModel(qty,name,dodge,duration,remark,id));
+                a.add(new PrescriptionModel(qty,name,dodge,duration,remark));
             }
             return a;
         } catch (SQLException e){
@@ -459,6 +459,7 @@ public class DbConnect {
             }
         }
         try (Statement statement = this.db.createStatement()){
+            statement.executeUpdate("DELETE FROM invoice_item WHERE invoice_id = "+prescription.getId());
                 Integer cnt = statement.executeUpdate("INSERT INTO prescription_item (prescription_id, m_name, dodge, qty, duration, remark) VALUES "+query);
             if(cnt==prescription_items.size()){
                 Integer cnt1 = statement.executeUpdate("UPDATE prescription SET " +
