@@ -1,0 +1,10 @@
+#upBox{
+    -fx-background-color:  #055554;
+}
+#lblBright{
+    -fx-text-fill: white;
+    -fx-font-size: 25px;
+}
+#AnchorBord{
+    -fx-border-color: grey;
+}
