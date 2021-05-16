@@ -4,17 +4,18 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
 public class PrescriptionModel {
-    private int  quantity;
-    private String name, dodge, duration, remark;
+    private int quantity;
+    private String name, dodge, duration, remark, id;
     private Button delete;
 
-    public PrescriptionModel( int quantity, String name, String dodge, String duration, String remark) {
+    public PrescriptionModel( int quantity, String name, String dodge, String duration, String remark, String id) {
 
         this.quantity = quantity;
         this.name = name;
         this.dodge = dodge;
         this.duration = duration;
         this.remark = remark;
+        this.id = id;
 
         this.delete = new Button();
         ImageView imgView = new ImageView(getClass().getResource("../assets/delete.png").toExternalForm());

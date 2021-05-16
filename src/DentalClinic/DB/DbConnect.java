@@ -428,6 +428,25 @@ public class DbConnect {
         }
     }
 
+    public ObservableList<PrescriptionModel> getPrescriptionItem(String id){
+        ObservableList<PrescriptionModel> a = FXCollections.observableArrayList(new ArrayList<PrescriptionModel>());
+        try (Statement statement = this.db.createStatement()) {
+            ResultSet result = statement.executeQuery("select * from prescription_item WHERE prescription_id = "+id);
+            while(result.next()){
+                String _id = result.getString("id");
+                String name = result.getString("m_name");
+                String dodge = result.getString("dodge");
+                String duration = result.getString("duration");
+                Integer qty = result.getInt("qty");
+                String remark = result.getString("remark");
+                a.add(new PrescriptionModel(qty,name,dodge,duration,remark,id));
+            }
+            return a;
+        } catch (SQLException e){
+            e.printStackTrace();
+            return a;
+        }
+    }
 
 
     public Boolean UpdatePrescription(PresCriptionMain prescription, ObservableList<PrescriptionModel> prescription_items){
