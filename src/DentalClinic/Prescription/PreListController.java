@@ -5,10 +5,14 @@ import DentalClinic.Doctor.Doctor;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.sql.Date;
@@ -34,6 +38,31 @@ public class PreListController {
 
         ObservableList<PresCriptionMain> presCriptionMains = FXCollections.observableArrayList();
         prescriptionFulls = db.PrescriptionList();
+
+
+        prescriptionFulls.forEach(prescriptionFull -> {
+            Button edit = prescriptionFull.getEdit();
+            edit.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    PrescriptionEditController pEditCont = new PrescriptionEditController(prescriptionFull);
+                    try{
+
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("./PrescriptionEdit.fxml"));
+                        loader.setController(pEditCont);
+                        Scene scene = new Scene(loader.load());
+                        Stage stage = new Stage();
+                        stage.setTitle("Prescription Edit");
+                        stage.setScene(scene);
+                        stage.showAndWait();
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            });
+        });
 
         TableColumn<PrescriptionFull, Button> edit = new TableColumn<>("");
         TableColumn<PrescriptionFull, Button> delete = new TableColumn<>("");

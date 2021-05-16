@@ -20,6 +20,11 @@ public class PrescriptionEditController {
 
     public PrescriptionEditController(PrescriptionFull prescriptionFull){
 
+        preIdField.setText(prescriptionFull.getId());
+        preIdField.setEditable(false);
+        patientNameField.setText(prescriptionFull.getName());
+        ageField.setText(prescriptionFull.getAge());
+
 
 
     }
