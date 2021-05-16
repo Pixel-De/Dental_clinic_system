@@ -7,10 +7,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.sql.Date;
@@ -25,12 +23,38 @@ public class PreListController {
     DatePicker fromPicker, toPicker;
     @FXML
     Button closeButton;
+    @FXML
+    TableView patientTable; // turluu bicig ugnu
 
     private ObservableList<String> params = FXCollections.observableArrayList("Prescription ID", "Patient Name");
 //    private ObservableList<>
 
     DbConnect db = new DbConnect();
     public void initialize(){
+
+        ObservableList<PresCriptionMain> presCriptionMains = FXCollections.observableArrayList();
+
+//        TableColumn<Doctor, Button> edit = new TableColumn<>("");
+//        TableColumn<Doctor, Button> delete = new TableColumn<>("");
+//        TableColumn<Doctor,Integer> id = new TableColumn<>("PRESCRIPTION ID");
+//        TableColumn<Doctor, String> p_id = new TableColumn<>("PATIENT NAME");
+//        TableColumn<Doctor, String> p_name = new TableColumn<>("PATIENT NAME");
+//        TableColumn<Doctor, String > age = new TableColumn<>("AGE");
+//
+//
+//        delete.setCellValueFactory(new PropertyValueFactory<Doctor, Button>("delete"));
+//        edit.setCellValueFactory(new PropertyValueFactory<Doctor, Button>("edit"));
+//        id.setCellValueFactory(new PropertyValueFactory<Doctor, Integer>("id"));
+//        p_id.setCellValueFactory(new PropertyValueFactory<Doctor, String>("name"));
+//        p_name.setCellValueFactory(new PropertyValueFactory<Doctor, String >("speciality"));
+//        age.setCellValueFactory(new PropertyValueFactory<Doctor, String>("qualification"));
+//
+//        doctorTable.setItems(doctors);
+//        doctorTable.getColumns().addAll(edit, delete, id, name, speciality, qualification, address, contact_no, date);
+
+
+
+
 
         param.setItems(params);
         param.getSelectionModel().selectedIndexProperty().addListener((ObservableValue<? extends Number> ov, Number old, Number new_val)->{
