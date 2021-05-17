@@ -7,15 +7,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import javax.print.attribute.standard.JobStateReason;
+import java.net.URL;
 import java.sql.Date;
+import java.util.ResourceBundle;
 
-public class VoucherController {
-
+public class EditVoucherController implements Initializable {
     @FXML
     TextField voucherIdField, refNumberField, amountField, remarkField;
     @FXML
@@ -36,19 +38,18 @@ public class VoucherController {
     private AccountModel selectedAcc ;
     DbConnect db = new DbConnect();
 
+    VoucherModel voucherModel;
 
-    public void initialize(){
 
-        accountModels = db.GetAllAccount();
-        accountModels.forEach(accountModel -> {
-            accountModelStr.add(accountModel.getName());
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        });
+        revenueRadioButton.setToggleGroup(toggleGroup);
+        expenseRadioButton.setToggleGroup(toggleGroup);
+
+
+        paymentMethodBox.setItems(paymentMethods);
         accountBox.setItems(accountModelStr);
-        if(accountModelStr.size() != 0){
-            accountBox.getSelectionModel().selectFirst();
-            selectedAcc = accountModels.get(0);
-        }
         accountBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
@@ -57,20 +58,44 @@ public class VoucherController {
             }
         });
 
-        revenueRadioButton.setToggleGroup(toggleGroup);
-        expenseRadioButton.setToggleGroup(toggleGroup);
+
+        voucherIdField.setText(voucherModel.getId());
+        refNumberField.setText(voucherModel.getReference());
+
+        if(voucherModel.getType().equals("Revenue")){
+            revenueRadioButton.setSelected(true);
+        } else {
+            expenseRadioButton.setSelected(true);
+        }
+
+        amountField.setText(voucherModel.getAmount());
+        accountBox.setValue(voucherModel.getAccount_name());
+        paymentMethodBox.setValue(voucherModel.getPayment_method());
+        datePicker.setValue(voucherModel.getDate().toLocalDate());
+        remarkField.setText(voucherModel.getRemark());
+
+        accountModels = db.GetAllAccount();
+        accountModels.forEach(accountModel -> {
+            accountModelStr.add(accountModel.getName());
+
+        });
 
 
-        paymentMethodBox.setItems(paymentMethods);
-        paymentMethodBox.getSelectionModel().selectFirst();
+
 
     }
 
-    public void save(){
+    public EditVoucherController(VoucherModel voucherModel){
+        this.voucherModel = voucherModel;
+    }
+
+
+    public void update(){
         Alert alert ;
         try{
             RadioButton selectedRadio =(RadioButton) toggleGroup.getSelectedToggle();
             String val = selectedRadio.getText();
+
             String refNum = refNumberField.getText();
             String amount = amountField.getText();
             String method = paymentMethodBox.getValue();
@@ -79,10 +104,10 @@ public class VoucherController {
 
             String accID = selectedAcc.getId();
 
-            boolean f = db.AddVoucher(accID, val ,d, refNum, amount, method, rema);
+            boolean f = db.UpdateVoucher(voucherModel.getId(), accID, val, d, refNum, amount, method, rema);
             if(f){
                 alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setContentText("Successfully Saved");
+                alert.setContentText("Successfully Updated");
                 alert.showAndWait();
             } else {
                 alert = new Alert(Alert.AlertType.ERROR);
@@ -127,4 +152,6 @@ public class VoucherController {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }
+
+
 }

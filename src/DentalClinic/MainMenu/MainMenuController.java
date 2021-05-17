@@ -109,8 +109,13 @@ public class MainMenuController {
     }
 
     @FXML
-    void setListOfVoucher(ActionEvent event) {
+    void setListOfVoucher(ActionEvent event) throws  IOException {
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Income/ListOfVoucher.fxml"));
+        Parent patientsInfo = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(patientsInfo));
+        stage.show();
     }
 
     @FXML
