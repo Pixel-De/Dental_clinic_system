@@ -21,11 +21,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
-
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.swing.JRViewer;
 
 import java.io.File;
-import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SaleController {
 
@@ -249,20 +250,18 @@ public class SaleController {
                     alert.setContentText("Invoice Successfully saved.");
                     alert.showAndWait();
 
-//                    JasperReport jasperReport = JasperCompileManager.compileReport("@Dental_clinic_system/src/Reports/Invoice_report.jrxml");
-//
-//                    Map<String, SaleModel> parameters = new HashMap<String, Object>();
-//
-//                    JRDataSource dataSource = new JREmptyDataSource();
-//
-//                    JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,
-//                            parameters, dataSource);
+                    JasperReport jasperReport = JasperCompileManager.compileReport("C:\\Users\\DeeGi\\IdeaProjects\\Dental_clinic_system\\src\\DentalClinic\\Reports\\Invoice_report.jrxml");
 
-//                    File invioceReport = new File("../Invoice_report");
-//                    invioceReport.mkdir();
+                    Map<String, SaleModel> parameters = new HashMap<String, SaleModel>();
 
-//                    JasperExportManager.exportReportToPdfFile(jasperPrint,
-//                            "../Invoice_report.pdf");
+                    JRDataSource dataSource = (JRDataSource) new JREmptyDataSource();
+
+                    JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
+                    JRViewer viewer = new JRViewer(jasperPrint);
+
+                    viewer.setOpaque(true);
+                    viewer.setVisible(true);
+
 
                 }else {
                     alert.setContentText("Invoice did not saved.");
