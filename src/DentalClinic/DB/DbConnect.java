@@ -642,8 +642,50 @@ public class DbConnect {
 
     public Boolean AddUser(String fullname,String username, String password, String designation, String contactNo, String usertype, Date joindate){
         try (Statement statement = this.db.createStatement()){
-            Integer cnt = statement.executeUpdate("INSERT INTO user ( fullname, designation, username, contact, type, join_date, password) VALUES ( '"+fullname+"','"+designation+"','"+username+"','"+contactNo+"','"+usertype+"','"+joindate+"','"+password+"')");
+            Integer cnt = statement.executeUpdate("INSERT INTO user ( fullname, designation, username, contact, type, join_date, password ,created_at) VALUES ( '"+fullname+"','"+designation+"','"+username+"','"+contactNo+"','"+usertype+"','"+joindate+"','"+password+"', CURRENT_TIMESTAMP)");
             if(cnt == 1){
+                ResultSet result = statement.executeQuery("SELECT id FROM user ORDER BY created_at DESC LIMIT 1");
+                if(result.next()){
+                    String _id = result.getString("id");
+                    statement.executeUpdate("INSERT INTO permission ( user_id) VALUES ( '"+_id+"')");
+                    return  true;
+                } else {
+                    return  false;
+                }
+            } else {
+                return  false;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public Boolean UpdateUser(String id,String fullname, String password, String designation, String contactNo, String usertype, Date joindate){
+        try (Statement statement = this.db.createStatement()){
+            Integer cnt = statement.executeUpdate("UPDATE voucher SET " +
+                    "fullname = '"+fullname+"', " +
+                    "designation = '"+designation+"', " +
+                    "contact = '"+contactNo+"', " +
+                    "type = '"+usertype+"', " +
+                    "join_date = '"+joindate+"', " +
+                    "password = '"+password+"' " +
+                    "WHERE id = "+id);
+            if(cnt == 1){
+                return  true;
+            } else {
+                return  false;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public Boolean DeleteUser(String id){
+        try (Statement statement = this.db.createStatement()){
+            Integer cnt = statement.executeUpdate("DELETE FROM user WHERE id = "+id);
+            if(cnt == 1){
+                statement.executeUpdate("DELETE FROM permission WHERE user_id = "+id);
                 return  true;
             } else {
                 return  false;
