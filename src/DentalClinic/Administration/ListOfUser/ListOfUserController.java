@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import DentalClinic.Administration.ListOfUser.User;
 
 import java.util.Date;
 import java.util.Optional;
@@ -36,13 +37,13 @@ public class ListOfUserController {
     private Button closeButton;
 
 
-//    private ObservableList<String> parameter = FXCollections.observableArrayList("DoctorID", "DoctorName");
-//    private ObservableList<User> users = FXCollections.observableArrayList();
-//    private ObservableList<User> tempPatt = FXCollections.observableArrayList();
-//
-//    private DbConnect db = new DbConnect();
-//
-//
+    private ObservableList<String> parameter = FXCollections.observableArrayList("DoctorID", "DoctorName");
+    private ObservableList<User> users = FXCollections.observableArrayList();
+    private ObservableList<User> tempPatt = FXCollections.observableArrayList();
+
+    private DbConnect db = new DbConnect();
+
+
 //    public void initialize(){
 //        Alert balert  = new Alert(Alert.AlertType.CONFIRMATION);
 //        balert.setTitle("Delete Patient");
@@ -82,7 +83,7 @@ public class ListOfUserController {
 //                            loader.setController(lc);
 //                            Scene scene = new Scene(loader.load());
 //                            Stage stage = new Stage();
-//                            stage.setTitle("Doctor Update");
+//                            stage.setTitle("User Update");
 //                            stage.setScene(scene);
 //                            stage.showAndWait();
 //
@@ -97,7 +98,7 @@ public class ListOfUserController {
 //                        Optional<ButtonType> result = balert.showAndWait();
 //                        if(result.get()==ButtonType.OK){
 //                            int delID = user.getId();
-//                            boolean f = db.DeleteDoctor(delID);
+//                            boolean f = db.DeleteUser(delID);
 //                            System.out.println(delID);
 //                            users.remove(user);
 //                        }
@@ -107,25 +108,25 @@ public class ListOfUserController {
 //            TableColumn<User, Button> edit = new TableColumn<>("");
 //            TableColumn<User, Button> delete = new TableColumn<>("");
 //            TableColumn<User,Integer> id = new TableColumn<>("USER ID");
-//            TableColumn<User, String> full_name = new TableColumn<>("FULL NAME");
-//            TableColumn<User, String> user_name = new TableColumn<>("Username");
-//            TableColumn<User, String > user_job = new TableColumn<>("USER TYPE");
-//            TableColumn<User, String> fieldOfArea = new TableColumn<>("DESIGNATION");
-//            TableColumn<User, Integer> contact_no = new TableColumn<>("CONTACT NO");
-//            TableColumn<User, Date> joining_date = new TableColumn<>("JOINING DATE");
+//            TableColumn<User, String> fullname = new TableColumn<>("FULL NAME");
+//            TableColumn<User, String> username = new TableColumn<>("Username");
+//            TableColumn<User, String > usertype = new TableColumn<>("USER TYPE");
+//            TableColumn<User, String> designation = new TableColumn<>("DESIGNATION");
+//            TableColumn<User, Integer> contact = new TableColumn<>("CONTACT NO");
+//            TableColumn<User, Date> join_date = new TableColumn<>("JOINING DATE");
 //
-//
+//            fullname.setCellValueFactory(new PropertyValueFactory<User, String>("FullName"));
 //            delete.setCellValueFactory(new PropertyValueFactory<User, Button>("delete"));
 //            edit.setCellValueFactory(new PropertyValueFactory<User, Button>("edit"));
 //            id.setCellValueFactory(new PropertyValueFactory<User, Integer>("id"));
-//            user_name.setCellValueFactory(new PropertyValueFactory<User, String>("username"));
-//            user_job.setCellValueFactory(new PropertyValueFactory<User, String >("user type"));
-//            fieldOfArea.setCellValueFactory(new PropertyValueFactory<User, String>("Designation"));
-//            contact_no.setCellValueFactory(new PropertyValueFactory<User, Integer>("contact_no"));
-//            joining_date.setCellValueFactory(new PropertyValueFactory<User, Date>("date"));
+//            username.setCellValueFactory(new PropertyValueFactory<User, String>("username"));
+//            usertype.setCellValueFactory(new PropertyValueFactory<User, String >("user type"));
+//            designation.setCellValueFactory(new PropertyValueFactory<User, String>("Designation"));
+//            contact.setCellValueFactory(new PropertyValueFactory<User, Integer>("contact_no"));
+//            join_date.setCellValueFactory(new PropertyValueFactory<User, Date>("date"));
 //
 //            ListOfUserTable.setItems(users);
-//            ListOfUserTable.getColumns().addAll(edit, delete, id, user_name, user_job, fieldOfArea, contact_no, joining_date);
+//            ListOfUserTable.getColumns().addAll(edit, delete, id, username, usertype, designation, contact, join_date);
 //
 //        }
 //    }
@@ -150,12 +151,12 @@ public class ListOfUserController {
 //
 //        return tempPatt;
 //    }
-//    public  ObservableList<User> FilterName(String user_name){
+//    public  ObservableList<User> FilterName(String username){
 //        tempPatt.clear();
-//        users.forEach(patient -> {
-//            if(patient.getName().toLowerCase().contains(user_name)){
-//                if(!tempPatt.contains(patient)){
-//                    tempPatt.add(patient);
+//        users.forEach(user -> {
+//            if(user.getUsername().toLowerCase().contains(username)){
+//                if(!tempPatt.contains(user)){
+//                    tempPatt.add(user);
 //                }
 //            }
 //        });

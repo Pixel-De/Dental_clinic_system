@@ -99,7 +99,7 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </GridPane>
-      <Button mnemonicParsing="false" text="SAVE" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+      <Button mnemonicParsing="false" onMouseClicked="#save" text="SAVE" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -111,7 +111,7 @@
             <Insets />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" text="RESET" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+      <Button mnemonicParsing="false" onMouseClicked="#reset" text="RESET" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -120,7 +120,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button mnemonicParsing="false" text="CLOSE" GridPane.columnIndex="3" GridPane.rowIndex="2">
+      <Button fx:id="closeButton" mnemonicParsing="false" onAction="#closeButtonAction" text="CLOSE" GridPane.columnIndex="3" GridPane.rowIndex="2">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>

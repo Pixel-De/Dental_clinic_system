@@ -233,7 +233,7 @@ public class SaleController {
 
     @FXML
     void createReport(MouseEvent event) throws JRException {
-        JasperReport jasperReport = JasperCompileManager.compileReport("C:\\Users\\DeeGi\\IdeaProjects\\Dental_clinic_system\\src\\DentalClinic\\Reports\\Invoice_report.jrxml");
+        JasperReport jasperReport = JasperCompileManager.compileReport("../../Reports/Invoice_report.jrxml");
 
     Map<String, SaleModel> parameters = new HashMap<String, SaleModel>();
 
@@ -266,7 +266,6 @@ public class SaleController {
                 if(f){
                     alert.setContentText("Invoice Successfully saved.");
                     alert.showAndWait();
-
 
 
 
