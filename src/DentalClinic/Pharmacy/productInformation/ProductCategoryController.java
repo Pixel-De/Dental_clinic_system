@@ -68,7 +68,11 @@ public class ProductCategoryController {
             public void handle(TableColumn.CellEditEvent cellEditEvent) {
                 Category c = (Category) cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow());
                 c.setCategory(cellEditEvent.getNewValue().toString());
-                System.out.println(c.getCategory());
+//                System.out.println(cellEditEvent.getOldValue());
+                int r = cellEditEvent.getTablePosition().getRow();
+                System.out.println(catList.get(r).getCategory());
+//                boolean f = db.UpdateCategory()
+//                System.out.println(c.getCategory());
             }
         });
 
