@@ -21,6 +21,8 @@ public class VoucherController {
     DatePicker datePicker;
     @FXML
     RadioButton revenueRadioButton, expenseRadioButton;
+    @FXML
+    Button closeButton;
 
     private ToggleGroup toggleGroup = new ToggleGroup();
 
@@ -50,6 +52,24 @@ public class VoucherController {
 
     }
 
+    public void save(){
+        Alert alert ;
+        try{
+//            String v_type = toggleGroup.getSelectedToggle();
+
+//            System.out.println(v_type);
+
+
+        }catch(Exception e){
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.showAndWait();
+        }
+
+
+    }
+    public void reset(){
+
+    }
     public void showAccount(){
 
         try{
@@ -59,6 +79,7 @@ public class VoucherController {
             Stage stage = new Stage();
             stage.setTitle("Chart of Account");
             stage.setScene(scene);
+            closeButtonAction();
             stage.showAndWait();
 
         }catch (Exception e){
@@ -67,4 +88,9 @@ public class VoucherController {
 
     }
 
+    @FXML
+    private void closeButtonAction(){
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        stage.close();
+    }
 }
