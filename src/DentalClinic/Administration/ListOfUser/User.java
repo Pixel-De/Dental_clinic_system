@@ -1,25 +1,30 @@
 package DentalClinic.Administration.ListOfUser;
 
+import DentalClinic.DB.DbConnect;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
+import java.awt.*;
 import java.sql.Date;
 
 public class User {
-    private String full_name,user_job,fieldOfArea,user_name;
-    private Integer id, contact_no;
-    private Date joining_date;
+    private String fullname,usertype,designation,username;
+    private Integer id, contact;
+    private Date join_date;
     private Button edit, delete , check;
+    private Checkbox select ;
 
-    public User(String full_name, String user_job, String fieldOfArea, String user_name, Integer id, Integer contact_no, Date joining_date){
-        this.full_name = full_name;
-        this.user_job = user_job;
-        this.fieldOfArea = fieldOfArea;
-        this.user_name = user_name;
+
+    public User(String fullname, String usertype, String designation, String username, Integer id, Integer contact, Date join_date){
+        this.fullname = fullname;
+        this.usertype = usertype;
+        this.designation = designation;
+        this.username = username;
         this.id = id;
-        this.contact_no = contact_no;
-        this.joining_date = joining_date;
+        this.contact = contact;
+        this.join_date = join_date;
         this.delete = new Button();
+        this.select = new Checkbox();
 
         ImageView imgView = new ImageView(getClass().getResource("../assets/delete.png").toExternalForm());
         imgView.setFitHeight(10);
@@ -42,6 +47,7 @@ public class User {
         this.check.setGraphic(imgView3);
     }
 
+
     public Button getEdit() {return edit; }
 
     public void setEdit(Button edit) {this.edit = edit; }
@@ -54,31 +60,38 @@ public class User {
 
     public void setCheck(Button check) { this.check = check; }
 
-    public String getFull_name() { return full_name; }
+    public String getFullname() {return fullname; }
 
-    public void setFull_name(String full_name) { this.full_name = full_name; }
+    public void setFullname(String fullname) { this.fullname = fullname; }
 
-    public String getUser_job() { return user_job; }
+    public String getUsertype() { return usertype; }
 
-    public void setUser_job(String user_job) { this.user_job = user_job; }
+    public void setUsertype(String usertype) { this.usertype = usertype; }
 
-    public String getFieldOfArea() { return fieldOfArea; }
+    public String getDesignation() { return designation; }
 
-    public void setFieldOfArea(String fieldOfArea) { this.fieldOfArea = fieldOfArea; }
+    public void setDesignation(String designation) { this.designation = designation; }
 
-    public String getUser_name() { return user_name; }
+    public String getUsername() { return username; }
 
-    public void setUser_name(String user_name) { this.user_name = user_name; }
+    public void setUsername(String username) { this.username = username; }
+
+    public Integer getContact() { return contact; }
+
+    public void setContact(Integer contact) { this.contact = contact; }
+
+    public Date getJoin_date() { return join_date; }
+
+    public void setJoin_date(Date join_date) { this.join_date = join_date; }
+
+
 
     public Integer getId() { return id; }
 
     public void setId(Integer id) { this.id = id; }
 
-    public Integer getContact_no() { return contact_no; }
 
-    public void setContact_no(Integer contact_no) { this.contact_no = contact_no; }
+    public Checkbox getSelect() {return select; }
 
-    public Date getJoining_date() { return joining_date; }
-
-    public void setJoining_date(Date joining_date) { this.joining_date = joining_date; }
+    public void setSelect(Checkbox select) { this.select = select; }
 }
