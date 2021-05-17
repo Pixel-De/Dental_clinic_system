@@ -500,17 +500,22 @@ public class DbConnect {
         }
     }
 
-    public Boolean AddAccount(String name,String type, String status){
+    public AccountModel AddAccount(String name,String type, String status){
         try (Statement statement = this.db.createStatement()){
-            Integer cnt = statement.executeUpdate("INSERT INTO account ( name, type, status) VALUES ( '"+name+"','"+type+"','"+status+"')");
+            Integer cnt = statement.executeUpdate("INSERT INTO account ( name, type, status, created_at) VALUES ( '"+name+"','"+type+"','"+status+"', CURRENT_TIMESTAMP)");
             if(cnt == 1){
-                return  true;
+                ResultSet result = statement.executeQuery("SELECT * FROM account ORDER BY created_at DESC LIMIT 1");
+                String _name = result.getString("name");
+                String _id = result.getString("id");
+                String _type = result.getString("type");
+                String _status = result.getString("status");
+                return  new AccountModel(_id,_name,_type,_status);
             } else {
-                return  false;
+                return  null;
             }
         } catch (SQLException e){
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 
@@ -622,6 +627,20 @@ public class DbConnect {
     public Boolean DeleteVoucher(String id){
         try (Statement statement = this.db.createStatement()){
             Integer cnt = statement.executeUpdate("DELETE FROM voucher WHERE id = "+id);
+            if(cnt == 1){
+                return  true;
+            } else {
+                return  false;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public Boolean AddUser(String account_id,String type, Date date, String reference, String amount, String payment_method, String remark){
+        try (Statement statement = this.db.createStatement()){
+            Integer cnt = statement.executeUpdate("INSERT INTO voucher ( account_id, type, date, reference, amount, payment, mark) VALUES ( '"+account_id+"','"+type+"','"+date+"','"+reference+"','"+amount+"','"+payment_method+"','"+remark+"')");
             if(cnt == 1){
                 return  true;
             } else {
