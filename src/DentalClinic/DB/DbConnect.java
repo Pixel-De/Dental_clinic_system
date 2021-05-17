@@ -682,7 +682,7 @@ public class DbConnect {
         }
     }
 
-    public Boolean DeleteUser(String id){
+    public Boolean DeleteUser(Integer id){
         try (Statement statement = this.db.createStatement()){
             Integer cnt = statement.executeUpdate("DELETE FROM user WHERE id = "+id);
             if(cnt == 1){
