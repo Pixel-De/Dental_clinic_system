@@ -1,5 +1,6 @@
 package DentalClinic.Income;
 
+import DentalClinic.DB.DbConnect;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -24,9 +25,22 @@ public class VoucherController {
     private ToggleGroup toggleGroup = new ToggleGroup();
 
     private ObservableList<AccountModel> accountModels = FXCollections.observableArrayList();
-    private ObservableList<String> paymentMethods = FXCollections.observableArrayList("CARD, CASH");
+    private ObservableList<String> paymentMethods = FXCollections.observableArrayList("CARD", "CASH");
+    private ObservableList<String> accountModelStr = FXCollections.observableArrayList();
+
+    DbConnect db = new DbConnect();
 
     public void initialize(){
+
+        accountModels = db.GetAllAccount();
+        accountModels.forEach(accountModel -> {
+            accountModelStr.add(accountModel.getName());
+
+        });
+        accountBox.setItems(accountModelStr);
+        if(accountModelStr.size() != 0){
+            accountBox.getSelectionModel().selectFirst();
+        }
 
         revenueRadioButton.setToggleGroup(toggleGroup);
         expenseRadioButton.setToggleGroup(toggleGroup);
