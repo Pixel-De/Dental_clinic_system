@@ -812,5 +812,28 @@ public class DbConnect {
             return null;
         }
     }
+    public Boolean UpdatePassword(Integer user_id,String oldPass,String newPass){
+        try (Statement statement = this.db.createStatement()){
+            ResultSet result = statement.executeQuery("select * FROM user WHERE id = "+user_id);
+            if(result.next()){
+                String pass = result.getString("password");
+                if(pass.equals(oldPass)){
+                    Integer cnt = statement.executeUpdate("UPDATE user SET password = '"+newPass+"' WHERE id = "+user_id);
+                    if(cnt == 1){
+                        return  true;
+                    } else {
+                        return  false;
+                    }
+                } else {
+                    return  false;
+                }
+            } else {
+                return  false;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
 
