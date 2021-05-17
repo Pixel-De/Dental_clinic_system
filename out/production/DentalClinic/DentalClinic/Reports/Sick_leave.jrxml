@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Simple_Blue" pageWidth="780" pageHeight="942" columnWidth="740" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="731f1205-e4aa-4edf-a0d0-eaeac964e142">
+	<subDataset name="Billings" uuid="9d2ea86f-64bd-4aa1-b92c-8e7b98dea877">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="770">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="780" height="790" backcolor="#FFFFFF" uuid="80e88335-4a73-4120-b4c5-4c63661fe469">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<staticText>
+					<reportElement x="112" y="25" width="370" height="55" forecolor="#050000" uuid="891b10ae-8ad0-4e03-9aa1-3673e8b7777c"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[OraMed Dental Care]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="113" y="90" width="67" height="20" forecolor="#050000" uuid="2f49d671-acc5-445e-8370-5610afa7b5e0"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Address: ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="113" y="116" width="57" height="20" forecolor="#050000" uuid="c837deb5-bfb8-4582-920e-bd966317f9b8"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Phone:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="114" y="146" width="370" height="20" forecolor="#050000" uuid="e8bc603b-7e39-434b-aabf-731add6047cf"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[A smile is a curve that serve everything straight]]></text>
+				</staticText>
+				<image>
+					<reportElement x="20" y="25" width="82" height="80" uuid="43792a9a-d3af-45d7-98e4-f2b0041e16b0"/>
+					<imageExpression><![CDATA["https://icon-library.com/images/dental-icon-png/dental-icon-png-19.jpg"]]></imageExpression>
+				</image>
+				<staticText>
+					<reportElement x="112" y="175" width="178" height="30" forecolor="#050000" uuid="0f4d737a-5623-485c-8a8a-bcedcd944c43"/>
+					<textElement textAlignment="Left">
+						<font size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[PATIENT FORM]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="60" y="670" width="370" height="20" forecolor="#050000" uuid="88b6c97e-bcef-486c-8e6e-5063401085a6"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Because you should want to go to your dentist.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="60" y="700" width="70" height="20" forecolor="#050000" uuid="72eb5d08-6625-43a2-97f5-0410ba777a2e"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Print Time: ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="179" y="700" width="50" height="20" forecolor="#050000" uuid="9cbaeca8-b39e-4966-bd0d-ba9a10379063"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[, Page: ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="183" y="90" width="100" height="22" uuid="ace71d48-af10-4f82-9f92-c09d5c9ae5a7"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["address"]]></textFieldExpression>
+				</textField>
+				<textField pattern="HH:mm">
+					<reportElement x="133" y="700" width="80" height="30" uuid="16644ff3-f886-49a4-8002-7e3c97d9a89c"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Report">
+					<reportElement x="228" y="701" width="31" height="30" uuid="5b8801ca-0017-4cdb-9ea9-9fb03035c783"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Report">
+					<reportElement x="258" y="701" width="30" height="30" uuid="5b9de5fc-939a-4a94-9ae6-40a2e21d9816"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="240" y="701" width="14" height="40" forecolor="#050000" uuid="418a19c2-4ebc-4ef3-a6d9-6577f18df025"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[/]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="180" y="116" width="100" height="22" uuid="dea23186-d8e1-4f49-ae81-edb0c422ce02"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["phone"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="224" y="210" width="100" height="22" uuid="611f0d43-6eea-4623-b860-cfa0eb337de1"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["1"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="214" y="210" width="10" height="22" forecolor="#050000" uuid="447efb39-3575-4da4-a77e-c1469933008a"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="112" y="211" width="90" height="20" forecolor="#050000" uuid="1c1e7724-88d4-4f08-b2cc-e0778d4c318e"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Visit No]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="214" y="240" width="10" height="22" forecolor="#050000" uuid="9c49c997-8516-4c08-b13f-6930e2cd066c"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="112" y="241" width="120" height="20" forecolor="#050000" uuid="3bef8415-ff9d-4871-8b05-9fc8e5a63bea"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Application date]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="224" y="270" width="100" height="22" uuid="b91f3ff3-80af-4345-a23c-a68c549597ff"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["0100"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="214" y="270" width="10" height="22" forecolor="#050000" uuid="841fe9d4-ffc0-4be5-9c5c-5be9a58bffa9"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="112" y="271" width="90" height="20" forecolor="#050000" uuid="af62aee5-8d9e-4480-b925-c077ac92a50a"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Reference No]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="107" y="430" width="233" height="40" uuid="ac9c5bd6-fb1d-4f0c-adf7-c00120659bd3"/>
+					<box>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="18"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Jerry.S Francis"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="107" y="400" width="233" height="30" forecolor="#050000" uuid="9fa7517b-6610-499f-bde2-809150abede9"/>
+					<box topPadding="2" leftPadding="30" bottomPadding="2">
+						<pen lineWidth="1.5"/>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#050000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#050000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="18" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Name of the Patient]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="211" y="350" width="289" height="30" uuid="5a7d853f-64ae-4b23-b4c7-f28088e646e7"/>
+					<textElement textAlignment="Center">
+						<font size="22" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[MEDICAL CERTIFICATE]]></text>
+				</staticText>
+				<textField pattern="MMMMM dd, yyyy">
+					<reportElement x="232" y="240" width="208" height="30" uuid="cfb4725d-e604-41ec-ad04-704a9601716d"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="340" y="400" width="233" height="30" forecolor="#050000" uuid="aff1c1d3-299e-4163-a268-355f4bad55ef"/>
+					<box topPadding="2" leftPadding="0" bottomPadding="2">
+						<pen lineWidth="1.5"/>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#050000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#050000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="18" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Age]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="340" y="430" width="233" height="40" uuid="e527391b-2988-4ea0-8ac5-bf7e1916b4cd"/>
+					<textElement textAlignment="Center">
+						<font size="18"/>
+					</textElement>
+					<textFieldExpression><![CDATA["25"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="60" y="510" width="537" height="20" forecolor="#050000" uuid="39ffbe2c-dcdb-4f83-9f08-664560562d9d"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[This to certify that above name person was experiment/ treated by me.  ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="60" y="540" width="600" height="50" forecolor="#050000" uuid="c3a4cbbd-634e-4bf6-a7c6-778446a9c595"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Calculate Number Of Days Between Two Dates in VB.NET. Have you ever carries the burden that we are the forgotten Xd who will be off and signed away?]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="60" y="600" width="264" height="30" forecolor="#050000" uuid="6d5ad609-633d-4913-94e6-e0b14e23a807"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[He / She is authorized for sick leave from ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="440" y="600" width="30" height="30" forecolor="#050000" uuid="ab8ac647-fe7d-4544-9c64-6aceceb8c666"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[To]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="570" y="600" width="107" height="30" forecolor="#050000" uuid="ae739448-1611-4936-ae21-732f3dd7aae2"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[For 3 day(s).]]></text>
+				</staticText>
+				<textField pattern="MMMMM dd, yyyy">
+					<reportElement x="330" y="600" width="100" height="30" uuid="111e706f-f1b2-4642-a42f-8d36dd76b7d6"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<textField pattern="MMMMM dd, yyyy">
+					<reportElement x="470" y="600" width="100" height="30" uuid="6eb64da1-d88d-44da-bf7b-4aff4932cb28"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
