@@ -662,14 +662,13 @@ public class DbConnect {
             return false;
         }
     }
-    public Boolean UpdateUser(String id,String fullname, String designation, String contactNo, String usertype, Date joindate){
+    public Boolean UpdateUser(Integer id,String fullname, String designation, String contactNo, String usertype){
         try (Statement statement = this.db.createStatement()){
             Integer cnt = statement.executeUpdate("UPDATE voucher SET " +
                     "fullname = '"+fullname+"', " +
                     "designation = '"+designation+"', " +
                     "contact = '"+contactNo+"', " +
-                    "type = '"+usertype+"', " +
-                    "join_date = '"+joindate+"' " +
+                    "type = '"+usertype+"' " +
                     "WHERE id = "+id);
             if(cnt == 1){
                 return  true;
