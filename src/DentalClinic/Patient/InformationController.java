@@ -62,7 +62,7 @@ public class InformationController implements Initializable {
         addressText = p.getAddress();
         idInt = p.getId();
         ageInt = p.getAge();
-        contactInt = p.getAge();
+        contactInt = p.getContact();
         referDate = p.getReference();
         dateDate = p.getDate();
     }

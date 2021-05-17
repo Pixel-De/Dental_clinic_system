@@ -134,6 +134,47 @@ public class PreListController {
     public void refresh(){
 
         prescriptionFulls = db.PrescriptionList();
+
+        prescriptionFulls.forEach(prescriptionFull -> {
+            Button edit = prescriptionFull.getEdit();
+            Button delete = prescriptionFull.getDelete();
+            delete.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+
+                    boolean f = db.DeletePrescription(prescriptionFull.getId());
+                    if(f){
+                        prescriptionFulls.remove(prescriptionFull);
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.showAndWait();
+                    }
+                }
+            });
+            edit.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    PrescriptionEditController pEditCont = new PrescriptionEditController(prescriptionFull);
+                    try{
+
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("./PrescriptionEdit.fxml"));
+                        loader.setController(pEditCont);
+                        Scene scene = new Scene(loader.load());
+                        Stage stage = new Stage();
+                        stage.setTitle("Prescription Edit");
+                        stage.setScene(scene);
+                        closeButtonAction();
+                        stage.showAndWait();
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            });
+        });
+
+
         preTable.setItems(prescriptionFulls);
 
     }

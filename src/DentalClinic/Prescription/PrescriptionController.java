@@ -119,7 +119,8 @@ public class PrescriptionController {
 
     public void createPresc(){
         presCriptionMain = db.CreatePrescription();
-//        System.out.println(presCriptionMain.id  +  " " + presCriptionMain.date);
+        prescriptionModels.clear();
+        preTableView.setItems(prescriptionModels);
         preIdField.setText(presCriptionMain.getId());
         datePicker.setValue(presCriptionMain.getDate().toLocalDate());
         createButton.setDisable(true);
