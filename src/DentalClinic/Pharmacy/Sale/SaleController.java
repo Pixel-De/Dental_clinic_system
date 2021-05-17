@@ -250,7 +250,7 @@ public class SaleController {
                     alert.setContentText("Invoice Successfully saved.");
                     alert.showAndWait();
 
-                    JasperReport jasperReport = JasperCompileManager.compileReport("C:\\Users\\DeeGi\\IdeaProjects\\Dental_clinic_system\\src\\DentalClinic\\Reports\\Invoice_report.jrxml");
+                    JasperReport jasperReport = JasperCompileManager.compileReport("../../Reports/Invoice_report.jrxml");
 
                     Map<String, SaleModel> parameters = new HashMap<String, SaleModel>();
 

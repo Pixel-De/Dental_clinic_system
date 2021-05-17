@@ -29,5 +29,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="jars" level="project" />
+    <orderEntry type="library" name="jars1" level="project" />
   </component>
 </module>
