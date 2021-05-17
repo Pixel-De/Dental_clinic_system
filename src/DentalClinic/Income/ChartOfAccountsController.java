@@ -4,9 +4,11 @@ import DentalClinic.DB.DbConnect;
 import DentalClinic.Prescription.PrescriptionFull;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class ChartOfAccountsController {
@@ -35,6 +37,20 @@ public class ChartOfAccountsController {
         statusBox.getSelectionModel().selectFirst();
 
         accountModels = db.GetAllAccount();
+        accountModels.forEach(accountModel -> {
+
+            Button delete = accountModel.getDelete();
+            delete.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    boolean f = db.DeleteAccount(accountModel.getId());
+                    if(f){
+                        accountModels.remove(accountModel);
+                    }
+                }
+            });
+
+        });
 
         TableColumn<AccountModel, Button> delete = new TableColumn<>("");
         TableColumn<AccountModel,String> id = new TableColumn<>("ACCOUNT ID");
@@ -61,12 +77,20 @@ public class ChartOfAccountsController {
         String t = accountBox.getValue();
         String s = statusBox.getValue();
 
-        boolean f = db.AddAccount(n,t, s);
+        AccountModel model = db.AddAccount(n,t, s);
+        Button delete = model.getDelete();
+        delete.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                boolean f = db.DeleteAccount(model.getId());
+                if(f){
+                    accountModels.remove(model);
+                }
+            }
+        });
 
-        Alert alert;
-        if(f){
-//            accountModels.add()
-        }
+        accountModels.add(model);
+
 
     }
     public void reset(){
