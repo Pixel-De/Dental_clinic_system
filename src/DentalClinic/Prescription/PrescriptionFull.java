@@ -35,6 +35,14 @@ public class PrescriptionFull {
 
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     public String getName() {
         return name;
     }
