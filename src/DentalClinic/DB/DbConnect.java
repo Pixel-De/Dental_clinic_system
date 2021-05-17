@@ -1,5 +1,7 @@
 package DentalClinic.DB;
 import DentalClinic.Doctor.Doctor;
+import DentalClinic.Income.AccountModel;
+import DentalClinic.Income.VoucherModel;
 import DentalClinic.Patient.Patient;
 import DentalClinic.Pharmacy.Sale.Invoice_item;
 import DentalClinic.Pharmacy.productInformation.Category;
@@ -497,5 +499,123 @@ public class DbConnect {
         }
     }
 
+    public Boolean UpdateAccount(String id, String name,String type, String status){
+        try (Statement statement = this.db.createStatement()){
+            Integer cnt = statement.executeUpdate("UPDATE account SET " +
+                    "name = '"+name+"', type = '"+type+"', status = '"+status+"' WHERE id = "+id);
+            if(cnt == 1){
+                return  true;
+            } else {
+                return  false;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public Boolean DeleteAccount(String id){
+        try (Statement statement = this.db.createStatement()){
+            Integer cnt = statement.executeUpdate("DELETE FROM account WHERE id = "+id);
+            if(cnt == 1){
+                return  true;
+            } else {
+                return  false;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public ObservableList<AccountModel> GetAllAccount(){
+        ObservableList<AccountModel> a = FXCollections.observableArrayList(new ArrayList<AccountModel>());
+        try (Statement statement = this.db.createStatement()) {
+            ResultSet result = statement.executeQuery("select * from account");
+            while(result.next()){
+                String name = result.getString("name");
+                String id = result.getString("id");
+                String type = result.getString("type");
+                String status = result.getString("status");
+                a.add(new AccountModel(id,name,type,status));
+            }
+            return a;
+        } catch (SQLException e){
+            e.printStackTrace();
+            return a;
+        }
+    }
+
+    public Boolean AddVoucher(String account_id,String type, Date date, String reference, String amount, String payment_method, String remark){
+        try (Statement statement = this.db.createStatement()){
+            Integer cnt = statement.executeUpdate("INSERT INTO voucher ( account_id, type, date, reference, amount, payment, mark) VALUES ( '"+account_id+"','"+type+"','"+date+"','"+reference+"','"+amount+"','"+payment_method+"','"+remark+"')");
+            if(cnt == 1){
+                return  true;
+            } else {
+                return  false;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public Boolean UpdateVoucher(String id,String account_id,String type, Date date, String reference, String amount, String payment_method, String remark){
+        try (Statement statement = this.db.createStatement()){
+            Integer cnt = statement.executeUpdate("UPDATE voucher SET " +
+                    "account_id = '"+account_id+"', " +
+                    "type = '"+type+"', " +
+                    "date = '"+date+"', " +
+                    "reference = '"+reference+"', " +
+                    "amount = '"+amount+"', " +
+                    "payment = '"+payment_method+"', " +
+                    "mark = '"+remark+"' " +
+                    "WHERE id = "+id);
+            if(cnt == 1){
+                return  true;
+            } else {
+                return  false;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public ObservableList<VoucherModel> GetAllVoucher(){
+        ObservableList<VoucherModel> a = FXCollections.observableArrayList(new ArrayList<VoucherModel>());
+        try (Statement statement = this.db.createStatement()) {
+            ResultSet result = statement.executeQuery("select voucher.id as id, account.name as name, voucher.type as type, date, reference, amount, payment, mark from account, voucher WHERE voucher.account_id = account.id");
+            while(result.next()){
+                String name = result.getString("name");
+                String id = result.getString("id");
+                String type = result.getString("type");
+                Date date = result.getDate("date");
+                String reference = result.getString("reference");
+                String amount = result.getString("amount");
+                String payment = result.getString("payment");
+                String mark = result.getString("mark");
+                a.add(new VoucherModel(id,name,type,amount,reference,payment,mark,date));
+            }
+            return a;
+        } catch (SQLException e){
+            e.printStackTrace();
+            return a;
+        }
+    }
+
+    public Boolean DeleteVoucher(String id){
+        try (Statement statement = this.db.createStatement()){
+            Integer cnt = statement.executeUpdate("DELETE FROM voucher WHERE id = "+id);
+            if(cnt == 1){
+                return  true;
+            } else {
+                return  false;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
 
