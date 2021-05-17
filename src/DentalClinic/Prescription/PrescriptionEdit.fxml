@@ -81,7 +81,7 @@
                 <TextField fx:id="dodgeField" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                 <TextField fx:id="remarkField" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="5" GridPane.rowIndex="1" />
                 <TextField fx:id="quantityField" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false"  GridPane.columnIndex="6" GridPane.rowIndex="1">
+                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#addPresc" GridPane.columnIndex="6" GridPane.rowIndex="1">
                     <graphic>
                         <ImageView fitHeight="18.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -101,7 +101,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button mnemonicParsing="false" text="SAVE CHANGES" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                <Button mnemonicParsing="false" onMouseClicked="#saveChanges" text="SAVE CHANGES" GridPane.columnIndex="1" GridPane.rowIndex="3">
                     <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -232,27 +232,11 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
-                                <Button fx:id="createButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="CREATE NEW">
-                                    <graphic>
-                                        <ImageView fitHeight="22.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../assets/pres_new.png" />
-                                            </image>
-                                        </ImageView>
-                                    </graphic></Button>
                                 <Button fx:id="closeButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="CLOSE" GridPane.rowIndex="2">
                                     <graphic>
                                         <ImageView fitHeight="20.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@../assets/pres_close.png" />
-                                            </image>
-                                        </ImageView>
-                                    </graphic></Button>
-                                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="RESET" GridPane.rowIndex="1">
-                                    <graphic>
-                                        <ImageView fitHeight="20.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../assets/pres_reset.png" />
                                             </image>
                                         </ImageView>
                                     </graphic></Button>

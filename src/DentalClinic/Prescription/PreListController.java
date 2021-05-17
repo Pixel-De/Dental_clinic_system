@@ -42,6 +42,14 @@ public class PreListController {
 
         prescriptionFulls.forEach(prescriptionFull -> {
             Button edit = prescriptionFull.getEdit();
+            Button delete = prescriptionFull.getDelete();
+            delete.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+
+                    prescriptionFulls.remove(prescriptionFull);
+                }
+            });
             edit.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
@@ -55,6 +63,7 @@ public class PreListController {
                         Stage stage = new Stage();
                         stage.setTitle("Prescription Edit");
                         stage.setScene(scene);
+                        closeButtonAction();
                         stage.showAndWait();
 
                     }catch (Exception e){
