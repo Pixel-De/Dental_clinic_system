@@ -134,9 +134,9 @@ public class MainMenuController {
     @FXML
     void setPermission(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../Administration/Permission/PermissionView.fxml"));
-        Parent clinic = loader.load();
+        Parent permissione = loader.load();
         Stage stage = new Stage();
-        stage.setScene(new Scene(clinic));
+        stage.setScene(new Scene(permissione));
         stage.show();
     }
 
@@ -161,18 +161,18 @@ public class MainMenuController {
     @FXML
     void setPrescription(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../Prescription/Presicription.fxml"));
-        Parent rootPharmaSale = loader.load();
+        Parent rootPharmaSales = loader.load();
         Stage stage = new Stage();
-        stage.setScene(new Scene(rootPharmaSale));
+        stage.setScene(new Scene(rootPharmaSales));
         stage.show();
     }
 
     @FXML
     void setPrescriptionList(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../Prescription/PreList.fxml"));
-        Parent rootPharmaSale = loader.load();
+        Parent rootPharmaSaled = loader.load();
         Stage stage = new Stage();
-        stage.setScene(new Scene(rootPharmaSale));
+        stage.setScene(new Scene(rootPharmaSaled));
         stage.show();
 
     }
@@ -207,18 +207,18 @@ public class MainMenuController {
     @FXML
     void setUserInformation(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../Administration/UserInformation/UserInformationView.fxml"));
-        Parent clinic = loader.load();
+        Parent clinics = loader. load();
         Stage stage = new Stage();
-        stage.setScene(new Scene(clinic));
+        stage.setScene(new Scene(clinics));
         stage.show();
     }
 
     @FXML
     void setVoucher(ActionEvent event)  throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../Income/VoucherView.fxml"));
-        Parent clinic = loader.load();
+        Parent clinicd = loader.load();
         Stage stage = new Stage();
-        stage.setScene(new Scene(clinic));
+        stage.setScene(new Scene(clinicd));
         stage.show();
 
     }

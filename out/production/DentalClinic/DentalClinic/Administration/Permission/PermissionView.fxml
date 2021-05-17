@@ -5,7 +5,6 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,7 +12,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
-
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@PermissionStyle.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DentalClinic.Administration.Permission.PermissionController">
    <children>
@@ -44,14 +42,21 @@
                      <children>
                         <VBox>
                            <children>
-                              <Label text="PARAMETER" />
+                              <Label text="User Name" />
                               <ChoiceBox fx:id="param" prefWidth="150.0" />
                            </children>
                         </VBox>
-                        <VBox>
+                        <VBox alignment="BOTTOM_CENTER">
                            <children>
-                              <Label text="CRITERIA" />
-                              <TextField fx:id="criteria" editable="false" />
+                              <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="89.0" text="Find">
+                                 <graphic>
+                                    <ImageView fitHeight="16.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../assets/search.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
                            </children>
                         </VBox>
                      </children>
@@ -70,7 +75,7 @@
                      <graphic>
                         <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../assets/floppy-disk.png" />
+                              <Image url="@../../assets/pres_save.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -79,7 +84,7 @@
                      <graphic>
                         <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../assets/logout.png" />
+                              <Image url="@../../assets/pres_close.png" />
                            </image>
                         </ImageView>
                      </graphic>

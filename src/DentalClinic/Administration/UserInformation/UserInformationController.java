@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.Date;
@@ -32,42 +33,72 @@ public class UserInformationController {
     DatePicker UserInformationDatepicker;
     @FXML
     Button btnReset, btnSave, btnClose ;
-//    private String full_name,user_job,fieldOfArea,user_name;
-//    private Integer id, contact_no;
-//    private Date joining_date;
-//    private DbConnect db = new DbConnect();
+    private String fullname,usertype,designation,username;
+    private Integer id, contact;
+    private Date join_date;
 
-//    public void initialize(URL url, ResourceBundle resourceBundle) {
-//
-//        txtUserID.setText(String.valueOf(id));
-//        txtFullname.setText(full_name);
-//        txtUsername.setText(user_name);
-//        txtDesignation.setText(fieldOfArea);
-////        txtRePassword.setText(passwordu);
-//        txtContact.setText(String.valueOf(contact_no));
-//        UserInformationDatepicker.setValue(joining_date.toLocalDate());
-//
-//    }
-    public UserInformationController(User user) {
+    ObservableList<String> Jobtypes = FXCollections.observableArrayList("Administrator", "Doctor, Receptionist, Cashier, Assistant");
+
+    private DbConnect db = new DbConnect();
+
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        txtUserID.setText(id.toString());
+        txtFullname.setText(fullname);
+        txtUsername.setText(username);
+        txtDesignation.setText(designation);
+//        txtRePassword.setText(passwordu);
+        txtContact.setText(String.valueOf(contact));
+        UserInformationDatepicker.setValue(join_date.toLocalDate());
+        comboUserType.setItems(Jobtypes);
 
     }
+    public UserInformationController(User u) {
+        fullname = u.getFullname();
+        usertype = u.getUsertype();
+        designation = u.getDesignation();
+        username = u.getUsername();
+        id = u.getId();
+        contact = u.getContact();
+        join_date = u.getJoin_date();
 
-//    private  ObservableList<String> comboUserType = FXCollections.observableArrayList("Administrator", "Doctor, Receptionist, Cashier, Assistant");
+    }
+    public void updateUser(){
+        String fn = txtFullname.getText();
+        String UN = txtUsername.getText();
+        String Desig = txtDesignation.getText();
+        int i = Integer.valueOf(txtUserID.getText());
+        int cont = Integer.valueOf(txtContact.getText());
+        String pass = txtPassword.getText();
+        LocalDate day = UserInformationDatepicker.getValue();
+//        boolean f = db.UpdateUser(i, fn, UN, Desig, pass, cont, day);
 //
-//    public void initializable(){
-//        comboUserType.setItems(comboUserType);
-//        comboUserType.getSelectionModel().selectFirst();
-//    }
+//        if (f){
+//            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//            alert.setTitle("Update");
+//            alert.setContentText("Successfully updated.");
+//            alert.show();
+//        }
+    }
+
+
 
 
     @FXML
     void btnCloseAction(ActionEvent event) {
-
+        Stage stage = (Stage) btnClose.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
     void btnResetAction(ActionEvent event) {
-
+        txtFullname.setText("");
+        txtContact.setText("");
+        txtUsername.setText("");
+        txtPassword.setText("");
+        txtUserID.setText("");
+        txtDesignation.setText("");
+        UserInformationDatepicker.setValue(null);
     }
 
     @FXML
@@ -79,5 +110,6 @@ public class UserInformationController {
     void refresh(MouseEvent event) {
 
     }
+
 
 }
