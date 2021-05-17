@@ -1,4 +1,6 @@
 package DentalClinic.DB;
+import DentalClinic.Administration.ListOfUser.User;
+import DentalClinic.Administration.Permission.PermissionModel;
 import DentalClinic.Doctor.Doctor;
 import DentalClinic.Income.AccountModel;
 import DentalClinic.Income.VoucherModel;
@@ -660,15 +662,14 @@ public class DbConnect {
             return false;
         }
     }
-    public Boolean UpdateUser(String id,String fullname, String password, String designation, String contactNo, String usertype, Date joindate){
+    public Boolean UpdateUser(String id,String fullname, String designation, String contactNo, String usertype, Date joindate){
         try (Statement statement = this.db.createStatement()){
             Integer cnt = statement.executeUpdate("UPDATE voucher SET " +
                     "fullname = '"+fullname+"', " +
                     "designation = '"+designation+"', " +
                     "contact = '"+contactNo+"', " +
                     "type = '"+usertype+"', " +
-                    "join_date = '"+joindate+"', " +
-                    "password = '"+password+"' " +
+                    "join_date = '"+joindate+"' " +
                     "WHERE id = "+id);
             if(cnt == 1){
                 return  true;
@@ -693,6 +694,123 @@ public class DbConnect {
         } catch (SQLException e){
             e.printStackTrace();
             return false;
+        }
+    }
+
+    public ObservableList<User> GetAllUser(){
+        ObservableList<User> a = FXCollections.observableArrayList(new ArrayList<User>());
+        try (Statement statement = this.db.createStatement()) {
+            ResultSet result = statement.executeQuery("select * from user");
+            while(result.next()){
+                String fullname = result.getString("fullname");
+                String type = result.getString("type");
+                String designation = result.getString("designation");
+                String username = result.getString("username");
+                Integer id = result.getInt("id");
+                Integer contact = result.getInt("contact");
+                Date date = result.getDate("join_date");
+                a.add(new User(fullname,type,designation,username,id,contact,date));
+            }
+            return a;
+        } catch (SQLException e){
+            e.printStackTrace();
+            return a;
+        }
+    }
+    public PermissionModel getUserpermission(Integer _id){
+        try (Statement statement = this.db.createStatement()) {
+            ResultSet result = statement.executeQuery("select * from permission WHERE user_id = "+_id);
+            if(result.next()){
+                Integer id,user_id;
+                Boolean patient_info,patient_list,doctor_info,doctor_list,pharmacy_info,pharmacy_list,pharmacy_report,prescription,prescription_list,voucher,voucher_list,voucher_report,admin,sales;
+                id = result.getInt("id");
+                user_id = result.getInt("user_id");
+                patient_info = result.getBoolean("patient_info");
+                patient_list = result.getBoolean("patient_list");
+                doctor_info = result.getBoolean("doctor_info");
+                doctor_list = result.getBoolean("doctor_list");
+                pharmacy_info = result.getBoolean("pharmacy_info");
+                pharmacy_list = result.getBoolean("pharmacy_list");
+                pharmacy_report = result.getBoolean("pharmacy_report");
+                prescription = result.getBoolean("prescription");
+                prescription_list = result.getBoolean("prescription_list");
+                voucher = result.getBoolean("voucher");
+                voucher_list = result.getBoolean("voucher_list");
+                voucher_report = result.getBoolean("voucher_report");
+                admin = result.getBoolean("adminstration");
+                sales = result.getBoolean("sales");
+                return  new PermissionModel(id,user_id,patient_info,patient_list,doctor_info,doctor_list,pharmacy_info,pharmacy_list,pharmacy_report,prescription,prescription_list,voucher,voucher_list,voucher_report,admin,sales);
+            } else {
+                return null;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public Boolean UpdatePermission(Integer user_id, Boolean patient_info,Boolean patient_list,Boolean doctor_info,Boolean doctor_list,Boolean pharmacy_info,Boolean pharmacy_list,Boolean pharmacy_report,Boolean prescription,Boolean prescription_list,Boolean voucher,Boolean voucher_list,Boolean voucher_report,Boolean admin,Boolean sales){
+        try (Statement statement = this.db.createStatement()){
+            Integer cnt = statement.executeUpdate("UPDATE voucher SET " +
+                    "patient_info = '"+patient_info+"', " +
+                    "patient_list = '"+patient_list+"', " +
+                    "doctor_info = '"+doctor_info+"', " +
+                    "doctor_list = '"+doctor_list+"', " +
+                    "pharmacy_info = '"+pharmacy_info+"', " +
+                    "pharmacy_list = '"+pharmacy_list+"', " +
+                    "pharmacy_report = '"+pharmacy_report+"', " +
+                    "prescription = '"+prescription+"', " +
+                    "prescription_list = '"+prescription_list+"', " +
+                    "voucher = '"+voucher+"', " +
+                    "voucher_list = '"+voucher_list+"', " +
+                    "voucher_report = '"+voucher_report+"', " +
+                    "adminstration = '"+admin+"', " +
+                    "sales = '"+sales+"' " +
+                    "WHERE user_id = "+user_id);
+            if(cnt == 1){
+                return  true;
+            } else {
+                return  false;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public PermissionModel Login(String username,String password){
+        try (Statement statement = this.db.createStatement()) {
+            ResultSet result = statement.executeQuery("select id from user WHERE username = '"+username+"' AND password = '"+password+"'");
+            if(result.next()){
+                Integer _id = result.getInt("id");
+                ResultSet _result = statement.executeQuery("select * from permission WHERE user_id = "+_id);
+                if(result.next()){
+                    Integer id,user_id;
+                    Boolean patient_info,patient_list,doctor_info,doctor_list,pharmacy_info,pharmacy_list,pharmacy_report,prescription,prescription_list,voucher,voucher_list,voucher_report,admin,sales;
+                    id = result.getInt("id");
+                    user_id = result.getInt("user_id");
+                    patient_info = result.getBoolean("patient_info");
+                    patient_list = result.getBoolean("patient_list");
+                    doctor_info = result.getBoolean("doctor_info");
+                    doctor_list = result.getBoolean("doctor_list");
+                    pharmacy_info = result.getBoolean("pharmacy_info");
+                    pharmacy_list = result.getBoolean("pharmacy_list");
+                    pharmacy_report = result.getBoolean("pharmacy_report");
+                    prescription = result.getBoolean("prescription");
+                    prescription_list = result.getBoolean("prescription_list");
+                    voucher = result.getBoolean("voucher");
+                    voucher_list = result.getBoolean("voucher_list");
+                    voucher_report = result.getBoolean("voucher_report");
+                    admin = result.getBoolean("adminstration");
+                    sales = result.getBoolean("sales");
+                    return  new PermissionModel(id,user_id,patient_info,patient_list,doctor_info,doctor_list,pharmacy_info,pharmacy_list,pharmacy_report,prescription,prescription_list,voucher,voucher_list,voucher_report,admin,sales);
+                } else {
+                    return null;
+                }
+            } else {
+                return null;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return null;
         }
     }
 }
