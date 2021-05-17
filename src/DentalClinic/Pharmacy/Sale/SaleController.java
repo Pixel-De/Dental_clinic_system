@@ -228,6 +228,23 @@ public class SaleController {
         return p;
     }
 
+
+
+
+    @FXML
+    void createReport(MouseEvent event) throws JRException {
+        JasperReport jasperReport = JasperCompileManager.compileReport("C:\\Users\\DeeGi\\IdeaProjects\\Dental_clinic_system\\src\\DentalClinic\\Reports\\Invoice_report.jrxml");
+
+    Map<String, SaleModel> parameters = new HashMap<String, SaleModel>();
+
+    JRDataSource dataSource = (JRDataSource) new JREmptyDataSource();
+
+    JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
+    JRViewer viewer = new JRViewer(jasperPrint);
+
+                    viewer.setOpaque(true);
+                    viewer.setVisible(true);
+    }
     public void saveInvoice(){
 
         try{
@@ -250,17 +267,7 @@ public class SaleController {
                     alert.setContentText("Invoice Successfully saved.");
                     alert.showAndWait();
 
-                    JasperReport jasperReport = JasperCompileManager.compileReport("../../Reports/Invoice_report.jrxml");
 
-                    Map<String, SaleModel> parameters = new HashMap<String, SaleModel>();
-
-                    JRDataSource dataSource = (JRDataSource) new JREmptyDataSource();
-
-                    JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
-                    JRViewer viewer = new JRViewer(jasperPrint);
-
-                    viewer.setOpaque(true);
-                    viewer.setVisible(true);
 
 
                 }else {
