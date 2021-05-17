@@ -511,7 +511,7 @@ public class DbConnect {
                     String _type = result.getString("type");
                     String _status = result.getString("status");
                     return  new AccountModel(_id,_name,_type,_status);
-                } else {return null}
+                } else {return null;}
             } else {
                 return  null;
             }
