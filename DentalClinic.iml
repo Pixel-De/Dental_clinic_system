@@ -28,7 +28,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="lib66" level="project" />
-    <orderEntry type="library" name="postgresql-777" level="project" />
+    <orderEntry type="library" name="jars" level="project" />
   </component>
 </module>

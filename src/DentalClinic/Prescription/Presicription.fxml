@@ -232,7 +232,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#createPresc" text="CREATE NEW">
+                        <Button fx:id="createButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#createPresc" text="CREATE NEW">
                            <graphic>
                               <ImageView fitHeight="22.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

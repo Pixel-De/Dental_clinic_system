@@ -4,7 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
 public class PrescriptionModel {
-    private int  quantity;
+    private int quantity;
     private String name, dodge, duration, remark;
     private Button delete;
 

@@ -21,8 +21,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.swing.JRViewer;
 
-import java.io.IOException;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SaleController {
 
@@ -123,10 +127,16 @@ public class SaleController {
         productNameBox.getSelectionModel().selectFirst();
         patientBox.getSelectionModel().selectFirst();
 
-        selectedPatient = patients.get(0);
         method = paidMethod.get(0);
-        setInformation(products.get(0).getName());
-        paid = 0.0;
+        if(products.size() != 0){
+            setInformation(products.get(0).getName());
+            paid = 0.0;
+        }
+        if(patients.size() != 0){
+            selectedPatient = patients.get(0);
+        }
+
+
         productNameBox.getSelectionModel().selectedIndexProperty().addListener(((observableValue, old, new_val) -> {
             String s = pBox.get((Integer) new_val);
             setInformation(s);
@@ -152,6 +162,7 @@ public class SaleController {
         TableColumn<SaleModel, Integer> quant = new TableColumn<>("QUANTITY");
         TableColumn<SaleModel, Float > unit = new TableColumn<>("UNIT");
         TableColumn<SaleModel, Float> total = new TableColumn<>("TOTAL");
+
 
         delete.setCellValueFactory(new PropertyValueFactory<SaleModel, Button>("delete"));
         id.setCellValueFactory(new PropertyValueFactory<SaleModel, Integer>("id"));
@@ -217,6 +228,23 @@ public class SaleController {
         return p;
     }
 
+
+
+
+    @FXML
+    void createReport(MouseEvent event) throws JRException {
+        JasperReport jasperReport = JasperCompileManager.compileReport("C:\\Users\\DeeGi\\IdeaProjects\\Dental_clinic_system\\src\\DentalClinic\\Reports\\Invoice_report.jrxml");
+
+    Map<String, SaleModel> parameters = new HashMap<String, SaleModel>();
+
+    JRDataSource dataSource = (JRDataSource) new JREmptyDataSource();
+
+    JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
+    JRViewer viewer = new JRViewer(jasperPrint);
+
+                    viewer.setOpaque(true);
+                    viewer.setVisible(true);
+    }
     public void saveInvoice(){
 
         try{
@@ -238,6 +266,10 @@ public class SaleController {
                 if(f){
                     alert.setContentText("Invoice Successfully saved.");
                     alert.showAndWait();
+
+
+
+
                 }else {
                     alert.setContentText("Invoice did not saved.");
                     alert.showAndWait();
