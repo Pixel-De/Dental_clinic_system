@@ -462,7 +462,7 @@ public class DbConnect {
             }
         }
         try (Statement statement = this.db.createStatement()){
-            statement.executeUpdate("DELETE FROM invoice_item WHERE invoice_id = "+prescription.getId());
+            statement.executeUpdate("DELETE FROM prescription_item WHERE prescription_id = "+prescription.getId());
                 Integer cnt = statement.executeUpdate("INSERT INTO prescription_item (prescription_id, m_name, dodge, qty, duration, remark) VALUES "+query);
             if(cnt==prescription_items.size()){
                 Integer cnt1 = statement.executeUpdate("UPDATE prescription SET " +
@@ -472,13 +472,28 @@ public class DbConnect {
                 if(cnt1==1) {
                     return true;
                 } else {
-                    statement.executeUpdate("DELETE FROM invoice_item WHERE invoice_id = "+prescription.getId());
+                    statement.executeUpdate("DELETE FROM prescription_item WHERE prescription_id = "+prescription.getId());
                 }
             }else{
-                statement.executeUpdate("DELETE FROM invoice_item WHERE invoice_id = "+prescription.getId());
+                statement.executeUpdate("DELETE FROM prescription_item WHERE prescription_id = "+prescription.getId());
                 return false;
             }
             return true;
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public Boolean DeletePrescription(String id){
+        try (Statement statement = this.db.createStatement()){
+            Integer cnt = statement.executeUpdate("DELETE FROM prescription WHERE id = "+id);
+            if(cnt == 1){
+                statement.executeUpdate("DELETE FROM prescription_item WHERE prescription_id = "+id);
+                return  true;
+            } else {
+                return  false;
+            }
         } catch (SQLException e){
             e.printStackTrace();
             return false;
