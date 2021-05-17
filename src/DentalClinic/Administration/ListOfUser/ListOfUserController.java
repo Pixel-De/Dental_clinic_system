@@ -151,10 +151,10 @@ public class ListOfUserController {
 //
 //        return tempPatt;
 //    }
-//    public  ObservableList<User> FilterName(String user_name){
+//    public  ObservableList<User> FilterName(String username){
 //        tempPatt.clear();
 //        users.forEach(user -> {
-//            if(user.getUsername().toLowerCase().contains(user_name)){
+//            if(user.getUsername().toLowerCase().contains(username)){
 //                if(!tempPatt.contains(user)){
 //                    tempPatt.add(user);
 //                }
