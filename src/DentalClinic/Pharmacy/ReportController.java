@@ -11,7 +11,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.swing.JRViewer;
+import net.sf.jasperreports.swing   .JRViewer;
 
 import java.awt.event.MouseEvent;
 import java.util.HashMap;

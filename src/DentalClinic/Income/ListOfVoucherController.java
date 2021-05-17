@@ -7,10 +7,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -23,9 +20,12 @@ public class ListOfVoucherController {
     TableView<VoucherModel> voucherTable;
     @FXML
     Button closeButton;
+    @FXML
+    DatePicker fromPicker, toPicker;
 
     ObservableList<VoucherModel> voucherModels = FXCollections.observableArrayList();
     DbConnect db = new DbConnect();
+    ObservableList<VoucherModel> tmp = FXCollections.observableArrayList();
 
     public void initialize(){
 
@@ -97,6 +97,25 @@ public class ListOfVoucherController {
 
         voucherTable.setItems(voucherModels);
         voucherTable.getColumns().addAll(edit, delete, v_id, date, p_method, accName, accType,ref, remark, amount);
+
+    }
+
+    public void search(){
+        tmp.clear();
+
+        Date  fr = Date.valueOf(fromPicker.getValue());
+        Date to = Date.valueOf(toPicker.getValue());
+
+        voucherModels.forEach(voucherModel -> {
+
+            Date date = voucherModel.getDate();
+
+            if(fr.compareTo(date)< 0 && to.compareTo(date) > 0){
+                tmp.add(voucherModel);
+            }
+        });
+
+        voucherTable.setItems(tmp);
 
     }
 
