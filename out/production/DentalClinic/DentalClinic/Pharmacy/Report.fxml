@@ -125,11 +125,4 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                     </children>
-                  </HBox>
-               </children>
-            </AnchorPane>
-         </bottom>
-      </BorderPane>
-   </children>
-</AnchorPane>
+        
