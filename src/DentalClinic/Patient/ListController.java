@@ -143,7 +143,51 @@ public class ListController {
         stage.close();
     }
     public void refresh(){
+
+        Alert alert  = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete Patient");
+        alert.setContentText("Are you sure you want to delete this record?");
+
         patients = db.PatientList();
+        patients.forEach(patient -> {
+            Button b = patient.getEdit();
+            Button dell = patient.getDelete();
+            b.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+
+                    InformationController lc = new InformationController(patient);
+                    try {
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("./InformationView.fxml"));
+                        loader.setController(lc);
+                        Scene scene = new Scene(loader.load());
+                        Stage stage = new Stage();
+                        stage.setTitle("Patient Update");
+                        stage.setScene(scene);
+                        stage.showAndWait();
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            //delete
+
+            dell.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if(result.get()==ButtonType.OK){
+                        int delID = patient.getId();
+                        boolean f = db.DeletePatient(delID);
+                        System.out.println(delID);
+                        patients.remove(patient);
+                    }
+                }
+            });
+        });
+
         patientTable.setItems(patients);
     }
     public ObservableList<Patient> filterId(int id){

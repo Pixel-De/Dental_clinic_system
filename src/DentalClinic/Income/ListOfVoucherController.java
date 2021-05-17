@@ -121,6 +121,46 @@ public class ListOfVoucherController {
 
     public void refresh(){
         voucherModels = db.GetAllVoucher();
+
+        voucherModels.forEach(voucherModel -> {
+            Button edit = voucherModel.getEdit();
+            Button delete = voucherModel.getDelete();
+
+            delete.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    boolean f = db.DeleteVoucher(voucherModel.getId());
+                    if(f){
+                        voucherModels.remove(voucherModel);
+                    }
+                }
+            });
+            edit.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                EditVoucherController editVoucherController = new EditVoucherController(voucherModel);
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+
+                    try{
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("./EditVoucher.fxml"));
+                        loader.setController(editVoucherController);
+                        Scene scene = new Scene(loader.load());
+                        Stage stage = new Stage();
+                        stage.setTitle("Chart of Account");
+                        stage.setScene(scene);
+                        closeButtonAction();
+                        stage.showAndWait();
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                }
+            });
+
+        });
+
+
         voucherTable.setItems(voucherModels);
     }
 

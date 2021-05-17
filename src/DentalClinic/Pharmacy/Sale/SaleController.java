@@ -182,26 +182,35 @@ public class SaleController {
 
 
     public void addToCart(){
-        if(!quantityField.getText().equals("")){
-            try{
-                Float ttl = Integer.valueOf(quantityField.getText()) * Float.valueOf(priceLabel.getText());
 
-                SaleModel saleModel = new SaleModel(Integer.valueOf(idLabel.getText()), Integer.valueOf(quantityField.getText()),nameLabel.getText(),Float.valueOf(priceLabel.getText()),ttl);
-                Button del = saleModel.getDelete();
-                del.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent mouseEvent) {
-                        saleModels.remove(saleModel);
-                    }
-                });
-                saleModels.add(saleModel);
-            } catch (Exception e){
-                e.printStackTrace();
+        if(Integer.valueOf(quantityField.getText()) > Integer.valueOf(avQuantityLabel.getText())){
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.showAndWait();
+
+        } else {
+            if(!quantityField.getText().equals("")){
+                try{
+                    Float ttl = Integer.valueOf(quantityField.getText()) * Float.valueOf(priceLabel.getText());
+
+                    SaleModel saleModel = new SaleModel(Integer.valueOf(idLabel.getText()), Integer.valueOf(quantityField.getText()),nameLabel.getText(),Float.valueOf(priceLabel.getText()),ttl);
+                    Button del = saleModel.getDelete();
+                    del.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent mouseEvent) {
+                            saleModels.remove(saleModel);
+                        }
+                    });
+                    saleModels.add(saleModel);
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
             }
+
         }
+
+
     }
-
-
 
     public void setInformation(String s){
 
@@ -245,6 +254,21 @@ public class SaleController {
                     viewer.setOpaque(true);
                     viewer.setVisible(true);
     }
+
+    public void newSale(){
+
+        invoiceId = db.getIdInvoice();
+        saleModels.clear();
+        salesTable.setItems(saleModels);
+        inVoiceIdLabel.setText(String.valueOf(invoiceId));
+        totalProperty.set("0");
+        total = 0;
+        paid = 0.0;
+        paidField.setText("0");
+        cd = 0.0;
+        changeD.set("0");
+
+    }
     public void saveInvoice(){
 
         try{
@@ -264,6 +288,7 @@ public class SaleController {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Invoice Saved.");
                 if(f){
+
                     alert.setContentText("Invoice Successfully saved.");
                     alert.showAndWait();
 

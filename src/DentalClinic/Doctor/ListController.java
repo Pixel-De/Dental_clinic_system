@@ -123,6 +123,46 @@ public class ListController {
     }
     public void refresh(){
         doctors = db.DoctorList();
+        Alert alert  = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete Patient");
+        alert.setContentText("Are you sure you want to delete this record?");
+
+        doctors.forEach(doctor -> {
+            Button btn = doctor.getEdit();
+            Button delBtn = doctor.getDelete();
+            btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    DentalClinic.Doctor.InformationController lc = new InformationController(doctor);
+                    try {
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("./InformationView.fxml"));
+                        loader.setController(lc);
+                        Scene scene = new Scene(loader.load());
+                        Stage stage = new Stage();
+                        stage.setTitle("Doctor Update");
+                        stage.setScene(scene);
+                        stage.showAndWait();
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            delBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if(result.get()==ButtonType.OK){
+                        int delID = doctor.getId();
+                        boolean f = db.DeleteDoctor(delID);
+                        System.out.println(delID);
+                        doctors.remove(doctor);
+                    }
+                }
+            });
+        });
+
         doctorTable.setItems(doctors);
     }
     @FXML
