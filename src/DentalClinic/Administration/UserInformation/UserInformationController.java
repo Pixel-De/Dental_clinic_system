@@ -68,17 +68,18 @@ public class UserInformationController {
         String UN = txtUsername.getText();
         String Desig = txtDesignation.getText();
         int i = Integer.valueOf(txtUserID.getText());
-        int cont = Integer.valueOf(txtContact.getText());
+        String cont = txtContact.getText();
         String pass = txtPassword.getText();
         LocalDate day = UserInformationDatepicker.getValue();
-//        boolean f = db.UpdateUser(i, fn, UN, Desig, pass, cont, day);
-//
-//        if (f){
-//            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//            alert.setTitle("Update");
-//            alert.setContentText("Successfully updated.");
-//            alert.show();
-//        }
+        String type = comboUserType.getValue();
+        boolean f = db.UpdateUser(i, fn, Desig ,cont, type);
+
+        if (f){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Update");
+            alert.setContentText("Successfully updated.");
+            alert.show();
+        }
     }
 
 

@@ -662,14 +662,13 @@ public class DbConnect {
             return false;
         }
     }
-    public Boolean UpdateUser(String id,String fullname, String designation, String contactNo, String usertype, Date joindate){
+    public Boolean UpdateUser(Integer id,String fullname, String designation, String contactNo, String usertype){
         try (Statement statement = this.db.createStatement()){
             Integer cnt = statement.executeUpdate("UPDATE voucher SET " +
                     "fullname = '"+fullname+"', " +
                     "designation = '"+designation+"', " +
                     "contact = '"+contactNo+"', " +
-                    "type = '"+usertype+"', " +
-                    "join_date = '"+joindate+"' " +
+                    "type = '"+usertype+"' " +
                     "WHERE id = "+id);
             if(cnt == 1){
                 return  true;
@@ -811,6 +810,29 @@ public class DbConnect {
         } catch (SQLException e){
             e.printStackTrace();
             return null;
+        }
+    }
+    public Boolean UpdatePassword(Integer user_id,String oldPass,String newPass){
+        try (Statement statement = this.db.createStatement()){
+            ResultSet result = statement.executeQuery("select * FROM user WHERE id = "+user_id);
+            if(result.next()){
+                String pass = result.getString("password");
+                if(pass.equals(oldPass)){
+                    Integer cnt = statement.executeUpdate("UPDATE user SET password = '"+newPass+"' WHERE id = "+user_id);
+                    if(cnt == 1){
+                        return  true;
+                    } else {
+                        return  false;
+                    }
+                } else {
+                    return  false;
+                }
+            } else {
+                return  false;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
         }
     }
 }
