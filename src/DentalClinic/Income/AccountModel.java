@@ -1,13 +1,34 @@
 package DentalClinic.Income;
 
+import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
+
 public class AccountModel {
     String id,name,type,status;
+    Button delete;
 
     public AccountModel(String id, String name, String type, String status) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.status = status;
+
+
+        this.delete = new Button();
+        ImageView imgView = new ImageView(getClass().getResource("../assets/delete.png").toExternalForm());
+        imgView.setFitHeight(10);
+        imgView.setPreserveRatio(true);
+        this.delete.setPrefSize(10,10);
+        this.delete.setGraphic(imgView);
+
+    }
+
+    public Button getDelete() {
+        return delete;
+    }
+
+    public void setDelete(Button delete) {
+        this.delete = delete;
     }
 
     public String getId() {

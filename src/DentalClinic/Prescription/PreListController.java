@@ -16,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.sql.Date;
+import java.util.Locale;
 
 public class PreListController {
 
@@ -28,12 +29,14 @@ public class PreListController {
     @FXML
     Button closeButton;
     @FXML
-    TableView<PrescriptionFull> preTable; // turluu bicig ugnu
+    TableView<PrescriptionFull> preTable;
 
     private ObservableList<String> params = FXCollections.observableArrayList("Prescription ID", "Patient Name");
     private ObservableList<PrescriptionFull> prescriptionFulls = FXCollections.observableArrayList();
+    private ObservableList<PrescriptionFull> tempPat = FXCollections.observableArrayList();
 
     DbConnect db = new DbConnect();
+
     public void initialize(){
 
         ObservableList<PresCriptionMain> presCriptionMains = FXCollections.observableArrayList();
@@ -47,7 +50,13 @@ public class PreListController {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
 
-                    prescriptionFulls.remove(prescriptionFull);
+                    boolean f = db.DeletePrescription(prescriptionFull.getId());
+                    if(f){
+                        prescriptionFulls.remove(prescriptionFull);
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.showAndWait();
+                    }
                 }
             });
             edit.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -101,11 +110,12 @@ public class PreListController {
                 ((observableValue, old, new_val) -> {
                     if(param.getValue() == params.get(0)){
                         if(new_val != ""){
-//                            doctorTable.setItems(filterId(Integer.valueOf(new_val)));
+                            preTable.setItems(filterId((String) new_val));
+                            System.out.println(new_val);
                         }
                     } else if(param.getValue() == params.get(1)){
                         if(new_val != "") {
-//                            doctorTable.setItems(filterName(new_val));
+                            preTable.setItems(filterName(new_val));
                         }
                     }
                 })
@@ -123,6 +133,9 @@ public class PreListController {
     }
     public void refresh(){
 
+        prescriptionFulls = db.PrescriptionList();
+        preTable.setItems(prescriptionFulls);
+
     }
     @FXML
     private void closeButtonAction(){
@@ -130,28 +143,28 @@ public class PreListController {
             stage.close();
     }
 
-//    public ObservableList<Doctor> filterId(int id){
-//        tempPat.clear();
-//        doctors.forEach(patient -> {
-//            if(patient.getId() == id){
-//                if(!tempPat.contains(patient)){
-//                    tempPat.add(patient);
-//                }
-//            }
-//        });
-//
-//        return tempPat;
-//    }
-//    public  ObservableList<Doctor> filterName(String name){
-//        tempPat.clear();
-//        doctors.forEach(patient -> {
-//            if(patient.getName().toLowerCase().contains(name)){
-//                if(!tempPat.contains(patient)){
-//                    tempPat.add(patient);
-//                }
-//            }
-//        });
-//        return tempPat;
-//    }
+    public ObservableList<PrescriptionFull> filterId(String id){
+        tempPat.clear();
+        prescriptionFulls.forEach(p -> {
+            if(p.getId().equals(id)){
+                if(!tempPat.contains(p)){
+                    tempPat.add(p);
+                }
+            }
+        });
+
+        return tempPat;
+    }
+    public  ObservableList<PrescriptionFull> filterName(String name){
+        tempPat.clear();
+        prescriptionFulls.forEach(p -> {
+            if(p.getName().toLowerCase().contains(name.toLowerCase())){
+                if(!tempPat.contains(p)){
+                    tempPat.add(p);
+                }
+            }
+        });
+        return tempPat;
+    }
 
 }
