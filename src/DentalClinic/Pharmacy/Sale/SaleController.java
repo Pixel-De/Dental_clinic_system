@@ -22,6 +22,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+
+
+import java.io.File;
 import java.io.IOException;
 
 public class SaleController {
@@ -159,6 +162,7 @@ public class SaleController {
         TableColumn<SaleModel, Float > unit = new TableColumn<>("UNIT");
         TableColumn<SaleModel, Float> total = new TableColumn<>("TOTAL");
 
+
         delete.setCellValueFactory(new PropertyValueFactory<SaleModel, Button>("delete"));
         id.setCellValueFactory(new PropertyValueFactory<SaleModel, Integer>("id"));
         name.setCellValueFactory(new PropertyValueFactory<SaleModel, String>("name"));
@@ -244,6 +248,22 @@ public class SaleController {
                 if(f){
                     alert.setContentText("Invoice Successfully saved.");
                     alert.showAndWait();
+
+//                    JasperReport jasperReport = JasperCompileManager.compileReport("@Dental_clinic_system/src/Reports/Invoice_report.jrxml");
+//
+//                    Map<String, SaleModel> parameters = new HashMap<String, Object>();
+//
+//                    JRDataSource dataSource = new JREmptyDataSource();
+//
+//                    JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,
+//                            parameters, dataSource);
+
+//                    File invioceReport = new File("../Invoice_report");
+//                    invioceReport.mkdir();
+
+//                    JasperExportManager.exportReportToPdfFile(jasperPrint,
+//                            "../Invoice_report.pdf");
+
                 }else {
                     alert.setContentText("Invoice did not saved.");
                     alert.showAndWait();
