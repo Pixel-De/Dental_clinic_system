@@ -40,6 +40,7 @@ public class LoginController {
     private DbConnect db = new DbConnect();
 
     @FXML
+
     void submitData(ActionEvent event) {
         String username = txtUsername.getText(), password = txtPassword.getText();
         System.out.println(username + password);
