@@ -47,8 +47,10 @@ public class ProductCategoryController {
                     Optional<ButtonType> result = alert.showAndWait();
                     if(result.get()==ButtonType.OK){
                         boolean f = db.DeleteCategory(category.getCategory());
-                        System.out.println(f);
-                        catList.remove(category);
+                        if(f){
+                            catList.remove(category);
+
+                        }
                     }
 
                 }
@@ -93,8 +95,9 @@ public class ProductCategoryController {
                     Optional<ButtonType> result = alert.showAndWait();
                     if(result.get()==ButtonType.OK){
                         boolean f = db.DeleteCategory(c.getCategory());
-                        System.out.println(f);
-                        catList.remove(c);
+                        if(f){
+                            catList.remove(c);
+                        }
                     }
                 }
             });
