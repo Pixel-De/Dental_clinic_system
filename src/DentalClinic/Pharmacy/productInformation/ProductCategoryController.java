@@ -49,7 +49,6 @@ public class ProductCategoryController {
                         boolean f = db.DeleteCategory(category.getCategory());
                         if(f){
                             catList.remove(category);
-
                         }
                     }
 
