@@ -644,9 +644,9 @@ public class DbConnect {
 
     public Boolean AddUser(String fullname,String username, String password, String designation, String contactNo, String usertype, Date joindate){
         try (Statement statement = this.db.createStatement()){
-            Integer cnt = statement.executeUpdate("INSERT INTO user ( fullname, designation, username, contact, type, join_date, password ,created_at) VALUES ( '"+fullname+"','"+designation+"','"+username+"','"+contactNo+"','"+usertype+"','"+joindate+"','"+password+"', CURRENT_TIMESTAMP)");
+            Integer cnt = statement.executeUpdate("INSERT INTO user_table ( fullname, designation, username, contact, type, join_date, password ,created_at) VALUES ( '"+fullname+"','"+designation+"','"+username+"','"+contactNo+"','"+usertype+"','"+joindate+"','"+password+"', CURRENT_TIMESTAMP)");
             if(cnt == 1){
-                ResultSet result = statement.executeQuery("SELECT id FROM user ORDER BY created_at DESC LIMIT 1");
+                ResultSet result = statement.executeQuery("SELECT id FROM user_table ORDER BY created_at DESC LIMIT 1");
                 if(result.next()){
                     String _id = result.getString("id");
                     statement.executeUpdate("INSERT INTO permission ( user_id) VALUES ( '"+_id+"')");
@@ -664,7 +664,7 @@ public class DbConnect {
     }
     public Boolean UpdateUser(Integer id,String fullname, String designation, String contactNo, String usertype){
         try (Statement statement = this.db.createStatement()){
-            Integer cnt = statement.executeUpdate("UPDATE voucher SET " +
+            Integer cnt = statement.executeUpdate("UPDATE user_table SET " +
                     "fullname = '"+fullname+"', " +
                     "designation = '"+designation+"', " +
                     "contact = '"+contactNo+"', " +
@@ -683,7 +683,7 @@ public class DbConnect {
 
     public Boolean DeleteUser(Integer id){
         try (Statement statement = this.db.createStatement()){
-            Integer cnt = statement.executeUpdate("DELETE FROM user WHERE id = "+id);
+            Integer cnt = statement.executeUpdate("DELETE FROM user_table WHERE id = "+id);
             if(cnt == 1){
                 statement.executeUpdate("DELETE FROM permission WHERE user_id = "+id);
                 return  true;
@@ -699,7 +699,7 @@ public class DbConnect {
     public ObservableList<User> GetAllUser(){
         ObservableList<User> a = FXCollections.observableArrayList(new ArrayList<User>());
         try (Statement statement = this.db.createStatement()) {
-            ResultSet result = statement.executeQuery("select * from user");
+            ResultSet result = statement.executeQuery("select * from user_table");
             while(result.next()){
                 String fullname = result.getString("fullname");
                 String type = result.getString("type");
@@ -777,10 +777,10 @@ public class DbConnect {
     }
     public PermissionModel Login(String username,String password){
         try (Statement statement = this.db.createStatement()) {
-            ResultSet result = statement.executeQuery("select id from user WHERE username = '"+username+"' and password = '"+password+"'");
-            if(result.next()){
-                Integer _id = result.getInt("id");
-                ResultSet _result = statement.executeQuery("select * from permission WHERE user_id = "+_id);
+            ResultSet _result = statement.executeQuery("select id from user_table WHERE username = '"+username+"' and password = '"+password+"'");
+            if(_result.next()){
+                Integer _id = _result.getInt("id");
+                ResultSet result = statement.executeQuery("select * from permission WHERE user_id = "+_id);
                 if(result.next()){
                     Integer id,user_id;
                     Boolean patient_info,patient_list,doctor_info,doctor_list,pharmacy_info,pharmacy_list,pharmacy_report,prescription,prescription_list,voucher,voucher_list,voucher_report,admin,sales;
@@ -814,11 +814,11 @@ public class DbConnect {
     }
     public Boolean UpdatePassword(Integer user_id,String oldPass,String newPass){
         try (Statement statement = this.db.createStatement()){
-            ResultSet result = statement.executeQuery("select * FROM user WHERE id = "+user_id);
+            ResultSet result = statement.executeQuery("select * FROM user_table WHERE id = "+user_id);
             if(result.next()){
                 String pass = result.getString("password");
                 if(pass.equals(oldPass)){
-                    Integer cnt = statement.executeUpdate("UPDATE user SET password = '"+newPass+"' WHERE id = "+user_id);
+                    Integer cnt = statement.executeUpdate("UPDATE user_table SET password = '"+newPass+"' WHERE id = "+user_id);
                     if(cnt == 1){
                         return  true;
                     } else {

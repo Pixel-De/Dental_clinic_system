@@ -46,7 +46,7 @@ public class LoginController {
         System.out.println(username + password);
         PermissionModel permissionmodel = db.Login(username, password);
         if (permissionmodel != null) {
-            System.out.println(permissionmodel.toString());
+            System.out.println(permissionmodel.getAdmin().toString());
 
         }
         else {
