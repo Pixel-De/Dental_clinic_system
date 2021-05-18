@@ -1,5 +1,6 @@
 package DentalClinic.MainMenu;
 
+import DentalClinic.Administration.ListOfUser.ListOfUserController;
 import DentalClinic.Administration.UserInformation.UserInformationController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -102,6 +103,7 @@ public class MainMenuController {
 
     @FXML
     void setListOfUsers(ActionEvent event) throws IOException {
+        ListOfUserController listUser = new ListOfUserController();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../Administration/ListOfUser/ListOfUserView.fxml"));
         Parent listofuser = loader.load();
         Stage stage = new Stage();
@@ -215,7 +217,7 @@ public class MainMenuController {
         UserInformationController userinfocont = new UserInformationController();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../Administration/UserInformation/UserInformationView.fxml"));
         loader.setController(userinfocont);
-        Parent clinics = loader. load();
+        Parent clinics = loader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(clinics));
         stage.show();

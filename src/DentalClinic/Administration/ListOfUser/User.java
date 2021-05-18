@@ -11,7 +11,7 @@ public class User {
     private String fullname,usertype,designation,username;
     private Integer id, contact;
     private Date join_date;
-    private Button edit, delete , check;
+    private Button edit, delete;
     private Checkbox select ;
 
 
@@ -26,25 +26,19 @@ public class User {
         this.delete = new Button();
         this.select = new Checkbox();
 
-        ImageView imgView = new ImageView(getClass().getResource("../assets/delete.png").toExternalForm());
+        ImageView imgView = new ImageView(getClass().getResource("../../assets/delete.png").toExternalForm());
         imgView.setFitHeight(10);
         imgView.setPreserveRatio(true);
         this.delete.setPrefSize(10,10);
         this.delete.setGraphic(imgView);
 
         this.edit = new Button();
-        ImageView imgView2 = new ImageView(getClass().getResource("../assets/draw.png").toExternalForm());
+        ImageView imgView2 = new ImageView(getClass().getResource("../../assets/draw.png").toExternalForm());
         imgView2.setFitHeight(10);
         imgView2.setPreserveRatio(true);
         this.edit.setPrefSize(10,10);
         this.edit.setGraphic(imgView2);
 
-        this.check = new Button();
-        ImageView imgView3 = new ImageView(getClass().getResource("../assets/check.png").toExternalForm());
-        imgView3.setFitHeight(10);
-        imgView3.setPreserveRatio(true);
-        this.check.setPrefSize(10,10);
-        this.check.setGraphic(imgView3);
     }
 
 
@@ -55,10 +49,6 @@ public class User {
     public Button getDelete() {return delete; }
 
     public void setDelete(Button delete) { this.delete = delete; }
-
-    public Button getCheck() { return check; }
-
-    public void setCheck(Button check) { this.check = check; }
 
     public String getFullname() {return fullname; }
 
@@ -84,12 +74,9 @@ public class User {
 
     public void setJoin_date(Date join_date) { this.join_date = join_date; }
 
-
-
     public Integer getId() { return id; }
 
     public void setId(Integer id) { this.id = id; }
-
 
     public Checkbox getSelect() {return select; }
 
