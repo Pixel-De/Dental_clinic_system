@@ -40,11 +40,6 @@ public class LoginController {
     private DbConnect db = new DbConnect();
 
     @FXML
-//    public void initialize(URL url, ResourceBundle resourceBundle) {
-//        txtUsername.getText();
-//        txtPassword.getText();
-//
-//    }
     void submitData(ActionEvent event) {
         String username = txtUsername.getText(), password = txtPassword.getText();
         System.out.println(username + password);
