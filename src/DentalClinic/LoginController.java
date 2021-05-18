@@ -41,23 +41,31 @@ public class LoginController {
 
     @FXML
 
-    void submitData(ActionEvent event) {
+    void submitData(ActionEvent event) throws IOException {
         String username = txtUsername.getText(), password = txtPassword.getText();
         System.out.println(username + password);
-        PermissionModel permissionmodel = db.Login(username, password);
-        if (permissionmodel != null) {
-            System.out.println(permissionmodel.getAdmin().toString());
 
-        }
-        else {
-            System.out.println("iim hereglegch baihgui");
-        }
         if (username.length() > 0 && password.length() > 0) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Success!");
-            alert.setHeaderText(null);
-            alert.setContentText("Successfully logged in!");
 
+            PermissionModel permissionmodel = db.Login(username, password);
+            if (permissionmodel != null) {
+                System.out.println(permissionmodel.getAdmin().toString());
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success!");
+                alert.setHeaderText(null);
+                alert.setContentText("Successfully logged in!");
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu/MainMenu.fxml"));
+                Parent patientsInfo = loader.load();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(patientsInfo));
+                stage.show();
+                Stage haah = (Stage) btnSubmit.getScene().getWindow();
+
+                haah.close();
+            }
+            else {
+                System.out.println("iim hereglegch baihgui");
+            }
 
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);

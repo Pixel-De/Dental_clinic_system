@@ -65,28 +65,24 @@ public class UserInformationController {
     public UserInformationController(){
 
     }
-    public void updateUser(){
-        String fn = txtFullname.getText();
-        String UN = txtUsername.getText();
-        String Desig = txtDesignation.getText();
-        int i = Integer.valueOf(txtUserID.getText());
-        String cont = txtContact.getText();
-        String pass = txtPassword.getText();
-        LocalDate day = UserInformationDatepicker.getValue();
-        String type = comboUserType.getValue();
-        boolean f = db.UpdateUser(i, fn, Desig ,cont, type);
-
-        if (f){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Update");
-            alert.setContentText("Successfully updated.");
-            alert.show();
-        }
-    }
-
-
-
-
+//    public void updateUser(){
+//        String fn = txtFullname.getText();
+//        String UN = txtUsername.getText();
+//        String Desig = txtDesignation.getText();
+//        int i = Integer.valueOf(txtUserID.getText());
+//        String cont = txtContact.getText();
+//        String pass = txtPassword.getText();
+//        LocalDate day = UserInformationDatepicker.getValue();
+//        String type = comboUserType.getValue();
+//        boolean f = db.UpdateUser(i, fn, Desig ,cont, type);
+//
+//        if (f){
+//            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//            alert.setTitle("Update");
+//            alert.setContentText("Successfully updated.");
+//            alert.show();
+//        }
+//    }
     @FXML
     void btnCloseAction(ActionEvent event) {
         Stage stage = (Stage) btnClose.getScene().getWindow();
@@ -106,7 +102,23 @@ public class UserInformationController {
 
     @FXML
     void btnSaveAction(ActionEvent event) {
+        String fn = txtFullname.getText();
+        String UN = txtUsername.getText();
+        String Desig = txtDesignation.getText();
+        int i = Integer.valueOf(txtUserID.getText());
+        String cont = txtContact.getText();
+        String pass = txtPassword.getText();
+        LocalDate day = UserInformationDatepicker.getValue() ;
+        Date d = Date.valueOf(day);
+        String type = comboUserType.getValue();
+        boolean k = db.AddUser(fn, Desig, UN ,cont, type,pass, Date.valueOf(day));
 
+        if(k){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Saved");
+            alert.setContentText("Successfully saved.");
+            alert.show();
+        }
     }
 
     @FXML
