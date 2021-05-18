@@ -777,7 +777,7 @@ public class DbConnect {
     }
     public PermissionModel Login(String username,String password){
         try (Statement statement = this.db.createStatement()) {
-            ResultSet result = statement.executeQuery("select id from user WHERE username = '"+username+"' AND password = '"+password+"'");
+            ResultSet result = statement.executeQuery("select id from user WHERE username = '"+username+"' and password = '"+password+"'");
             if(result.next()){
                 Integer _id = result.getInt("id");
                 ResultSet _result = statement.executeQuery("select * from permission WHERE user_id = "+_id);
