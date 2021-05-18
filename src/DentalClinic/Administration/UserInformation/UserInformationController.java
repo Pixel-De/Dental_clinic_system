@@ -33,11 +33,11 @@ public class UserInformationController {
     DatePicker UserInformationDatepicker;
     @FXML
     Button btnReset, btnSave, btnClose ;
-    private String fullname,usertype,designation,username;
+    private String fullname,usertype,designation,username,password;
     private Integer id, contact;
     private Date join_date;
 
-    ObservableList<String> Jobtypes = FXCollections.observableArrayList("Administrator", "Doctor, Receptionist, Cashier, Assistant");
+    ObservableList<String> JobTypes= FXCollections.observableArrayList("Administrator", "Doctor, Receptionist, Cashier, Assistant");
 
     private DbConnect db = new DbConnect();
 
@@ -47,10 +47,10 @@ public class UserInformationController {
         txtFullname.setText(fullname);
         txtUsername.setText(username);
         txtDesignation.setText(designation);
-//        txtRePassword.setText(passwordu);
+        txtPassword.setText(password);
         txtContact.setText(String.valueOf(contact));
         UserInformationDatepicker.setValue(join_date.toLocalDate());
-        comboUserType.setItems(Jobtypes);
+        comboUserType.setItems(JobTypes);
 
     }
     public UserInformationController(User u) {
@@ -61,6 +61,8 @@ public class UserInformationController {
         id = u.getId();
         contact = u.getContact();
         join_date = u.getJoin_date();
+    }
+    public UserInformationController(){
 
     }
     public void updateUser(){

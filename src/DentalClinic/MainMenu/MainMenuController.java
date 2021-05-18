@@ -1,5 +1,6 @@
 package DentalClinic.MainMenu;
 
+import DentalClinic.Administration.UserInformation.UserInformationController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -211,7 +212,9 @@ public class MainMenuController {
 
     @FXML
     void setUserInformation(ActionEvent event) throws IOException {
+        UserInformationController userinfocont = new UserInformationController();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../Administration/UserInformation/UserInformationView.fxml"));
+        loader.setController(userinfocont);
         Parent clinics = loader. load();
         Stage stage = new Stage();
         stage.setScene(new Scene(clinics));

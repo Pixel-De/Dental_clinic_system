@@ -37,7 +37,7 @@ public class ListOfUserController {
     private Button closeButton;
 
 
-    private ObservableList<String> parameter = FXCollections.observableArrayList("DoctorID", "DoctorName");
+    private ObservableList<String> parameter = FXCollections.observableArrayList(" ", " ");
     private ObservableList<User> users = FXCollections.observableArrayList();
     private ObservableList<User> tempPatt = FXCollections.observableArrayList();
 
@@ -46,7 +46,7 @@ public class ListOfUserController {
 
     public void initialize(){
         Alert balert  = new Alert(Alert.AlertType.CONFIRMATION);
-        balert.setTitle("Delete Patient");
+        balert.setTitle("Delete User");
         balert.setContentText("Are you sure you want to delete this record?");
 
         param.setItems(parameter);
