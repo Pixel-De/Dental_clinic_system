@@ -3,6 +3,7 @@ package DentalClinic;
 import DentalClinic.Administration.ListOfUser.User;
 import DentalClinic.Administration.Permission.PermissionModel;
 import DentalClinic.DB.DbConnect;
+import DentalClinic.MainMenu.MainMenuController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -48,13 +49,18 @@ public class LoginController {
         if (username.length() > 0 && password.length() > 0) {
 
             PermissionModel permissionmodel = db.Login(username, password);
+
             if (permissionmodel != null) {
+
+                MainMenuController mainMenuController = new MainMenuController(permissionmodel);
+
                 System.out.println(permissionmodel.getAdmin().toString());
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success!");
                 alert.setHeaderText(null);
                 alert.setContentText("Successfully logged in!");
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu/MainMenu.fxml"));
+                loader.setController(mainMenuController);
                 Parent patientsInfo = loader.load();
                 Stage stage = new Stage();
                 stage.setScene(new Scene(patientsInfo));
