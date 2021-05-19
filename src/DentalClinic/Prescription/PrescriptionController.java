@@ -129,7 +129,6 @@ public class PrescriptionController {
         Alert alert ;
 
         try{
-
             presCriptionMain.setPatient_id(String.valueOf(patientId));
             boolean f = db.UpdatePrescription(presCriptionMain, prescriptionModels );
 
