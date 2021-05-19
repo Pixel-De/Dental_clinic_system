@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 public class ClinicInfoController {
 
@@ -39,7 +40,8 @@ public class ClinicInfoController {
     }
     @FXML
     void btnCloseAction(ActionEvent event) {
-
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
