@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -17,7 +18,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-public class UserInformationController {
+public class UserInformationController implements Initializable {
 
     @FXML
     HBox upBox;
@@ -37,7 +38,7 @@ public class UserInformationController {
     private Integer id, contact;
     private Date join_date;
 
-    ObservableList<String> JobTypes= FXCollections.observableArrayList("Administrator", "Doctor, Receptionist, Cashier, Assistant");
+    ObservableList<String> JobTypes= FXCollections.observableArrayList("Administrator", "Doctor", "Receptionist", "Cashier", "Assistant");
 
     private DbConnect db = new DbConnect();
 
@@ -59,6 +60,7 @@ public class UserInformationController {
         id = u.getId();
         contact = u.getContact();
         join_date = u.getJoin_date();
+        System.out.println(u.getUsername());
     }
 
     public void UpdateUser(){
@@ -71,7 +73,7 @@ public class UserInformationController {
         LocalDate day = UserInformationDatepicker.getValue() ;
         Date d = Date.valueOf(day);
         String type = comboUserType.getValue();
-        boolean k = db.AddUser(fn, Desig, UN ,cont, type,pass, Date.valueOf(day));
+        boolean k = db.UpdateUser(i,fn,Desig,cont,type);
 
         if(k){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -90,6 +92,7 @@ public class UserInformationController {
         txtPassword.setText("");
         txtUserID.setText("");
         txtDesignation.setText("");
+        txtRePassword.setText("");
         UserInformationDatepicker.setValue(null);
     }
 

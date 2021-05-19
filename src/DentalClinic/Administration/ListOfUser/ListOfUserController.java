@@ -37,7 +37,7 @@ public class ListOfUserController {
     private Button closeButton;
 
 
-    private ObservableList<String> parameter = FXCollections.observableArrayList("d ", " d");
+    private ObservableList<String> parameter = FXCollections.observableArrayList("UserID ", "Username");
     private ObservableList<User> users = FXCollections.observableArrayList();
     private ObservableList<User> tempPatt = FXCollections.observableArrayList();
 
@@ -99,7 +99,7 @@ public class ListOfUserController {
                         Optional<ButtonType> result = balert.showAndWait();
                         if (result.get() == ButtonType.OK) {
                             int delID = user.getId();
-                            boolean o = db.DeleteUser(delID);
+                            boolean f = db.DeleteUser(delID);
                             System.out.println(delID);
                             users.remove(user);
                         }

@@ -52,7 +52,7 @@ public class UserInfoController {
         LocalDate day = UserInformationDatepicker.getValue() ;
         Date d = Date.valueOf(day);
         String type = comboUserType.getValue();
-        boolean Lee = db.AddUser(fn, Desig, UN ,cont, type,pass, Date.valueOf(day));
+        boolean Lee = db.AddUser(fn, UN,pass, Desig,cont,type, Date.valueOf(day));
 
         if(Lee){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -69,6 +69,7 @@ public class UserInfoController {
         txtContact.setText("");
         txtUsername.setText("");
         txtPassword.setText("");
+        txtRePassword.setText("");
         txtUserID.setText("");
         txtDesignation.setText("");
         UserInformationDatepicker.setValue(null);

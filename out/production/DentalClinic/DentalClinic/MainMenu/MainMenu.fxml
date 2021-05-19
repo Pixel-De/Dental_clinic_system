@@ -19,7 +19,7 @@
                 <items>
                     <MenuItem fx:id="menuLogOff" mnemonicParsing="false" text="Log Off: admin" />
                     <MenuItem fx:id="menuChangePassword" mnemonicParsing="false" text="Change Password" />
-                    <MenuItem fx:id="menuExit" mnemonicParsing="false" text="Exit" visible="false" />
+               <MenuItem fx:id="menuExit" mnemonicParsing="false" text="Exit" />
                 </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Window">
@@ -152,28 +152,6 @@
                             <MenuItem mnemonicParsing="false" onAction="#setProductList" text="Product List" />
                             <MenuItem mnemonicParsing="false" onAction="#setPharmacySales" text="Sales" />
                             <MenuItem mnemonicParsing="false" onAction="#setPharmacyReport" text="Reports" />
-                        </items>
-                    </MenuButton>
-                </children>
-                <VBox.margin>
-                    <Insets left="5.0" right="5.0" />
-                </VBox.margin>
-            </HBox>
-            <HBox maxHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: white; -fx-text-fill: white;" styleClass="border" stylesheets="@overlord.css">
-                <children>
-                    <ImageView fitHeight="44.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
-                        <image>
-                            <Image url="@../assets/tooth-extraction.png" />
-                        </image>
-                        <HBox.margin>
-                            <Insets left="10.0" />
-                        </HBox.margin>
-                    </ImageView>
-                    <MenuButton fx:id="btn" mnemonicParsing="false" popupSide="RIGHT" prefHeight="73.0" prefWidth="198.0" text="Treatment">
-                        <items>
-                            <MenuItem mnemonicParsing="false" onAction="#setDentalScreen" text="Dental's Screen" />
-                            <MenuItem mnemonicParsing="false" onAction="#setPatientVisitList" text="Patient Visit List" />
-                            <MenuItem mnemonicParsing="false" onAction="#setTreatmentReports" text="Reports" />
                         </items>
                     </MenuButton>
                 </children>

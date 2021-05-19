@@ -19,7 +19,7 @@
                 <items>
                     <MenuItem fx:id="menuLogOff" mnemonicParsing="false" text="Log Off: admin" />
                     <MenuItem fx:id="menuChangePassword" mnemonicParsing="false" text="Change Password" />
-                    <MenuItem fx:id="menuExit" mnemonicParsing="false" text="Exit" visible="false" />
+               <MenuItem fx:id="menuExit" mnemonicParsing="false" text="Exit" />
                 </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Window">
