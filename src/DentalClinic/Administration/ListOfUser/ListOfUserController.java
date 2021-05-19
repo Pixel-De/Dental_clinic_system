@@ -48,7 +48,6 @@ public class ListOfUserController {
         Alert balert = new Alert(Alert.AlertType.CONFIRMATION);
         balert.setTitle("Delete User");
         balert.setContentText("Are you sure you want to delete this record?");
-//        users = db.GetAllUser();
 
 
         param.setItems(parameter);
@@ -78,10 +77,10 @@ public class ListOfUserController {
                 btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
-                        UserInformationController lc = new UserInformationController(user);
+                        UserInformationController userinforCont = new UserInformationController(user);
                         try {
                             FXMLLoader loader = new FXMLLoader();
-                            loader.setController(lc);
+                            loader.setController(userinforCont);
                             loader.setLocation(getClass().getResource("../UserInformation/UserInformationView.fxml"));
                             Scene scene = new Scene(loader.load());
                             Stage stage = new Stage();
@@ -100,7 +99,7 @@ public class ListOfUserController {
                         Optional<ButtonType> result = balert.showAndWait();
                         if (result.get() == ButtonType.OK) {
                             int delID = user.getId();
-                            boolean f = db.DeleteUser(delID);
+                            boolean o = db.DeleteUser(delID);
                             System.out.println(delID);
                             users.remove(user);
                         }
@@ -165,9 +164,6 @@ public class ListOfUserController {
         });
         return tempPatt;
     }
-//    public ListOfUserController(){
-//
-//    }
     @FXML
     void btnRefreshAction(ActionEvent event) {
         users = db.GetAllUser();

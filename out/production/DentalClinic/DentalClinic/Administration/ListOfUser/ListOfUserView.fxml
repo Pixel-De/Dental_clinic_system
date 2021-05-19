@@ -50,7 +50,7 @@
                               <VBox>
                                  <children>
                                     <Label text="CRITERIA" />
-                                    <TextField fx:id="criteria" editable="false" />
+                                    <TextField fx:id="criteria" />
                                  </children>
                               </VBox>
                            </children>

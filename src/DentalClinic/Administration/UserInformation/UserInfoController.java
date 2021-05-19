@@ -1,6 +1,5 @@
 package DentalClinic.Administration.UserInformation;
 
-import DentalClinic.Administration.ListOfUser.User;
 import DentalClinic.DB.DbConnect;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,56 +11,38 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.ResourceBundle;
 
-public class UserInformationController {
-
+public class UserInfoController {
     @FXML
     HBox upBox;
     @FXML
     Label lblBright;
     @FXML
-    AnchorPane AnchorBord;
+    AnchorPane Anchor1;
     @FXML
-    TextField txtUserID ,txtFullname, txtUsername, txtDesignation, txtPassword, txtRePassword, txtContact;
+    TextField txtUserID ,txtFullname,txtUsername,txtPassword,txtRePassword,txtDesignation,txtContact;
     @FXML
     ComboBox<String> comboUserType;
     @FXML
     DatePicker UserInformationDatepicker;
     @FXML
-    Button btnReset, btnSave, btnClose ;
-    private String fullname,usertype,designation,username,password;
-    private Integer id, contact;
-    private Date join_date;
-
-    ObservableList<String> JobTypes= FXCollections.observableArrayList("Administrator", "Doctor, Receptionist, Cashier, Assistant");
-
+    AnchorPane Anchor2;
+    @FXML
+    AnchorPane Anchor3;
+    @FXML
+    Button btnReset;
+    @FXML
+    Button btnClose;
+    ObservableList<String> JobTypes= FXCollections.observableArrayList("Administrator", "Doctor", "Receptionist", "Cashier", "Assistant");
     private DbConnect db = new DbConnect();
-
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        txtUserID.setText(id.toString());
-        txtFullname.setText(fullname);
-        txtUsername.setText(username);
-        txtDesignation.setText(designation);
-        txtPassword.setText(password);
-        txtContact.setText(String.valueOf(contact));
-        UserInformationDatepicker.setValue(join_date.toLocalDate());
+    public void initialize(){
         comboUserType.setItems(JobTypes);
-    }
-    public UserInformationController(User u) {
-        fullname = u.getFullname();
-        usertype = u.getUsertype();
-        designation = u.getDesignation();
-        username = u.getUsername();
-        id = u.getId();
-        contact = u.getContact();
-        join_date = u.getJoin_date();
+        comboUserType.getSelectionModel().selectFirst();
     }
 
-    public void UpdateUser(){
+    public void saveUser(){
         String fn = txtFullname.getText();
         String UN = txtUsername.getText();
         String Desig = txtDesignation.getText();
@@ -71,9 +52,9 @@ public class UserInformationController {
         LocalDate day = UserInformationDatepicker.getValue() ;
         Date d = Date.valueOf(day);
         String type = comboUserType.getValue();
-        boolean k = db.AddUser(fn, Desig, UN ,cont, type,pass, Date.valueOf(day));
+        boolean Lee = db.AddUser(fn, Desig, UN ,cont, type,pass, Date.valueOf(day));
 
-        if(k){
+        if(Lee){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Saved");
             alert.setContentText("Successfully saved.");
@@ -92,11 +73,12 @@ public class UserInformationController {
         txtDesignation.setText("");
         UserInformationDatepicker.setValue(null);
     }
-
     @FXML
     void btnCloseAction(ActionEvent event) {
         Stage stage = (Stage) btnClose.getScene().getWindow();
         stage.close();
     }
-    public UserInformationController(){ }
+
+
 }
+
